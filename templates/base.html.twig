@@ -3,6 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <!--FontAwesome-->
+        <script src="https://kit.fontawesome.com/8190148fda.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href={{ asset('css/bootstrap.min.css')}}>
+        <!--Custom style sheet-->
+        <link rel="stylesheet" href={{ asset('css/custom.css')}}>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>

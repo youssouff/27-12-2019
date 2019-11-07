@@ -8,7 +8,7 @@ Pour importer le projet :
 
 -git pull
 
-executer :
+executer : <br>
 ~ composer update <br>
 ~ php bin/console doctrine:database:create <br>
 ~ php bin/console migrate <br>

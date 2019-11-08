@@ -8,9 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\OrdersRepository")
  */
-class Order
+class Orders
 {
     /**
      * @ORM\Id()

@@ -40,7 +40,7 @@ class Goodies
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Order", mappedBy="goodies")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Orders", mappedBy="goodies")
      */
     private $orders;
 
@@ -103,14 +103,14 @@ class Goodies
     }
 
     /**
-     * @return Collection|Order[]
+     * @return Collection|Orders[]
      */
     public function getOrders(): Collection
     {
         return $this->orders;
     }
 
-    public function addOrder(Order $order): self
+    public function addOrder(Orders $order): self
     {
         if (!$this->orders->contains($order)) {
             $this->orders[] = $order;
@@ -120,7 +120,7 @@ class Goodies
         return $this;
     }
 
-    public function removeOrder(Order $order): self
+    public function removeOrder(Orders $order): self
     {
         if ($this->orders->contains($order)) {
             $this->orders->removeElement($order);

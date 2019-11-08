@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+        <h2>{{ event.title }}</h2>
+        <div class="content">
+            <img src="{{ event.image}}" alt="">
+            <p>{{ event.description | raw}}</p>
+            <p>Prix: {{ event.price }}€</p>
+            <p>Evenement: {{ event.recursion.name }}</p>
+        </div>
+
+
+        
+
+
+
+{% endblock %}

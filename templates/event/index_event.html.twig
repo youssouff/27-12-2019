@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SiteController!{% endblock %}
+
+{% block body %}
+
+<section class="evements">
+    {% for event in events %}
+    
+    {% for event in events %}
+        
+    <article>
+        <h2>{{ event.title }}</h2>
+        <div class="metadata">{{ event.date | date ('d/m/Y à H:i')}}</div>
+        <div class="content">
+            <img src=" {{ event.image }}" alt="">
+            <p>{{ event.description | raw }}</p>
+            <a href=" {{ path('event_show', {'id': event.id }) }}" class="btn btn-primary">En savoir plus</a>
+        </div>
+    </article>
+    
+{% endfor %}
+    {% endfor %}
+
+</section>
+
+{% endblock %}

@@ -24,7 +24,7 @@ class Recursion
     private $name;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $timeInterval;
 
@@ -55,12 +55,12 @@ class Recursion
         return $this;
     }
 
-    public function getTimeInterval(): ?\DateTimeInterface
+    public function getTimeInterval(): ?int
     {
         return $this->timeInterval;
     }
 
-    public function setTimeInterval(?\DateTimeInterface $timeInterval): self
+    public function setTimeInterval(int $timeInterval): self
     {
         $this->timeInterval = $timeInterval;
 

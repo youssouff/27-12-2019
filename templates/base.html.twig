@@ -2,101 +2,56 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>
+            {% block title %}Welcome!
+            {% endblock %}
+        </title>
         <!--FontAwesome-->
         <script src="https://kit.fontawesome.com/8190148fda.js" crossorigin="anonymous"></script>
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href={{ asset('css/bootstrap.min.css')}}>
+        <link
+        rel="stylesheet" href={{ asset('css/bootstrap.min.css')}}>
         <!--Custom style sheet-->
-        <link rel="stylesheet" href={{ asset('css/custom.css')}}>
-        {% block stylesheets %}{% endblock %}
-    </head>
+        <link rel="stylesheet" href={{ asset('css/custom.css')}}> {% block stylesheets %}{% endblock %}
+        </head>
 
-    <body>
+        <body>
 
-    <header>
-    <div class="jumbotron jumbotron-fluid" id="banner">
-    </div>
+            <header>
+                <div class="jumbotron jumbotron-fluid" id="banner"></div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark" id="navbar" style="background-color : #27251f">
-        <a class="navbar-brand" href="#">BDE Strasbourg</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Acceuil <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            </ul>
-        </div>
-    </nav>
-    </header>
-
-    <div class="row" id="body-row">
-                <!-- Sidebar -->
-                <div id="sidebar-container" class="sidebar-expanded d-none d-md-block col-2">
-                    <!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
-                    <!-- Bootstrap List Group -->
-                    <ul class="list-group sticky-top sticky-offset">
-                        <!-- Separator with title -->
-                        <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed" style="background-color : #27251f">
-                            <small>EVENEMENTS</small>
-                        </li>
-                        <!-- /END Separator -->
-                        <!-- Menu with submenu -->
-                        <!-- Submenu content -->
-                        
-                             <a href="/" class=" list-group-item list-group-item-action" style="background-color : #27251f">
-                                <div class="d-flex w-100 justify-content-start align-items-center">
-                                    <span class="fa fa-calendar fa-fw mr-3"></span>
-                                    <span class="menu-collapsed">Evénements prochains</span>
-                                </div>
-                            </a>
-                            <a href="/" class=" list-group-item list-group-item-action" style="background-color : #27251f">
-                                    <div class="d-flex w-100 justify-content-start align-items-center">
-                                        <span class="fa fa-calendar fa-fw mr-3"></span>
-                                        <span class="menu-collapsed">Evénements passés</span>
-                                    </div>
+                <nav class="navbar navbar-expand-lg navbar-dark" id="navbar" style="background-color : #27251f">
+                    <a class="navbar-brand" href="#">BDE Strasbourg</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Acceuil
+                                    <span class="sr-only">(current)</span>
                                 </a>
-                        
-                            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed" style="background-color : #27251f">
-                              <small>BOUTIQUE</small>
-                          </li>
-                          <!-- /END Separator -->
-                          <a href="/" class="list-group-item list-group-item-action" style="background-color : #27251f">
-                              <div class="d-flex w-100 justify-content-start align-items-center">
-                                  <span class="fa fa-calendar fa-fw mr-3"></span>
-                                  <span class="menu-collapsed">Notre boutique</span>
-                              </div>
-                          </a>
-                          
-                          <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed" style="background-color : #27251f">
-                                <small>MAIN MENU</small>
                             </li>
-                            <a href="#list-item-2" class="list-group-item list-group-item-action text-white" style="background-color : #27251f">
-                                    <span class="menu-collapsed">Nouveautés</span>
-                                </a>
-                                <a href="#list-item-3" class="list-group-item list-group-item-action text-white" style="background-color : #27251f">
-                                    <span class="menu-collapsed">Actualités</span>
-                                </a>
-                                <a href="#list-item-4" class="list-group-item list-group-item-action text-white" style="background-color : #27251f">
-                                    <span class="menu-collapsed">A propos</span>
-                                </a>
-                       
-                    <!-- List Group END-->
-                </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Features</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Pricing</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
 
-            <footer>
-            </footer>
+            
 
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+                <aside style="background-color : #27251f; width : 254px; margin-left : 1333px;"></aside>
+
+                <footer></footer>
+
+                {% block body %}{% endblock %}
+                {% block javascripts %}{% endblock %}
+            </body>
+        </body>
+    </html>
+</body></html>

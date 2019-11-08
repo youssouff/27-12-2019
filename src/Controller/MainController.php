@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Evenement;
 use App\Repository\EvenementRepository;
+use App\Repository\PhotoRepository;
 
 class MainController extends AbstractController
 {
@@ -41,11 +42,12 @@ class MainController extends AbstractController
     /**
     * @Route("/event/{id}", name="event_show")
     */
-    public function event_show(Evenement $event){
+    public function event_show(Evenement $event, PhotoRepository $photorepo){
         
-        
+        $photos = $photorepo->findAll();
         return $this->render('event/show_event.html.twig', [
-            'event' => $event
+            'event' => $event,
+            'photos' => $photos
         ]);
     }
 

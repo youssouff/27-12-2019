@@ -6,8 +6,10 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Evenement;
 use App\Entity\Recursion;
+use App\Entity\User;
 use App\Repository\RecursionRepository;
 use App\Entity\Comment;
+use App\Entity\Center;
 class EvenementFixtures extends Fixture 
 {
     public function load(ObjectManager $manager)
@@ -42,19 +44,34 @@ class EvenementFixtures extends Fixture
         
 
         $faker = \Faker\Factory::create('fr_FR');
-        for($i = 1; $i <= mt_rand(4,6); $i++){
+        for($j = 1; $j <= mt_rand(4,6); $j++){
             $event = new Evenement();
             $event->setTitle($faker->sentence($nbWords = 6))
                     ->setDescription($faker->paragraph())
                     ->setImage("https://www.placecage.com/640/360")
-                    ->setDate($faker->dateTimeBetween($startDate = 'now', $endDate = '+1 year'))
+                    ->setDate($faker->dateTimeBetween($startDate = '-1 year', $endDate = '+1 year'))
                     ->setPrice($faker->randomNumber(2))
                     ->setRecursion($recursion);
                 
             $manager->persist($event);
-            
+            /*$user = new User();
+            for($k = 1; $k <= mt_rand(4,10); $k++){
+                $comment = new Comment();
+                $comment->setAuthor($user)
+                        ->setContent($faker->paragraph())
+                        ->setCreatedAt($faker->dateTimeBetween('-2 months'))
+                        ->setProduit($produit);
+                $manager->persist($comment);
+
+                
+            }*/
+        }
+        for($l = 1; $l <= 7; $l++){
+            $center = new Center();
+            $center->setDenomination($faker->city);
+            $manager->persist($center);
+        }
 
         $manager->flush(); 
     }
-}
 }

@@ -46,7 +46,7 @@ class EvenementFixtures extends Fixture
             $event = new Evenement();
             $event->setTitle($faker->sentence($nbWords = 6))
                     ->setDescription($faker->paragraph())
-                    ->setImage($faker->imageUrl($width = 640, $height = 480))
+                    ->setImage("https://www.placecage.com/640/360")
                     ->setDate($faker->dateTimeBetween($startDate = 'now', $endDate = '+1 year'))
                     ->setPrice($faker->randomNumber(2))
                     ->setRecursion($recursion);

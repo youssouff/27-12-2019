@@ -39,16 +39,6 @@ class Goodies
      */
     private $category;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Orders", mappedBy="goodies")
-     */
-    private $orders;
-
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -102,31 +92,4 @@ class Goodies
         return $this;
     }
 
-    /**
-     * @return Collection|Orders[]
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Orders $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->addGoody($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Orders $order): self
-    {
-        if ($this->orders->contains($order)) {
-            $this->orders->removeElement($order);
-            $order->removeGoody($this);
-        }
-
-        return $this;
-    }
 }

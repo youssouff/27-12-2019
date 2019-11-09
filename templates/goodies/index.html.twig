@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Goodies index{% endblock %}
+
+{% block body %}
+    <h1>Goodies index</h1>
+    <a href="{{ path('goodies_new') }}">Create new</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for goody in goodies %}
+            <tr>
+                <td>{{ goody.name }}</td>
+                <td>{{ goody.description }}</td>
+                <td>{{ goody.price }}</td>
+                <td>
+                    <a href="{{ path('shop_show', {'id': goody.id}) }}" class="btn btn-dark">show</a>
+                    <a href="{{ path('goodies_edit', {'id': goody.id}) }}" class="btn btn-dark">edit</a>
+                    {{ include('goodies/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

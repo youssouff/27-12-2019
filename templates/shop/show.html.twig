@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Goodies{% endblock %}
+
+{% block body %}
+    <h1>Goodies</h1>
+Name
+{{ goody.name }}
+
+Description
+{{ goody.description }}
+Price
+{{ goody.price }}
+
+
+    <a href="{{ path('shop') }}">back to shop</a>
+
+
+    
+{% endblock %}

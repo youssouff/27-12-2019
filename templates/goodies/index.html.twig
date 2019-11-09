@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Goodies index{% endblock %}
+{% block title %}Produits{% endblock %}
 
 {% block body %}
-    <h1>Goodies index</h1>
-    <a href="{{ path('goodies_new') }}">Create new</a>
+    <h1>Produits</h1>
+    <a href="{{ path('goodies_new') }}" class="btn btn-dark">Create new</a>
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>Price</th>
-                <th>actions</th>
+                <th>Prix</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,14 +21,14 @@
                 <td>{{ goody.description }}</td>
                 <td>{{ goody.price }}</td>
                 <td>
-                    <a href="{{ path('shop_show', {'id': goody.id}) }}" class="btn btn-dark">show</a>
-                    <a href="{{ path('goodies_edit', {'id': goody.id}) }}" class="btn btn-dark">edit</a>
+                    <a href="{{ path('shop_show', {'id': goody.id}) }}" class="btn btn-dark">Voir</a>
+                    <a href="{{ path('goodies_edit', {'id': goody.id}) }}" class="btn btn-dark">Editer</a>
                     {{ include('goodies/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Pas d'enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>

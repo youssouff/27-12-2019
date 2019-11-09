@@ -34,6 +34,12 @@ class Photo
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Evenement", inversedBy="photos")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $evenement;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -95,6 +101,18 @@ class Photo
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getEvenement(): ?Evenement
+    {
+        return $this->evenement;
+    }
+
+    public function setEvenement(?Evenement $evenement): self
+    {
+        $this->evenement = $evenement;
 
         return $this;
     }

@@ -11,14 +11,17 @@
         <p>Evenement: {{ event.recursion.name }}</p>
     </div>
 
+    <a href="{{ path('event') }}">Retour a la liste</a>
 
     <div class="row">
-        {% for photo in photos %}
+        {% if event.photos %}
+        {% for photo in event.photos %}
         <div class="col">
         <img src="{{ photo.url}}" alt="">
         <p>{{photo.author.firstName}}</p>
         </div>
         {% endfor %}
+        {% endif %}
     </div>
 
         

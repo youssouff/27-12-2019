@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenements{% endblock %}
+
+{% block body %}
+    <h1>Evenements</h1>
+    <a href="{{ path('evenement_new') }}" class="btn btn-dark">Créer un nouvel evenement</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.title }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.price }}</td>
+                <td>{{ evenement.date ? evenement.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('event_show', {'id': evenement.id}) }}" class="btn btn-dark">Voir</a>
+                    <a href="{{ path('evenement_edit', {'id': evenement.id}) }}" class="btn btn-dark">Editer</a>
+                    {{ include('evenement/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Pas d'enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

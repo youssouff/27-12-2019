@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Goodies;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use App\Entity\GoodiesSearch;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Goodies|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +21,36 @@ class GoodiesRepository extends ServiceEntityRepository
         parent::__construct($registry, Goodies::class);
     }
 
+
+    /**
+     * @return Query
+     */
+    public function findAllQuery(GoodiesSearch $search): Query
+    {
+        $query = $this
+            ->createQueryBuilder('a')
+        ;
+
+        if($search->getMaxPrice() || $search->getMaxPrice() === 0){
+            $query = $query
+                ->where('a.price <= :maxprice')
+                ->setParameter('maxprice', $search->getMaxPrice());
+        }
+
+        if($search->getCategory()){
+            $query = $query
+                ->andWhere('a.category = :category')
+                ->setParameter('category', $search->getCategory());
+        }
+
+        if($search->getOrderBy()){
+            $query = $query->orderBy('a.'.$search->getOrderBy(), $search->getOrderType());
+        }
+        
+        return $query->getQuery();
+        
+  
+    }
     // /**
     //  * @return Goodies[] Returns an array of Goodies objects
     //  */

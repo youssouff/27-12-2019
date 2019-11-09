@@ -5,6 +5,29 @@
 {% block body %}
 <h2 class="title py-2">Boutique</h2>
 
+{{form_start(form)}}
+    <div class="row title my-3 pb-3">
+        <div class="col-6 col-md-3 mb-2">
+            {{form_widget(form.maxPrice)}}
+        </div>
+        <div class="col-6 col-md-3">
+            {{form_widget(form.category)}}
+        </div>
+        <div class="col-6 col-md-3">
+            {{form_widget(form.orderBy)}}
+            {{form_widget(form.orderType)}}
+
+        </div>
+        <div class="col-6 col-md-3">
+            <button type="submit" class="btn btn-dark btn-block">Search</button>
+        </div>
+    </div>
+{{form_end(form)}}
+{% if goodies is empty %}
+        <div class="alert alert-danger btn-block text-center">
+            Pas de résultat
+        </div>
+{% endif %}
 <div class="card-deck m-4">
     {% for goody in goodies %}
         <div class="card">

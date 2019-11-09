@@ -4,9 +4,9 @@
 
 {% block body %}
 <h2 class="title py-2">Boutique</h2>
-
-{{form_start(form)}}
-    <div class="row title my-3 pb-3">
+<div class="container-fluid">
+    {{form_start(form)}}
+    <div class="row">
         <div class="col-6 col-md-3 mb-2">
             {{form_widget(form.maxPrice)}}
         </div>
@@ -22,28 +22,36 @@
             <button type="submit" class="btn btn-dark btn-block">Search</button>
         </div>
     </div>
-{{form_end(form)}}
-{% if goodies is empty %}
-        <div class="alert alert-danger btn-block text-center">
-            Pas de résultat
-        </div>
-{% endif %}
-<div class="card-deck m-4">
-    {% for goody in goodies %}
-        <div class="card">
-            <div class="card-header">
-                {{ goody.name }}
+    {{form_end(form)}}
+    
+    <div class="row">
+        {% if goodies is empty %}
+            <div class="alert alert-danger btn-block text-center">
+                Pas de résultat
             </div>
-            <div class="card-body">
-                <div class="meta">Categorie : {{ goody.category.name }}</div>
-                {{ goody.description }}
-
-                Prix : {{goody.price ? goody.price : "Gratuit"}}
-                <a href="{{path('shop_show', {'id': goody.id }) }}" class="btn btn-dark"> Détails</a>
+        {% endif %}
+    </div>
+    <div class="row">
+            {% for goody in goodies %}
+            <div class=" col-md-6 col-lg-4 ">
+                <div class="card m-2">
+                    <div class="card-header">
+                        {{ goody.name }}
+                    </div>
+                    <div class="card-body">
+                        <div class="meta">Categorie : {{ goody.category.name }}</div>
+                        {{ goody.description }}
+            
+                        Prix : {{goody.price ? goody.price : "Gratuit"}}
+                        <a href="{{path('shop_show', {'id': goody.id }) }}" class="btn btn-dark"> Détails</a>
+                    </div>
+                </div>
             </div>
-
-        </div>    
-    {% endfor %}
+            {% endfor %}
+    </div>
+    <div class="row align-center">
+            {{ knp_pagination_render(goodies) }}
+    </div>
 </div>
 
 {% endblock %}

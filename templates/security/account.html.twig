@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Lab | Account{% endblock %}
+
+{% block body %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">The Lab | Account</h1>
+        <p class="lead">
+            Welcome to The Lab {{app.user.username}}, here you can view your account
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">My Account</h5>
+                <p>
+                    You can find your informations below :
+                </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Username: {{app.user.username}}</li>
+                <li class="list-group-item">Email: {{app.user.email}}</li>
+            </ul>
+            
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Administrate</h5>
+                <p>
+                    Here are the action you are allowed to do:
+                </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a href="" class="btn btn-dark btn-block">Delete My account (disabled)</a>
+                </li>
+                {% if is_granted('ROLE_USER') %}
+                <li class="list-group-item">
+                    <a href="{{path('admin_article_index')}}" class="btn btn-dark btn-block">
+                        Manage articles
+                    </a>
+                    
+                </li>
+                {% endif %}
+                {% if is_granted('ROLE_SUPERADMIN') %}
+                <li class="list-group-item">
+                    <a href="{{path('admin_type_index')}}" class="btn btn-dark btn-block">
+                        Manage types of product
+                    </a>
+                </li>
+                {% endif %}
+                {% if is_granted('ROLE_SUPERADMIN') %}
+                <li class="list-group-item">
+                        <a href="{{path('admin_category_index')}}" class="btn btn-dark btn-block">
+                            Manage categories
+                        </a> 
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

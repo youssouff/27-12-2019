@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Lab | Login{% endblock %}
+
+{% block body %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">The Lab | Login</h1>
+        <p class="lead">
+            Welcome back to The Lab, log in to share your own model
+        </p>
+    </div>
+</div>
+<div class="m-4 text-center">
+    {% if error %}
+        <div class="alert alert-danger">
+            {{error.messageKey}}
+        </div>
+    {% endif %}
+
+    <form action=" {{ path('security_login') }}" class="form-signin ml-1 mr-1" method="post">
+            <input placeholder="Email" required name="_username" type="text" class="bordered form-control"></input>
+            <input placeholder="Password" required name="_password" type="password" class="bordered form-control"></input>
+    
+            <button type="submit" class="btn btn-dark btn-block colored bordered">
+                Login
+            </button>
+        
+        <div class="mt-4">
+            <span class="meta">Don't have an account ?</span> 
+            <br />
+            <a href="{{path('security_register')}}">Sign up</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

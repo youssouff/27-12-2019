@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Lab | Register{% endblock %}
+
+{% block body %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">The Lab | Register</h1>
+        <p class="lead">
+            Welcome to The Lab, join us to share your own model
+        </p>
+    </div>
+</div>
+<div class="m-4 text-center">
+    {{ form_start(form) }}
+
+    <div class="form">
+        {{ form_errors(form.username) }}
+        {{ form_errors(form.email) }}
+        {{ form_errors(form.password) }}
+        {{ form_errors(form.confirm_password) }}
+        <div class="bordered">
+            {{ form_widget(form.username, {'attr':
+                    {
+                    'placeholder' : "Username"
+                    }
+                }) 
+            }}
+        </div>
+        <div class="bordered">
+            {{ form_widget(form.email, {'attr':
+                    {
+                    'placeholder' : "Email"
+                    }
+                }) 
+            }}
+        </div>
+        <div class="bordered">
+            {{ form_widget(form.password, {'attr':
+                    {
+                    'placeholder' : "Password"
+                    }
+                }) 
+            }}
+        </div>
+        <div class="bordered">
+            {{ form_widget(form.confirm_password, {'attr':
+                    {
+                    'placeholder' : "Repeat Password"
+                    }
+                }) 
+            }}
+        </div>
+
+        <button type="submit" class="btn btn-dark btn-block colored mt-4">
+            Register
+        </button>
+    </div>
+    <div class="mt-4">
+        <span class="meta">Already have an account ?</span>
+        <br />
+        <a href="{{path('security_login')}}">Login</a>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}

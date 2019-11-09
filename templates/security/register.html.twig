@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}The Lab | Register{% endblock %}
+{% block title %}Inscrivez vous{% endblock %}
 
 {% block body %}
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">The Lab | Register</h1>
+        <h1 class="display-4">Inscrivez vous avec vos identifiant CESI</h1>
         <p class="lead">
-            Welcome to The Lab, join us to share your own model
+            Vos compte BDE et cesi seront automatiquement liés
         </p>
     </div>
 </div>
@@ -15,19 +15,33 @@
     {{ form_start(form) }}
 
     <div class="form">
-        {{ form_errors(form.username) }}
         {{ form_errors(form.email) }}
         {{ form_errors(form.password) }}
-        {{ form_errors(form.confirm_password) }}
-        <div class="bordered">
-            {{ form_widget(form.username, {'attr':
-                    {
-                    'placeholder' : "Username"
-                    }
-                }) 
-            }}
-        </div>
-        <div class="bordered">
+        <div class="">
+                {{ form_widget(form.name, {'attr':
+                        {
+                        'placeholder' : "Nom"
+                        }
+                    }) 
+                }}
+            </div>
+        <div class="">
+                {{ form_widget(form.firstName, {'attr':
+                        {
+                        'placeholder' : "Prénom"
+                        }
+                    }) 
+                }}
+            </div>
+        <div class="">
+                {{ form_widget(form.password, {'attr':
+                        {
+                        'placeholder' : "Mots de passe"
+                        }
+                    }) 
+                }}
+            </div>
+        <div class="">
             {{ form_widget(form.email, {'attr':
                     {
                     'placeholder' : "Email"
@@ -35,31 +49,23 @@
                 }) 
             }}
         </div>
-        <div class="bordered">
-            {{ form_widget(form.password, {'attr':
+        <div class="">
+            {{ form_widget(form.center, {'attr':
                     {
-                    'placeholder' : "Password"
-                    }
-                }) 
-            }}
-        </div>
-        <div class="bordered">
-            {{ form_widget(form.confirm_password, {'attr':
-                    {
-                    'placeholder' : "Repeat Password"
+                    'placeholder' : "Centre"
                     }
                 }) 
             }}
         </div>
 
-        <button type="submit" class="btn btn-dark btn-block colored mt-4">
-            Register
+        <button type="submit" class="btn btn-dark btn-block mt-4">
+            S'inscrire
         </button>
     </div>
     <div class="mt-4">
-        <span class="meta">Already have an account ?</span>
+        <span class="meta">Vos comptes sont deja liés ? </span>
         <br />
-        <a href="{{path('security_login')}}">Login</a>
+        <a href="{{path('security_login')}}">Connectez-vous</a>
     </div>
     {{ form_end(form) }}
 </div>

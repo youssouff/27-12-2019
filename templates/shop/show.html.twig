@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Goodies{% endblock %}
+{% block title %}{{goody.name}}{% endblock %}
 
 {% block body %}
-    <h1>Goodies</h1>
-Name
-{{ goody.name }}
+
+<h1>Name : {{ goody.name }}</h1>
 
 Description
 {{ goody.description }}
 Price
 {{ goody.price }}
+category
+{{ goody.category.name }}
 
 
     <a href="{{ path('shop') }}">back to shop</a>

@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Center;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
 {
@@ -13,11 +16,13 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
-            ->add('password')
+            ->add('password', PasswordType::class)
             ->add('name')
             ->add('firstName')
-            ->add('center')
+            ->add('center', EntityType::class, [
+                'class' => Center::class,
+                'choice_label' => 'denomination'
+            ])
         ;
     }
 

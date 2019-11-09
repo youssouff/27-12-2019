@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}The Lab | Login{% endblock %}
+{% block title %}Connection{% endblock %}
 
 {% block body %}
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">The Lab | Login</h1>
+        <h1 class="display-4">BDE Strasbourg | Connexion</h1>
         <p class="lead">
-            Welcome back to The Lab, log in to share your own model
+            Bienvenue sur le site de votre bde ! veuillez vous connecter pour accèdez a toutes les fonctionalitée
         </p>
     </div>
 </div>
@@ -23,13 +23,13 @@
             <input placeholder="Password" required name="_password" type="password" class="bordered form-control"></input>
     
             <button type="submit" class="btn btn-dark btn-block colored bordered">
-                Login
+                Se connecter
             </button>
         
         <div class="mt-4">
-            <span class="meta">Don't have an account ?</span> 
+            <span class="meta">Vous n'avez pas encore liez votre compte CESI ?</span> 
             <br />
-            <a href="{{path('security_register')}}">Sign up</a>
+            <a href="{{path('security_register')}}">Inscrivez-vous</a>
         </div>
     </form>
 </div>

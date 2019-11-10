@@ -1,55 +1,72 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">{{ event.title }}</h1>
+			<p class="lead">{{ event.description | raw}}</p>
+		</div>
+	</div>
 
+    <center>
+    <div class="row" style="margin-left : 400px;">
+	<div class="">
+		<img src="{{ event.image}}" alt="" style="text-align: center;">	
+	</div>
 
-    <h2>{{ event.title }}</h2>
-    <div class="content">
-        <img src="{{ event.image}}" alt="">
-        <p>{{ event.description | raw}}</p>
-        <p>Prix: {{ event.price }}€</p>
-        <p>Evenement: {{ event.recursion.name }}</p>
+    <div class="" style="margin-left : 50px;">
+    <p>Prix:
+			{{ event.price }}€</p>
+		<p>Evenement:
+			{{ event.recursion.name }}</p>
     </div>
-
-
-    <div class="row">
-        {% if event.photos is empty %}
-        <div class="">
-        <p>Il n'y a pas de photos pour cet évenement.</p>
-        </div>
-        {% else %}
-        {% for photo in event.photos %}
-        <div class="col">
-        <p>Photo postée par: {{photo.author.firstName}}</p>
-        <img src="{{ photo.url}}" alt="">
-
-        <div class="commentaires">
-        <table>
-            <tr>
-                <th>Commentaires</th>
-            </tr>
-            {% for comment in photo.comments %}
-            <tr> 
-                <td>{{ comment.author.firstname}}:</th>
-                <td>{{ comment.content}}</th>
-            </tr>
-            {% endfor %}
-        </table>
-        
-        </div>
-        
-        
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% if app.user.name is defined %}
-        <div class="">
-        <p>Vous avez participé a l'évenement ? Partagez vos photos : </p>
-        {{ form(formUpload)}}
-        </div>
-        {% else %}
-        <p>Si vous avez participé a l'évenement et souhaitez poster des photos,</p><a href="{{path('security_login')}}">connectez-vous</a><p> d'abords.</p>
-        {% endif %}
     </div>
-    <a href="{{ path('event') }}">Retour a la liste</a>
-{% endblock %}
+    </center>
+
+    <hr>
+
+	<div class="" style="margin-top : 80px;">
+		{% if event.photos is empty %}
+        <center>
+        <div class="alert alert-dark" role="alert" style="text-align: center; width : 400px;">
+           Il n'y a pas de photos pour cet évenement.
+        </div>
+        </center>
+		{% else %}
+			{% for photo in event.photos %}
+				<div class="col" >
+					<img src="{{ photo.url}}" alt="">
+					<p>Photo postée par:
+						{{photo.author.firstName}}</p>
+                    <div class="commentaires">
+                    <table>
+                        <tr>
+                            <th>Commentaires</th>
+                        </tr>
+                        {% for comment in photo.comments %}
+                        <tr> 
+                            <td>{{ comment.author.firstname}}:</th>
+                            <td>{{ comment.content}}</th>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    </div>
+				</div>
+
+			{% endfor %}
+		{% endif %}
+		{% if app.user.name is defined %}
+			<div class="" style="margin-top : 100px;">
+				<p>Vous avez participé a l'évenement ? Partagez vos photos :
+				</p>
+				{{ form(formUpload)}}
+				</div>
+			{% else %}
+				<p>Si vous avez participé a l'évenement et souhaitez poster des photos,</p>
+				<a href="{{path('security_login')}}">connectez-vous</a>
+				<p>
+					d'abords.</p>
+			{% endif %}
+		</div>
+		<a href="{{ path('event') }}">Retour a la liste</a>
+	{% endblock %}

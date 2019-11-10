@@ -19,9 +19,9 @@ class GoodiesController extends AbstractController
      * @Route("/", name="goodies_index", methods={"GET"})
      */
     public function index(GoodiesRepository $goodiesRepository): Response
-    {
+    { 
         return $this->render('goodies/index.html.twig', [
-            'goodies' => $goodiesRepository->findAll(),
+            'goodies' => $goodiesRepository->findAll(),    
         ]);
     }
 

@@ -31,11 +31,34 @@ class ShopController extends AbstractController
      */
     public function shop(PaginatorInterface $paginator, Request $request, GoodiesRepository $repository)
     {
-        $search = new GoodiesSearch();
+        $total=0;//init cart total
+
+        if($request->cookies->get('cart')){
+            $rawCart = json_decode($request->cookies->get('cart'));//getting cookie value
+            $cart = [];
+        
+            foreach ($rawCart as $id => $quantity) { //cart init from cookie
+                $cart[] = [
+                    'product' => $repository->find($id),
+                    'quantity' => $quantity
+                ];
+            }
+
+            
+            foreach ($cart as $item) { //calcul cart total
+                $totalItem = $item['product']->getPrice() * $item['quantity'];
+                $total += $totalItem;
+            }
+        }else{
+            $cart = null;
+        }
+        
+
+        $search = new GoodiesSearch(); //creating search and handling form
         $form = $this->createForm(GoodiesSearchType::class, $search);
         $form->handleRequest($request);
 
-        $goodies = $paginator->paginate(
+        $goodies = $paginator->paginate(//paginate search results
             $this->repository->findAllQuery($search),
             $request->query->getInt('page', 1),
             12
@@ -43,7 +66,9 @@ class ShopController extends AbstractController
         
         return $this->render('shop/index_shop.html.twig',[
             'goodies' => $goodies,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'cart' => $cart,
+            'total' => $total
         ]);
     }
 

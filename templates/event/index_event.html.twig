@@ -14,7 +14,6 @@
         <div class="metadata">Prévu pour le: {{ event.date | date ('d/m/Y à H:i')}}</div>
         <div class="content">
             <img src=" {{ event.image }}" alt="">
-            <p>{{ event.description | raw }}</p>
             <a href=" {{ path('event_show', {'id': event.id }) }}" class="btn btn-primary">En savoir plus</a>
         </div>
     </article>

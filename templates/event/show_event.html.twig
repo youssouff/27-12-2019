@@ -10,17 +10,28 @@
         <p>Prix: {{ event.price }}€</p>
         <p>Evenement: {{ event.recursion.name }}</p>
     </div>
+
+
     <div class="row">
-        {% if event.photos is not empty %}
+        {% if event.photos is empty %}
+        <div class="">
+        <p>Il n'y a pas de photos pour cet évenement.</p>
+        </div>
+        {% else %}
         {% for photo in event.photos %}
         <div class="col">
         <img src="{{ photo.url}}" alt="">
         <p>Photo postée par: {{photo.author.firstName}}</p>
         </div>
         {% endfor %}
+        {% endif %}
+        {% if app.user.name is defined %}
+        <div class="">
+        <p>Vous avez participé a l'évenement ? Partagez vos photos : </p>
+        {{ form(form)}}
+        </div>
         {% else %}
-        <p>Il n'y a pas de photos pour cet évenement.</p>
-        
+        <p>Si vous avez participé a l'évenement et souhaitez poster des photos,</p><a href="{{path('security_login')}}">connectez-vous</a><p> d'abords.</p>
         {% endif %}
     </div>
     <a href="{{ path('event') }}">Retour a la liste</a>

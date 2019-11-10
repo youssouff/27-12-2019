@@ -16,13 +16,22 @@ body{
     background-color: white;
 }
 
+footer{
+        background:#27251f;
+        bottom:0;      
+        width:100%;       
+        padding-top:10px;        
+        height:200px;  
+        color : white;
+}
+
 .background{
     background-image: url("../appdata/background.jpg");
-    width: 70%;
-    height: 700px;
+    width: 80%;
+    height: 600px;  
     position: absolute;
     background-repeat: no-repeat;
-    margin-left : 318px;
+    margin-left : 305px;
 }
 
 .titleindex{
@@ -64,4 +73,27 @@ body{
     margin-top: -50px;
 }
 
+.borderleft
+{
+    background-color: #27251f;
+    width: 280px;
+    height: 1000px;
+}
 
+.borderright
+{
+    background-color: #27251f;
+    float : right;
+    width : 100px;
+    height: 1000px;
+}
+
+.col-sm2{
+    color : white;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.card{
+    height: 420px;
+}

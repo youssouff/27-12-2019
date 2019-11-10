@@ -57,6 +57,9 @@ class CartController extends AbstractController
         }
         if(!empty($cart[$id])){
             $cart[$id]--;
+            if($cart[$id] == 0){
+                unset($cart[$id]);
+            }
         }
         
         $cookie = new Cookie('cart', json_encode($cart), time() + (365 * 24 * 60 * 60));

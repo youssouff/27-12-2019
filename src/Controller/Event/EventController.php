@@ -5,8 +5,10 @@ namespace App\Controller\Event;
 use App\Entity\Evenement;
 use App\Entity\Upload;
 use App\Entity\Photo;
+use App\Entity\Comment;
 use App\Repository\EvenementRepository;
 use App\Form\UploadType;
+use App\Form\CommentType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,13 +33,14 @@ class EventController extends AbstractController
     public function event_show(Evenement $event, Request $request, $id ){
 
         $upload = new Upload();
-        $form = $this->createForm(UploadType::class, $upload);
-        
-        $fileUrl = "";
+        $comment = new Comment();
+        $formUpload = $this->createForm(UploadType::class, $upload);
+        $formComment = $this->createForm(CommentType::class, $comment);
 
-        $form->handleRequest($request);
+        $formUpload->handleRequest($request);
+        $formComment->handleRequest($request);
         
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             
             $file = $upload->getName();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
@@ -45,7 +48,7 @@ class EventController extends AbstractController
             $upload->setName($fileName);
 
             $photo = new Photo;
-            $photo->setUrl("../photos/".$fileName);
+            $photo->setUrl("../appdata/photos/".$fileName);
             $photo->setauthor( $user = $this->getUser() );
             $photo->setEvenement( $event );
 
@@ -56,14 +59,22 @@ class EventController extends AbstractController
             return $this->redirectToRoute('event_show', [
                 'id' => $id,
             ]);
+        }
+        if ($formComment->isSubmitted() && $formComment->isValid()) {
+            
+            $comment->setauthor( $user = $this->getUser() );
+            
 
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
 
         }
 
         return $this->render('event/show_event.html.twig', [
             'event' => $event,
-            'form' => $form->createView(),
-            'fileUrl' => $fileUrl,
+            'formUpload' => $formUpload->createView(),
+            //'formComment' => $formComment->createView(),
         ]);
     }
 }

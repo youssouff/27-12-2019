@@ -20,15 +20,32 @@
         {% else %}
         {% for photo in event.photos %}
         <div class="col">
-        <img src="{{ photo.url}}" alt="">
         <p>Photo postée par: {{photo.author.firstName}}</p>
+        <img src="{{ photo.url}}" alt="">
+
+        <div class="commentaires">
+        <table>
+            <tr>
+                <th>Commentaires</th>
+            </tr>
+            {% for comment in photo.comments %}
+            <tr> 
+                <td>{{ comment.author.firstname}}:</th>
+                <td>{{ comment.content}}</th>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        </div>
+        
+        
         </div>
         {% endfor %}
         {% endif %}
         {% if app.user.name is defined %}
         <div class="">
         <p>Vous avez participé a l'évenement ? Partagez vos photos : </p>
-        {{ form(form)}}
+        {{ form(formUpload)}}
         </div>
         {% else %}
         <p>Si vous avez participé a l'évenement et souhaitez poster des photos,</p><a href="{{path('security_login')}}">connectez-vous</a><p> d'abords.</p>

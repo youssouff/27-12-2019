@@ -92,6 +92,15 @@ class Photo
 
         return $this;
     }
+    public function addUser(User $users): self
+    {
+        return $this->users;
+    }
+    public function removeUser(Comment $comment): self
+    {
+
+        return $this;
+    }
 
     public function getAuthor(): ?User
     {

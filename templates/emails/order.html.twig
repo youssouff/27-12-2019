@@ -1,40 +1,47 @@
-<h1>Récipicé de commande</h1>
-<p>A delivrer à :</p>
-{{user.name}} {{user.firstName}} <br>
-En Salle : {{room}} <br>
-
-<table>
-        <thead>
-            <th>Nom</th>
-            <th>Prix</th>
-            <th>Quantité</th>
-            <th>Total</th>
-
-        </thead>
-        <tbody>
-
-            {% for item in cart %}
-            <tr>
-                <td>
-                    {{item.product.name}}
-                </td>
-                <td>
-                    {{item.product.price}} €
-                </td>
-                <td>
-                    {{item.quantity}}
-                </td>
-                <td>
-                    {{item.product.price * item.quantity}} €
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3">Total : </td>
-                <td>{{ total }} €</td>
-                <td></td>
-            </tr>
-        </tfoot>
-    </table>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+            <h1>Récipicé de commande</h1>
+            <p>A delivrer à :</p>
+            {{user.name}} {{user.firstName}} <br>
+            En Salle : {{room}} <br>
+            
+            <table>
+                    <thead>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+            
+                    </thead>
+                    <tbody>
+            
+                        {% for item in cart %}
+                        <tr>
+                            <td>
+                                {{item.product.name}}
+                            </td>
+                            <td>
+                                {{item.product.price}} €
+                            </td>
+                            <td>
+                                {{item.quantity}}
+                            </td>
+                            <td>
+                                {{item.product.price * item.quantity}} €
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Total : </td>
+                            <td>{{ total }} €</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+    </body>

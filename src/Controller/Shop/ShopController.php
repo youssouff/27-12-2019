@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * @Route("/shop")
@@ -29,17 +31,18 @@ class ShopController extends AbstractController
     /**
      * @Route("/", name="shop")
      */
-    public function shop(PaginatorInterface $paginator, Request $request, GoodiesRepository $repository)
+    public function shop(PaginatorInterface $paginator, Request $request)
     {
         $total=0;//init cart total
+        $cart = []; // init cart
 
         if($request->cookies->get('cart')){
             $rawCart = json_decode($request->cookies->get('cart'));//getting cookie value
-            $cart = [];
+            
         
             foreach ($rawCart as $id => $quantity) { //cart init from cookie
                 $cart[] = [
-                    'product' => $repository->find($id),
+                    'product' => $this->repository->find($id),
                     'quantity' => $quantity
                 ];
             }
@@ -49,8 +52,6 @@ class ShopController extends AbstractController
                 $totalItem = $item['product']->getPrice() * $item['quantity'];
                 $total += $totalItem;
             }
-        }else{
-            $cart = null;
         }
         
 
@@ -69,6 +70,72 @@ class ShopController extends AbstractController
             'form' => $form->createView(),
             'cart' => $cart,
             'total' => $total
+        ]);
+    }
+
+    /**
+     * @Route("/checkout", name="shop_checkout")
+     */
+    public function checkout(Request $request, \Swift_Mailer $mailer)
+    {
+        /*generate cart from cookie*/
+        $total = 0;//init cart total
+        $cart = []; // init cart
+
+        if($request->cookies->get('cart')){
+            $rawCart = json_decode($request->cookies->get('cart'));//getting cookie value
+            
+        
+            foreach ($rawCart as $id => $quantity) { //cart init from cookie
+                $cart[] = [
+                    'product' => $this->repository->find($id),
+                    'quantity' => $quantity
+                ];
+            }
+
+            
+            foreach ($cart as $item) { //calcul cart total
+                $totalItem = $item['product']->getPrice() * $item['quantity'];
+                $total += $totalItem;
+            }
+        }
+
+        $defaultData = ['message' => 'messagebuilder'];
+        $form = $this->createFormBuilder($defaultData)
+                    ->add('salle', IntegerType::class)
+                    ->add('envoyer', SubmitType::class)
+                    ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // data is an array with "name", "email", and "message" keys
+            $data = $form->getData();
+            /** @var \App\Entity\User $user */
+            $user = $this->getUser();
+
+            $message = (new \Swift_Message('Commande'))
+            ->setFrom($user->getUsername())
+            ->setTo('montemonttheophile@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    // templates/emails/order.html.twig
+                    'emails/order.html.twig',
+                    ['cart' => $cart,
+                    'total' => $total,
+                    'user' => $user,
+                    'room' => $data['salle']]
+                ),'text/html');
+    
+            $mailer->send($message);
+
+            return $this->redirectToRoute('cart_clear'); //will clear cart then redirect to shop
+        }
+
+        return $this->render('shop/checkout.html.twig', [
+            'cart' => $cart,
+            'total' => $total,
+            'form' => $form->createView()
         ]);
     }
 

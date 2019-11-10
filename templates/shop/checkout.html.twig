@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation de Commande{% endblock %}
+
+{% block body %}
+<div class="container">
+    <table class="table">
+        <thead>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+            <th></th>
+        </thead>
+        <tbody>
+
+            {% for item in cart %}
+            <tr>
+                <td>
+                    {{item.product.name}}
+                </td>
+                <td>
+                    {{item.product.price}} €
+                </td>
+                <td>
+                    {{item.quantity}}
+                </td>
+                <td>
+                    {{item.product.price * item.quantity}} €
+                </td>
+                <td>
+                    <a href="{{path('cart_remove', {'id': item.product.id})}}" class="btn btn-danger sm">Retirer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total : </td>
+                <td>{{ total }} €</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="row">
+        <div class="col">
+                Toute commande vous engage à payer !
+        </div>
+        <div class="col">
+            {{form_start(form)}}
+
+            {{form_end(form)}}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

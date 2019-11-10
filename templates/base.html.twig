@@ -40,6 +40,13 @@
                                 <a class="dropdown-item" href="{{path('event')}}">Evénements passés</a>
                               </div>
                             </div>
+
+                            {% if is_granted('ROLE_ADMIN')%}
+                             <li class="nav-item">
+                                <a class="nav-link" href="/">Administration</a>
+                            </li>
+                            {% else %}
+                            {% endif %}
                         </ul>
                     </div>
 

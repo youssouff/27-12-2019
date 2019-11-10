@@ -6,7 +6,7 @@
 
 <section class="evements">
     
-    
+    {% if events %}
     {% for event in events %}
         
     <article>
@@ -18,9 +18,10 @@
             <a href=" {{ path('event_show', {'id': event.id }) }}" class="btn btn-primary">En savoir plus</a>
         </div>
     </article>
-    
-
     {% endfor %}
+    {% else %}
+    <p>Il n'y a pas d'évenements de prévus</p>
+    {% endif %}
 
 </section>
 

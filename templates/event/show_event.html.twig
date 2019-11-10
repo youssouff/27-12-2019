@@ -10,17 +10,18 @@
         <p>Prix: {{ event.price }}€</p>
         <p>Evenement: {{ event.recursion.name }}</p>
     </div>
-
-    <a href="{{ path('event') }}">Retour a la liste</a>
-
     <div class="row">
-        {% if event.photos %}
+        {% if event.photos is not empty %}
         {% for photo in event.photos %}
         <div class="col">
         <img src="{{ photo.url}}" alt="">
-        <p>{{photo.author.firstName}}</p>
+        <p>Photo postée par: {{photo.author.firstName}}</p>
         </div>
         {% endfor %}
+        {% else %}
+        <p>Il n'y a pas de photos pour cet évenement.</p>
+        
         {% endif %}
     </div>
+    <a href="{{ path('event') }}">Retour a la liste</a>
 {% endblock %}

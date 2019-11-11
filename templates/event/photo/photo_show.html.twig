@@ -39,7 +39,11 @@
                         <tr> 
                             <td>{{ comment.author.firstname}}:</th>
                             <td>{{ comment.content}}</th>
+                            {% if app.user.firstname == comment.author.firstname %}                        
+                            <a class="btn btn-lg" style="background-color:transparent;" href="">Supprimer</a>                        
+                            {% endif %}
                         </tr>
+                        
                         {% endfor %}
                     </table>
                     </div>

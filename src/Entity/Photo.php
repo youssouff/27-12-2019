@@ -62,6 +62,7 @@ class Photo
         return $this;
     }
 
+
     /**
      * @return Collection|Comment[]
      */

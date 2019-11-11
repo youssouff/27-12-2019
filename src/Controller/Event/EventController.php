@@ -16,13 +16,42 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EventController extends AbstractController
 {
+    
        /**
-     * @Route("/event", name="event")
+     * @Route("/event/later", name="event_later")
      */
-    public function event(EvenementRepository $eventrepo)
+    public function event_later(EvenementRepository $eventrepo)
     {
-        $events = $eventrepo->findAll();
-        return $this->render('event/index_event.html.twig', [
+        $now = new \DateTime('now');
+        $query = $eventrepo->createQueryBuilder('p')
+        ->where('p.date >= :now')
+        ->setParameter('now', $now)
+        ->getQuery()
+    ;
+
+    $events = $query->getResult();
+        
+        
+        return $this->render('event/index_event_later.html.twig', [
+            'events' => $events
+        ]);
+    }
+    /**
+     * @Route("/event/before", name="event_before")
+     */
+    public function event_before(EvenementRepository $eventrepo)
+    {
+        $now = new \DateTime('now');
+        $query = $eventrepo->createQueryBuilder('p')
+        ->where('p.date <= :now')
+        ->setParameter('now', $now)
+        ->getQuery()
+    ;
+
+    $events = $query->getResult();
+        
+        
+        return $this->render('event/index_event_before.html.twig', [
             'events' => $events
         ]);
     }
@@ -95,6 +124,7 @@ class EventController extends AbstractController
             'formComment' => $formComment->createView(),
         ]);
     }
+    
 
 
 

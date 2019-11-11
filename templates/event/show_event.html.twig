@@ -34,25 +34,15 @@
         </center>
 		{% else %}
 			{% for photo in event.photos %}
-				<div class="col" >
-					<img src="{{ photo.url}}" alt="">
+				<div class="col" style="margin: 20px 0 20px 0q">
 					<p>Photo postée par:
 						{{photo.author.firstName}}</p>
+					<img src="{{ photo.url}}" alt="">
                     <div class="commentaires">
-                    <table>
-                        <tr>
-                            <th>Commentaires</th>
-                        </tr>
-                        {% for comment in photo.comments %}
-                        <tr> 
-                            <td>{{ comment.author.firstname}}:</th>
-                            <td>{{ comment.content}}</th>
-                        </tr>
-                        {% endfor %}
-                    </table>
+						<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">il y a {{ photo.comments | length}} commentaire{% if photo.comments | length <= 1 %} {% else %}s {% endif %}</a>
                     </div>
 				</div>
-
+				<hr>
 			{% endfor %}
 		{% endif %}
 		{% if app.user.name is defined %}

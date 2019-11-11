@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+		<p>Photo postée par:
+            {{photo.author.firstName}}</p>
+		</div>
+	</div>
+
+    <center>
+    <div class="row" style="margin-left : 400px;">
+	<div class="">
+		<img src="../{{photo.url}}" alt="">
+	</div>
+
+    
+    </div>
+    </center>
+
+    <hr>
+
+	<div class="" style="margin-top : 80px;">
+		{% if photo.comments is empty %}
+        <center>
+        <div class="alert alert-dark" role="alert" style="text-align: center; width : 400px;">
+           Il n'y a pas de commentaires pour cette photo.
+        </div>
+        </center>
+		{% else %}
+				<div class="col" >
+
+                    <div class="commentaires" >
+                    <table>
+                        <tr>
+                            <th>Commentaires</th>
+                        </tr>
+                        {% for comment in photo.comments %}
+                        <tr> 
+                            <td>{{ comment.author.firstname}}:</th>
+                            <td>{{ comment.content}}</th>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    </div>
+				</div>
+		{% endif %}
+		{% if app.user.name is defined %}
+			<div class="" style="margin-top : 100px;">
+				<p>Postez un commentaire: 
+				</p>
+				{{ form(formComment)}}
+				</div>
+			{% else %}
+				<p>Si vous souhaitez commenter la photo,</p>
+				<a href="{{path('security_login')}}">connectez-vous</a>
+				<p>
+					d'abords.</p>
+			{% endif %}
+		</div>
+		<a href="{{ path('event') }}">Retour a la liste</a>
+	{% endblock %}

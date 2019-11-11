@@ -33,12 +33,9 @@ class EventController extends AbstractController
     public function event_show(Evenement $event, Request $request, $id ){
 
         $upload = new Upload();
-        $comment = new Comment();
         $formUpload = $this->createForm(UploadType::class, $upload);
-        $formComment = $this->createForm(CommentType::class, $comment);
 
         $formUpload->handleRequest($request);
-        $formComment->handleRequest($request);
         
         if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             
@@ -60,16 +57,7 @@ class EventController extends AbstractController
                 'id' => $id,
             ]);
         }
-        if ($formComment->isSubmitted() && $formComment->isValid()) {
-            
-            $comment->setauthor( $user = $this->getUser() );
-            
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($comment);
-            $entityManager->flush();
-
-        }
+        
 
         return $this->render('event/show_event.html.twig', [
             'event' => $event,
@@ -77,4 +65,36 @@ class EventController extends AbstractController
             //'formComment' => $formComment->createView(),
         ]);
     }
+    /**
+    * @Route("/event/photo/{id}", name="photo_show")
+    */
+    public function photo_show(Photo $photo, Request $request, $id ){
+
+        $comment = new Comment();
+
+        $formComment = $this->createForm(CommentType::class, $comment);
+
+        $formComment->handleRequest($request);
+
+        if ($formComment->isSubmitted() && $formComment->isValid()) {
+            
+            $comment->setauthor( $user = $this->getUser() );
+            $comment->setPhoto( $photo );
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            return $this->redirectToRoute('photo_show', [
+                'id' => $id,
+            ]);
+
+
+        }
+        return $this->render('event/photo/photo_show.html.twig', [
+            'photo' => $photo,
+            'formComment' => $formComment->createView(),
+        ]);
+    }
+
+
 }

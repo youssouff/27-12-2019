@@ -3,22 +3,24 @@
 namespace App\Form;
 
 use App\Entity\Comment;
-use App\Entity\Photo;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content')
-            ->add('photo', EntityType::class, [
-                'class' => Photo::class,
+            ->add('content', TextareaType::class, [
+                'attr' => ['placeholder' => 'Ecrivez votre commentaire' ]
+                
             ])
-        ;
+            ->add('submit', SubmitType::class)
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

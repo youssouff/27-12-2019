@@ -35,6 +35,25 @@ class EvenementRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function eventsLater(){
+        $now = new \DateTime('now');
+        $query = $this->createQueryBuilder('p')
+        ->where('p.date >= :now')
+        ->setParameter('now', $now)
+        ->getQuery()   
+        
+        ;
+        return $query->getResult();
+    }
+    public function eventsBefore(){
+        $now = new \DateTime('now');
+        $query = $this->createQueryBuilder('p')
+        ->where('p.date <= :now')
+        ->setParameter('now', $now)
+        ->getQuery()   
+        ;
+        return $query->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Evenement

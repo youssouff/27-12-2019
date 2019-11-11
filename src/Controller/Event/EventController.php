@@ -36,14 +36,8 @@ class EventController extends AbstractController
      */
     public function event_before(EvenementRepository $eventrepo)
     {
-        $now = new \DateTime('now');
-        $query = $eventrepo->createQueryBuilder('p')
-        ->where('p.date <= :now')
-        ->setParameter('now', $now)
-        ->getQuery()
-    ;
-
-    $events = $eventrepo->eventsLater();
+        
+    $events = $eventrepo->eventsBefore();
         
         
         return $this->render('event/index_event_before.html.twig', [

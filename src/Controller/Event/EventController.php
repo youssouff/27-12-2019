@@ -61,7 +61,7 @@ class EventController extends AbstractController
             
             $file = $upload->getName();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('upload_directory'), $fileName);
+            $file->move($this->getParameter('upload_directory_photos'), $fileName);
             $upload->setName($fileName);
 
             $photo = new Photo;

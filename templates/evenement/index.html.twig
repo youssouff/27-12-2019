@@ -3,8 +3,15 @@
 {% block title %}Evenements{% endblock %}
 
 {% block body %}
-    <h1>Evenements</h1>
-    <a href="{{ path('evenement_new') }}" class="btn btn-dark">Créer un nouvel evenement</a>
+    <div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Gestion Evenements</h1>
+			<p class="lead">Modifie et supprime les événements ici</p>
+		</div>
+	</div>
+
+
+    <div class="text-center">
     <table class="table">
         <thead>
             <tr>
@@ -35,6 +42,8 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 
-    
+    <a href="{{ path('evenement_new') }}" class="btn btn-dark mb-5 mt-5" style="margin-left : 83%">Créer un nouvel evenement</a>
+
 {% endblock %}

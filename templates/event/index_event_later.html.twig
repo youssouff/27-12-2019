@@ -11,7 +11,7 @@
     <div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-4">Nos événements</h1>
-			<p class="lead">Retrouver tous nous événements passés</p>
+			<p class="lead">Retrouvez tous nous événements à venir</p>
 		</div>
 	</div>
    
@@ -26,7 +26,9 @@
     <div class="col-sm2" style="margin: 0 auto;">
     <div class="card card-event" style="width: 18rem; background-color: #8a8d8f;">
         {% if event.image %} 
-        <img src="{{ event.image }}" class="card-img-top" alt="...">
+        
+        <img class="img-card" src="{{ event.image }}" class="card-img-top" alt="...">
+        
         {% else %}
         <div style="background-color : black; height :165px ; width : 100%;"></div>
         

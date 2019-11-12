@@ -33,27 +33,27 @@
                         <div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
                             <div class="row">
                                 {% if not app.user %}
-                                <div class="col">
+                                <div class="col-12">
                                     <a href="{{path('security_register')}}" class="btn btn-dark btn-block mt-1 mb-1">
                                         Inscription
                                     </a>
                                 </div>
                                {% else %} 
-                                <div class="col">
+                                <div class="col-12">
                                         <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
                                             Mon Profil
                                         </a>
                                 </div>
                                 {% endif %}
                                     {% if is_granted('ROLE_ADMIN')%}
-                                   <div class="col">
-                                        <a href="/" class="btn btn-dark btn-block mt-1 mb-1">
+                                   <div class="col-12">
+                                        <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
                                             Administration
                                         </a>
                                     </div>
                                     {% else %}
                                     {% endif %}
-                                <div class="col">
+                                <div class="col-12">
                                     <a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}"
                                         class="btn btn-dark btn-block mt-1 mb-1">
                                         {% if app.user %} Déconnexion {% else %} Connexion {% endif %}
@@ -90,28 +90,28 @@
                             <div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
                                 <div class="row">
                                     {% if not app.user %}
-                                    <div class="col">
+                                    <div class="col-12">
                                         <a href="{{path('security_register')}}"
                                             class="btn btn-dark btn-block mt-1 mb-1">
                                             Inscription
                                         </a>
                                     </div>
                                     {% else %}
-                                    <div class="col">
+                                    <div class="col-12">
                                         <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
                                             Mon Profil
                                         </a>
                                     </div>
                                     {% endif %}
                                     {% if is_granted('ROLE_ADMIN')%}
-                                   <div class="col">
-                                        <a href="/" class="btn btn-dark btn-block mt-1 mb-1">
+                                   <div class="col-12">
+                                        <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
                                             Administration
                                         </a>
                                     </div>
                                     {% else %}
                                     {% endif %}
-                                    <div class="col">
+                                    <div class="col-12">
                                         <a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}"
                                             class="btn btn-dark btn-block mt-1 mb-1">
                                             {% if app.user %} Déconnexion {% else %} Connexion {% endif %}

@@ -108,6 +108,15 @@ hr{
     border: none; /*on supprime le style par défaut*/
   }
 
+.hr-comment{
+    width: 50%;
+    height: 2px;
+    margin-top: 120px;
+    margin-bottom: 70px;
+    background-color: gray;
+    border: none;  
+}
+
 
   .bdr-event{
       border-width : 2px;
@@ -123,6 +132,24 @@ hr{
     background-color : #BDBDBD;
 }
 
+.bdr-comment{
+    border-width : 2px;
+    border-style: solid;
+    border-color:  lightslategrey;
+    background-color : #F2F2F2; 
+    width: 50%;
+}
+
+.bdr-comment2{
+    border-width : 2px;
+    border-style: solid;
+    border-color:  lightslategrey;
+    background-color : white; 
+    width: 50%;
+    height: auto;
+}
+
+
   .size-border-event{
       width: 500px;
   }
@@ -130,6 +157,14 @@ hr{
   p.size-text{
       font-size: 25px;
   }
+
+  p.size-text-comment{
+    font-size: 20px;
+}
+
+p.size-text-shop{
+    font-size: 25px;
+}
 
 
   .mrg-left{
@@ -143,4 +178,11 @@ hr{
   .img-event{
       max-width : 500px;
       min-width : 500px;
+  }
+
+  .img-card{
+    max-width : 100%;
+    max-width : 100%;
+    min-height : 165px;
+    max-height : 165px;
   }

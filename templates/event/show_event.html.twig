@@ -51,7 +51,7 @@
 							</a>
 						</div>
 					</div>
-					<hr>
+					<hr class="hr-comment">
 				{% endfor %}
 			</div>
 			<hr>
@@ -62,12 +62,12 @@
 				</p>
 				<div class="w-50 mx-auto">
 					{{ form(formUpload)}}
-					</div>
 				</div>
+			</div>
 			{% else %}
 				<div class="mrg-top text-center">
 					<p class="size-text">Vous avez participé a l'évenement et souhaitez poster des photos,
-						<a href="{{path('security_login')}}">connectez-vous</a>d'abords.</p>
+						<a href="{{path('security_login')}}">connectez-vous</a> d'abords.</p>
 				</div>
 			{% endif %}
 		</div>

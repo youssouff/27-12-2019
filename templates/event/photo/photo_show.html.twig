@@ -27,41 +27,47 @@
         </div>
         </center>
 		{% else %}
-				<div class="col" >
+			<p class="size-text text-center">Commentaires</p>
+				<div class="bdr-comment w-50 mx-auto" >
 
                     <div class="commentaires" >
-                    <table>
-                        <tr>
-                            <th>Commentaires</th>
-                        </tr>
-                        {% for comment in photo.comments %}
-                        <tr> 
-                            <td>{{ comment.author.firstname}} :</th>
-							<td>{{ comment.content}}</th>
-							{% if app.user.name is defined %}
-                            {% if app.user.firstname == comment.author.firstname %}                        
-                            <a class="btn btn-lg" style="background-color:transparent;" href="">Supprimer</a>                        
-							{% endif %}
-							{% endif %}
-                        </tr>
+                    
                         
+                        
+                        
+						<div class="row">
+                        {% for comment in photo.comments %}
+                         <div class="bdr-comment2 mx-auto mb-2 col-8 mt-2">
+                            <p class="mt-2 ml-1 size-text-comment" >{{ comment.author.firstname}}:<br></p>
+							<p class="mt-2 ml-1 size-text-comment">{{ comment.content}}</p>
+						</div>
+							{% if app.user.name is defined %}
+                            {% if app.user.firstname == comment.author.firstname %}   
+							<div class="mx-auto">                     
+                            <a class="btn btn-lg" style="background-color:transparent;" href="">Supprimer</a>  
+							</div>                     
+							{% endif %}
+							{% endif %}
+							<br>	
                         {% endfor %}
-                    </table>
+						</div>
                     </div>
 				</div>
+				<hr>
 		{% endif %}
 		{% if app.user.name is defined %}
 			<div class="mrg-top text-center">
 				<p>Postez un commentaire: 
 				</p>
 				<div class="w-50 mx-auto">
-				{{ form(formComment)}}
+				{{ form_start(formComment)}}
+				{{ form_widget(formComment.content)}}
+				{{ form_end(formComment)}}
 				</div>
 				</div>
 			{% else %}
-				<p>Si vous souhaitez commenter la photo,</p>
+				<p class="size-text text-center">Si vous souhaitez commenter la photo,
 				<a href="{{path('security_login')}}">connectez-vous</a>
-				<p>
 					d'abords.</p>
 			{% endif %}
 		</div>

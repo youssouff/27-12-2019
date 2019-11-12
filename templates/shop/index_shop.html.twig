@@ -3,7 +3,13 @@
 {% block title %}Boutique{% endblock %}
 
 {% block body %}
-<h2 class="title py-2">Boutique</h2>
+<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Notre boutique</h1>
+			<p class="lead">Retrouvez tous nos goodies sur ici !</p>
+		</div>
+	</div>
+
 <div class="container-fluid">
     <h1>Meilleur ventes</h1>
     <div class="row">
@@ -34,23 +40,26 @@
     </div>
     {{form_start(form)}}
     <div class="row">
-        <div class="col-6 col-md-3 mb-2">
+        <div class="col-2 col-md-2 mb-2 mx-auto">
             {{form_widget(form.maxPrice)}}
         </div>
-        <div class="col-6 col-md-3">
+        <div class="col-2 col-md-2 mx-auto">
             {{form_widget(form.category)}}
         </div>
-        <div class="col-6 col-md-3">
+        <div class="col-2 col-md-2 mx-auto">
             {{form_widget(form.orderBy)}}
-            {{form_widget(form.orderType)}}
-
+           
         </div>
-        <div class="col-6 col-md-3">
+        <div class="col-2 col-md-2 mx-auto">
+        {{form_widget(form.orderType)}}
+        </div>
+        <div class="col-2 col-md-2 mx-auto">
             <button type="submit" class="btn btn-dark btn-block">Rechercher</button>
             <a href="{{path('shop_checkout')}}" class="btn btn-dark btn-block">Voir le Panier</a>
         </div>
     </div>
     {{form_end(form)}}
+    <hr>
 
     <div class="row">
         {% if goodies is empty %}
@@ -63,17 +72,19 @@
             {% for goody in goodies %}
             <div class="col-md-6 col-lg-4 mb-2">
                 <div class="card">
-                    <div class="card-header">
-                        {{ goody.name }}
+                    <div class="card-header" style="height : 90px;">
+                        <p class="size-text-shop ml-5">{{ goody.name }}</p>
+                        <p style="margin-left: 80%">Prix : {{goody.price ? goody.price : "Gratuit"}}€</p>
                     </div>
                     <div class="card-body">
                         <div class="meta">Categorie : {{ goody.category.name }}</div>
-                        {{ goody.description }}
-
-                        Prix : {{goody.price ? goody.price : "Gratuit"}}
+                        <p>Description : {{ goody.description }}</p><br>
+    
+                        <div style="margin-left: 55%">
                         <a href="{{path('shop_show', {'id': goody.id }) }}" class="btn btn-dark"> Détails</a>
-                        <a href="{{path('cart_add', {'id': goody.id }) }}" class="btn btn-dark"> Ajouter au
+                        <a href="{{path('cart_add', {'id': goody.id }) }}" class="btn" style="background-color : #e4002b; color : white;"> Ajouter au
                             panier</a>
+                        </div>
                     </div>
                 </div>
             </div>

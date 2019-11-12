@@ -142,11 +142,12 @@ class EventController extends AbstractController
     /**
     * @Route("/comment/delete/{id}", name="delete_comment")
     */
-    public function delete_comment(Photo $photo,Comment $comment, Request $request){
+    public function delete_comment(Comment $comment, Request $request){
 
         
     if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
         $id = $comment->getPhoto()->getId();
+        $photo = $comment->getPhoto();
         $photo->removeComment($comment);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($photo);

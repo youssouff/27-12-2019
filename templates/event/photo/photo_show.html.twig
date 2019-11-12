@@ -44,7 +44,7 @@
 							{% if app.user.name is defined %}
                             {% if app.user.firstname == comment.author.firstname %}   
 							<div class="mx-auto">                     
-                            <a class="btn btn-lg" style="background-color:transparent;" href="">Supprimer</a>  
+							{{ include('event/photo/_delete_comment_form.html.twig') }}
 							</div>                     
 							{% endif %}
 							{% endif %}

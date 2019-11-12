@@ -14,7 +14,7 @@
 		<img class="img-event" src="../{{photo.url}}" alt="">
 	</div>
     </div>
-    <a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="far fa-heart"></i> {{ photo.users | length }} </a>
+    <a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
     </center>
 
     <hr>

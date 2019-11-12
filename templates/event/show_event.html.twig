@@ -40,9 +40,8 @@
 						<p>Photo postée par:
 							{{photo.author.firstName}}</p>
 						<img class="img-event" src="{{ photo.url}}" alt="">
-						<a class="btn btn-lg" style="background-color:transparent;">
-							<i class="far fa-heart"></i>
-							Like</a>
+						<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
+							
 						<div class="commentaires">
 							<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">Il y a
 								{{ photo.comments | length}}

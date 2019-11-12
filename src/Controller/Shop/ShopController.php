@@ -33,10 +33,23 @@ class ShopController extends AbstractController
     /**
      * @Route("/", name="shop")
      */
-    public function shop(PaginatorInterface $paginator, Request $request, OrderHistoryRepository $repo)
+    public function shop(PaginatorInterface $paginator, Request $request, OrderHistoryRepository $repo, GoodiesRepository $goodiesRepository)
     {
-        //Best-sellers
-       $bestSeller = $repo->findAll();
+        //Best-sellers  
+        $orders = $repo->findAll();
+        
+        
+        $allOrder = [];//initialising couting array
+
+        for ($i=0; $i < sizeof($orders); $i++) {  //getting cart content 
+            foreach ($orders[$i]->getCart() as $goodies => $quantity) { //counting quantity
+                array_key_exists($goodies, $allOrder) ? $allOrder[$goodies] += $quantity : $allOrder[$goodies] = $quantity;      
+            }
+        }
+        arsort($allOrder); //sorting array from value
+        foreach (array_slice($allOrder, 0, 3, true) as $id => $sum) {//slice only 3 first value
+            $bestSeller[] = [$goodiesRepository->find($id), $sum]; //associate id in array with objects
+        }
         
         //Search
         $search = new GoodiesSearch(); //creating search and handling form

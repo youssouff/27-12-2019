@@ -39,7 +39,12 @@
 					<div class="col text-center" style="margin: 20px 0 20px 0q">
 						<p>Photo postée par:
 							{{photo.author.firstName}}</p>
+							{% if photo.author == app.user or is_granted('ROLE_ADMIN') %}
 							{{ include('event/_delete_photo_form.html.twig') }}
+							{% endif %}
+							
+
+
 						<img class="img-event" src="{{ photo.url}}" alt="">
 						<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
 							

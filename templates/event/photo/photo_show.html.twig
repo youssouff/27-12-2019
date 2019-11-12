@@ -37,16 +37,14 @@
                         
 						<div class="row">
                         {% for comment in photo.comments %}
-                         <div class="bdr-comment2 mx-auto mb-2 col-8 mt-2">
-                            <p class="mt-2 ml-1 size-text-comment" >{{ comment.author.firstname}}:<br></p>
-							<p class="mt-2 ml-1 size-text-comment">{{ comment.content}}</p>
-						</div>
-							{% if app.user.name is defined %}
-                            {% if app.user.firstname == comment.author.firstname %}   
-							<div class="mx-auto">                     
-							{{ include('event/photo/_delete_comment_form.html.twig') }}
-							</div>                     
-							{% endif %}
+                         	<div class="bdr-comment2 mx-auto mb-2 col-8 mt-2">
+								<p class="mt-2 ml-1 size-text-comment" >{{ comment.author.firstname}}:<br></p>
+								<p class="mt-2 ml-1 size-text-comment">{{ comment.content}}</p>
+							</div>
+							{% if comment.author == app.user or is_granted('ROLE_ADMIN') %}
+								<div class="mx-auto">          
+								{{ include('event/photo/_delete_comment_form.html.twig') }}
+								</div>       
 							{% endif %}
 							<br>	
                         {% endfor %}

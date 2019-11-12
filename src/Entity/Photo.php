@@ -99,6 +99,10 @@ class Photo
 
         return $this;
     }
+    public function clearComments()
+    {
+            $this->getComments()->clear();
+    }
 
 
     public function getAuthor(): ?User

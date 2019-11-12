@@ -144,6 +144,10 @@ class Evenement
     {
         return $this->photos;
     }
+    public function clearPhotos()
+    {
+            $this->getPhotos()->clear();
+    }
 
     public function addPhoto(Photo $photo): self
     {

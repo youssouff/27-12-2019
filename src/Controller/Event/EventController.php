@@ -161,4 +161,25 @@ class EventController extends AbstractController
         
 
     }
+    /**
+    * @Route("/photo/delete/{id}", name="delete_photo")
+    */
+    public function delete_photo(Photo $photo,$id, Request $request){
+
+        
+        if ($this->isCsrfTokenValid('delete'.$photo->getId(), $request->request->get('_token'))) {
+            $id = $photo->getEvenement()->getId();
+            $photo->clearComments();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($photo);
+            $entityManager->flush();
+    
+        }
+            return $this->redirectToRoute('event_show', [
+            'photo' => $photo,
+            'id' => $id
+            ]);
+            
+    
+        }
 }

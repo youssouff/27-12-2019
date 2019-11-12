@@ -12,8 +12,9 @@
 
 <div class="container-fluid">
     <h1>Meilleur ventes</h1>
-    <div class="row">
-        
+
+    {% if bestSeller is not empty %}
+    <div class="row">     
         {% for item in bestSeller %}
         <div class="col-md">
             <div class="card">
@@ -38,6 +39,7 @@
         </div>
         {% endfor %}
     </div>
+    {% endif %}
     {{form_start(form)}}
     <div class="row">
         <div class="col-2 col-md-2 mb-2 mx-auto">

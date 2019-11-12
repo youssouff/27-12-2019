@@ -39,7 +39,9 @@ class ShopController extends AbstractController
         $orders = $repo->findAll();
         
         
+        
         $allOrder = [];//initialising couting array
+        $bestSeller = [];
 
         for ($i=0; $i < sizeof($orders); $i++) {  //getting cart content 
             foreach ($orders[$i]->getCart() as $goodies => $quantity) { //counting quantity

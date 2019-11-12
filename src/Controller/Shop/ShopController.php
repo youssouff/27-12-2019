@@ -3,6 +3,7 @@
 namespace App\Controller\Shop;
 
 use App\Entity\Goodies;
+use App\Entity\OrderHistory;
 use App\Entity\GoodiesSearch;
 use App\Form\GoodiesSearchType;
 use App\Repository\GoodiesRepository;
@@ -111,12 +112,16 @@ class ShopController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // data is an array with "name", "email", and "message" keys
             $data = $form->getData();
-            /** @var \App\Entity\User $user */
+            
+            /**
+             *  @var \App\Entity\User $user 
+             */
             $user = $this->getUser();
 
+            
             $message = (new \Swift_Message('Commande'))
             ->setFrom($user->getUsername())
-            ->setTo('montemonttheophile@gmail.com')
+            ->setTo('montemonttheophile@gmail.com')//the bde's mail
             ->setBody(
                 $this->renderView(
                     // templates/emails/order.html.twig
@@ -128,6 +133,15 @@ class ShopController extends AbstractController
                 ),'text/html');
     
             $mailer->send($message);
+
+
+            //fillin order objet to prepare insert into database
+            $order = new OrderHistory();
+            $order  ->setAuthor($user)
+                    ->setCart(json_decode($request->cookies->get('cart'), true))
+                    ->setCreatedAt(new \DateTime());
+            $this->manager->persist($order);
+            $this->manager->flush();
 
             return $this->redirectToRoute('cart_clear'); //will clear cart then redirect to shop
         }

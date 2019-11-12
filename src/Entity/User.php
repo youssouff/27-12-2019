@@ -60,10 +60,16 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderHistory", mappedBy="author", orphanRemoval=true)
+     */
+    private $orderHistories;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->orderHystories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -236,6 +242,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getAuthor() === $this) {
                 $comment->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderHystory[]
+     */
+    public function getOrderHystories(): Collection
+    {
+        return $this->orderHystories;
+    }
+
+    public function addOrderHystory(OrderHystory $orderHystory): self
+    {
+        if (!$this->orderHystories->contains($orderHystory)) {
+            $this->orderHystories[] = $orderHystory;
+            $orderHystory->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderHystory(OrderHystory $orderHystory): self
+    {
+        if ($this->orderHystories->contains($orderHystory)) {
+            $this->orderHystories->removeElement($orderHystory);
+            // set the owning side to null (unless already changed)
+            if ($orderHystory->getAuthor() === $this) {
+                $orderHystory->setAuthor(null);
             }
         }
 

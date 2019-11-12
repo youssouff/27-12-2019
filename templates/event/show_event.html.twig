@@ -36,23 +36,20 @@
 		{% else %}
 			<div class="border border-dark mx-auto w-50">
 				{% for photo in event.photos %}
-					<div class="mx-auto">
-						<div class="col" style="margin: 20px 0 20px 0q">
-							<p>Photo postée par:
-								{{photo.author.firstName}}</p>
-							<img src="{{ photo.url}}" alt="">
-							<a class="btn btn-lg" style="background-color:transparent;">
-								<i class="far fa-heart"></i>
-								Like</a>
-							<div class="commentaires">
-								<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">il y a
-									{{ photo.comments | length}}
-									commentaire
-									{% if photo.comments | length <= 1 %}
-											{% else %}s
-									{% endif %}
-								</a>
-							</div>
+					<div class="col text-center" style="margin: 20px 0 20px 0q">
+						<p>Photo postée par:
+							{{photo.author.firstName}}</p>
+						<img class="img-event" src="{{ photo.url}}" alt="">
+						<a class="btn btn-lg" style="background-color:transparent;">
+							<i class="far fa-heart"></i>
+							Like</a>
+						<div class="commentaires">
+							<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">Il y a
+								{{ photo.comments | length}}
+								commentaire{% if photo.comments | length <= 1 %}
+										{% else %}s
+								{% endif %}
+							</a>
 						</div>
 					</div>
 					<hr>

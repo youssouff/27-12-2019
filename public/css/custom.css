@@ -131,3 +131,8 @@ hr{
   .mrg-top{
       margin-top : 50px;
   }
+
+  .img-event{
+      max-width : 500px;
+      min-width : 500px;
+  }

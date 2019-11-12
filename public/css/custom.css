@@ -94,7 +94,7 @@ footer{
     margin-left: 50px;
 }
 
-.card{
+.card-event{
     height: 420px;
 }
 
@@ -103,6 +103,31 @@ hr{
     width: 50%;
     height: 2px;
     margin-top: 120px;
+    margin-bottom: 70px;
     background-color: black;
     border: none; /*on supprime le style par défaut*/
+  }
+
+
+  .bdr-event{
+      border-width : 2px;
+      border-style: solid;
+      border-color:  black;
+      background-color : #BDBDBD;
+  }
+
+  .size-border-event{
+      width: 500px;
+  }
+
+  p.post-photo{
+      font-size: 18px;
+  }
+
+  .mrg-left{
+      margin-left: 50px;
+  }
+
+  .mrg-top{
+      margin-top : 50px;
   }

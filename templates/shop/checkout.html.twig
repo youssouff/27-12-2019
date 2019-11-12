@@ -3,7 +3,14 @@
 {% block title %}Validation de Commande{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Votre panier</h1>
+			<p class="lead">Retrouvez ici le contenue de votre panier</p>
+		</div>
+	</div>
+
+<div class="container mb-5">
     <div class="row">
         <div class="col">
             <a href="{{path('shop')}}" class="btn btn-dark btn-block">Retourner à la Boutique</a>
@@ -34,7 +41,7 @@
                     {{item.product.price * item.quantity}} €
                 </td>
                 <td>
-                    <a href="{{path('cart_remove', {'id': item.product.id})}}" class="btn btn-danger sm">Retirer</a>
+                    <a href="{{path('cart_remove', {'id': item.product.id})}}" class="btn sm" style="background-color : #e4002b; color: white;">Retirer</a>
                 </td>
             </tr>
             {% endfor %}

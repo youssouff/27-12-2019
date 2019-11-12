@@ -139,7 +139,26 @@ class EventController extends AbstractController
             'id' => $id
         ]);
     }
+    /**
+    * @Route("/comment/delete/{id}", name="delete_comment")
+    */
+    public function delete_comment(Photo $photo,Comment $comment, Request $request){
 
+        
+    if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+        $id = $comment->getPhoto()->getId();
+        $photo->removeComment($comment);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($photo);
+        $entityManager->remove($comment);
+        $entityManager->flush();
 
+    }
+        return $this->redirectToRoute('photo_show', [
+        'photo' => $photo,
+        'id' => $id
+        ]);
+        
 
+    }
 }

@@ -60,7 +60,9 @@
 				<p>Postez un commentaire: 
 				</p>
 				<div class="w-50 mx-auto">
-				{{ form(formComment)}}
+				{{ form_start(formComment)}}
+				{{ form_widget(formComment.content)}}
+				{{ form_end(formComment)}}
 				</div>
 				</div>
 			{% else %}

@@ -22,6 +22,9 @@ class GoodiesRepository extends ServiceEntityRepository
     }
 
 
+    
+
+
     /**
      * @return Query
      */

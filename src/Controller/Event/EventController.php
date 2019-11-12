@@ -26,9 +26,9 @@ class EventController extends AbstractController
 
         $events = $eventrepo->eventsLater();
         
-        
         return $this->render('event/index_event_later.html.twig', [
             'events' => $events,
+            
         ]);
     }
     /**
@@ -45,13 +45,12 @@ class EventController extends AbstractController
     }
 
     /**
-    * @Route("/event/{id}", name="event_show")
+    * @Route("/event/{id}", name="show_event")
     */
-    public function event_show(Evenement $event, Request $request, $id ){
+    public function show_event(Evenement $event, Request $request, $id ){
 
         $upload = new Upload();
         $formUpload = $this->createForm(UploadType::class, $upload);
-
         $user = $this->getUser();
         $formUpload->handleRequest($request);
         
@@ -77,12 +76,18 @@ class EventController extends AbstractController
             ]);
         }
         $photos = $event->getPhotos();
-
+        $now = new \DateTime('now');
+        if($event->getDate() >= $now){
+            $eventincoming = true;
+        } else {
+            $eventincoming = false;
+        }
         
         return $this->render('event/show_event.html.twig', [
             'id' => $id,
             'event' => $event,
             'formUpload' => $formUpload->createView(),
+            'incoming' => $eventincoming
         ]);
     }
     /**

@@ -26,43 +26,44 @@
 
 	<hr>
 
-	<div class="mt-5">
-		{% if event.photos is empty %}
-			<center>
-				<div class="alert alert-dark text-center w-30" role="alert" style="width : 400px;">
-					Il n'y a pas de photos pour cet évenement.
-				</div>
-			</center>
-		{% else %}
-			<div class="border border-dark mx-auto w-50">
-				{% for photo in event.photos %}
-					<div class="col text-center" style="margin: 20px 0 20px 0q">
-						<p>Photo postée par:
-							{{photo.author.firstName}}</p>
-							{% if photo.author == app.user or is_granted('ROLE_ADMIN') %}
-							{{ include('event/_delete_photo_form.html.twig') }}
-							{% endif %}
-							
-
-
-						<img class="img-event" src="{{ photo.url}}" alt="">
-						<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
-							
-						<div class="commentaires">
-							<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">Il y a
-								{{ photo.comments | length}}
-								commentaire{% if photo.comments | length <= 1 %}
-										{% else %}s
-								{% endif %}
-							</a>
-						</div>
+	{% if incoming == false %}
+		<div class="mt-5">
+			{% if event.photos is empty %}
+				<center>
+					<div class="alert alert-dark text-center w-30" role="alert" style="width : 400px;">
+						Il n'y a pas de photos pour cet évenement.
 					</div>
-					<hr class="hr-comment">
-				{% endfor %}
-			</div>
-			<hr>
-		{% endif %}
-		{% if app.user.name is defined %}
+				</center>
+			{% else %}
+				<div class="border border-dark mx-auto w-50">
+					{% for photo in event.photos %}
+						<div class="col text-center" style="margin: 20px 0 20px 0q">
+							<p>Photo postée par:
+								{{photo.author.firstName}}</p>
+								{% if photo.author == app.user or is_granted('ROLE_ADMIN') %}
+								{{ include('event/_delete_photo_form.html.twig') }}
+								{% endif %}
+								
+
+
+							<img class="img-event" src="{{ photo.url}}" alt="">
+							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
+								
+							<div class="commentaires">
+								<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">Il y a
+									{{ photo.comments | length}}
+									commentaire{% if photo.comments | length <= 1 %}
+											{% else %}s
+									{% endif %}
+								</a>
+							</div>
+						</div>
+						<hr class="hr-comment">
+					{% endfor %}
+		</div>
+		<hr>
+			{% endif %}
+			{% if app.user.name is defined %}
 			<div class="mrg-top text-center">
 				<p>Vous avez participé a l'évenement ? Partagez vos photos :
 				</p>
@@ -76,6 +77,9 @@
 						<a href="{{path('security_login')}}">connectez-vous</a> d'abords.</p>
 				</div>
 			{% endif %}
+		{% else %}
+		<p>Vous pourrez poster des photos dès que cet évenement sera passé.</p>
+		{% endif %}
 		</div>
 		<a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à la liste</a>
 	{% endblock %}

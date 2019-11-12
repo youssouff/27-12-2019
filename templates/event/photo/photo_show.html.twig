@@ -69,5 +69,5 @@
 					d'abords.</p>
 			{% endif %}
 		</div>
-		<a href="{{ path('index') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à l'acceuil</a>
+		<a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à l'évenement</a>
 	{% endblock %}

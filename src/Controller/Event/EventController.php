@@ -28,7 +28,7 @@ class EventController extends AbstractController
         
         
         return $this->render('event/index_event_later.html.twig', [
-            'events' => $events
+            'events' => $events,
         ]);
     }
     /**
@@ -38,7 +38,6 @@ class EventController extends AbstractController
     {
         
     $events = $eventrepo->eventsBefore();
-        
         
         return $this->render('event/index_event_before.html.twig', [
             'events' => $events
@@ -81,6 +80,7 @@ class EventController extends AbstractController
 
         
         return $this->render('event/show_event.html.twig', [
+            'id' => $id,
             'event' => $event,
             'formUpload' => $formUpload->createView(),
         ]);

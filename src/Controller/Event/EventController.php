@@ -78,17 +78,9 @@ class EventController extends AbstractController
             ]);
         }
         $photos = $event->getPhotos();
-        foreach($photos as $photo){
-            if(!$photo->getUsers() || !$photo->getUsers()->contains($user)){
-                $liked = false;
-                
-            } else {
-                $liked = true;
-            }
-        }
+
         
         return $this->render('event/show_event.html.twig', [
-            'liked' => $liked,
             'event' => $event,
             'formUpload' => $formUpload->createView(),
             //'formComment' => $formComment->createView(),
@@ -119,17 +111,10 @@ class EventController extends AbstractController
 
 
         }
-        if(!$photo->getUsers() || !$photo->getUsers()->contains($user)){
-            $liked = false;
-            
-        } else {
-            $liked = true;
-        }
+
         return $this->render('event/photo/photo_show.html.twig', [
-            'liked' => $liked,
             'photo' => $photo,
             'formComment' => $formComment->createView(),
-            'liked' => $liked
         ]);
     }
     

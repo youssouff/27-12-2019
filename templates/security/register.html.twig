@@ -11,13 +11,18 @@
         </p>
     </div>
 </div>
+
+<div class="bdr-login w-50 mx-auto mb-5">
 <div class="m-4 text-center">
+
+    <p class="size-text">Inscrivez vous</p>
     {{ form_start(form) }}
 
     <div class="form">
         {{ form_errors(form.email) }}
         {{ form_errors(form.password) }}
-        <div class="">
+        <div class="row">
+        <div class="col-6 mb-3 mt-3">
                 {{ form_widget(form.name, {'attr':
                         {
                         'placeholder' : "Nom"
@@ -25,7 +30,7 @@
                     }) 
                 }}
             </div>
-        <div class="">
+        <div class="col-6 mb-3 mt-3">
                 {{ form_widget(form.firstName, {'attr':
                         {
                         'placeholder' : "Prénom"
@@ -33,7 +38,7 @@
                     }) 
                 }}
             </div>
-        <div class="">
+        <div class="col-6 mb-3">
                 {{ form_widget(form.password, {'attr':
                         {
                         'placeholder' : "Mots de passe"
@@ -41,7 +46,7 @@
                     }) 
                 }}
             </div>
-        <div class="">
+        <div class="col-6 mb-3">
             {{ form_widget(form.email, {'attr':
                     {
                     'placeholder' : "Email"
@@ -49,13 +54,14 @@
                 }) 
             }}
         </div>
-        <div class="">
+        <div class="col-3 mx-auto">
             {{ form_widget(form.center, {'attr':
                     {
                     'placeholder' : "Centre"
                     }
                 }) 
             }}
+        </div>
         </div>
 
         <button type="submit" class="btn btn-dark btn-block mt-4">
@@ -68,6 +74,7 @@
         <a href="{{path('security_login')}}">Connectez-vous</a>
     </div>
     {{ form_end(form) }}
+</div>
 </div>
 
 {% endblock %}

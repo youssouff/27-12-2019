@@ -65,11 +65,17 @@ class User implements UserInterface
      */
     private $likedphotos;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderHistory", mappedBy="author", orphanRemoval=true)
+     */
+    private $orderHistories;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likedphotos = new ArrayCollection();
+        $this->orderHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -271,6 +277,37 @@ class User implements UserInterface
         if ($this->likedphotos->contains($likedphoto)) {
             $this->likedphotos->removeElement($likedphoto);
             $likedphoto->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderHistory[]
+     */
+    public function getOrderHistories(): Collection
+    {
+        return $this->orderHistories;
+    }
+
+    public function addOrderHistory(OrderHistory $orderHistory): self
+    {
+        if (!$this->orderHistories->contains($orderHistory)) {
+            $this->orderHistories[] = $orderHistory;
+            $orderHistory->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderHistory(OrderHistory $orderHistory): self
+    {
+        if ($this->orderHistories->contains($orderHistory)) {
+            $this->orderHistories->removeElement($orderHistory);
+            // set the owning side to null (unless already changed)
+            if ($orderHistory->getAuthor() === $this) {
+                $orderHistory->setAuthor(null);
+            }
         }
 
         return $this;

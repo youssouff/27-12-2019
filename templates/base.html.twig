@@ -24,6 +24,45 @@
 
                 <nav class="navbar navbar-expand-lg navbar-dark" id="navbar" style="background-color : #27251f">
                     <a class="navbar-brand" href="/">BDE Strasbourg</a>
+
+                    <div class="dropdown d-lg-none ml-auto">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            {% if app.user %} <div class="text-secondary">{{ app.user.username }}</div> {% else %} <div class="text-secondary">Connexion</div> {% endif %}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
+                            <div class="row">
+                                {% if not app.user %}
+                                <div class="col">
+                                    <a href="{{path('security_register')}}" class="btn btn-dark btn-block mt-1 mb-1">
+                                        Inscription
+                                    </a>
+                                </div>
+                               {% else %} 
+                                <div class="col">
+                                        <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
+                                            Mon Profil
+                                        </a>
+                                </div>
+                                {% endif %}
+                                    {% if is_granted('ROLE_ADMIN')%}
+                                   <div class="col">
+                                        <a href="/" class="btn btn-dark btn-block mt-1 mb-1">
+                                            Administration
+                                        </a>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                <div class="col">
+                                    <a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}"
+                                        class="btn btn-dark btn-block mt-1 mb-1">
+                                        {% if app.user %} Déconnexion {% else %} Connexion {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -42,31 +81,46 @@
                                 <a class="dropdown-item" href="{{path('event_before')}}">Evénements passés</a>
                               </div>
                             </div>
-
-                            {% if is_granted('ROLE_ADMIN')%}
-                             <li class="nav-item">
-                                <a class="nav-link" href="/">Administration</a>
-                            </li>
-                            {% else %}
-                            {% endif %}
                         </ul>
+                        <div class="dropdown d-none d-lg-block ml-auto">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                {% if app.user %} <div class="text-secondary">{{ app.user.username }}</div> {% else %} <div class="text-secondary">Connexion</div> {% endif %}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
+                                <div class="row">
+                                    {% if not app.user %}
+                                    <div class="col">
+                                        <a href="{{path('security_register')}}"
+                                            class="btn btn-dark btn-block mt-1 mb-1">
+                                            Inscription
+                                        </a>
+                                    </div>
+                                    {% else %}
+                                    <div class="col">
+                                        <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
+                                            Mon Profil
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_ADMIN')%}
+                                   <div class="col">
+                                        <a href="/" class="btn btn-dark btn-block mt-1 mb-1">
+                                            Administration
+                                        </a>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    <div class="col">
+                                        <a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}"
+                                            class="btn btn-dark btn-block mt-1 mb-1">
+                                            {% if app.user %} Déconnexion {% else %} Connexion {% endif %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    {% if app.user %}
-                     <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: gray; margin-right : 50px;">Profil</a>                           
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{{path('security_account')}}">Profil</a>
-                        <a class="dropdown-item" href="/logout">Déconnexion</a>
-                    </div>
-                    {% else %}
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: gray; margin-right : 50px;">Connexion</a>                           
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{{path('security_login')}}">Connexion</a>
-                        <a class="dropdown-item" href="{{path('security_register')}}">Inscription</a>
-                    </div>
-                    {% endif %}
                 </nav>
             </header>
 

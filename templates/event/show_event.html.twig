@@ -8,56 +8,69 @@
 		</div>
 	</div>
 
-    <center>
-    <div class="row" style="margin-left : 400px;">
-	<div class="">
-		<img src="{{ event.image}}" alt="" style="text-align: center;">	
-	</div>
+	<center>
+		<div class="row mx-auto">
+			<div class="mx-auto">
+				<img src="{{ event.image}}" alt="" style="text-align: center;">
+			</div>
 
-    <div class="" style="margin-left : 50px;">
-    <p>Prix:
-			{{ event.price }}€</p>
-		<p>Evenement:
-			{{ event.recursion.name }}</p>
-    </div>
-    </div>
-    </center>
+			<div class="bdr-event size-border-event mx-auto" style="margin-left : 50px; ">
+				<h3 style="margin-top : 30px;">Détails de l'événements</h3><br>
+				<p>Prix:
+					{{ event.price }}€</p>
+				<p>Evenement:
+					{{ event.recursion.name }}</p>
+			</div>
+		</div>
+	</center>
 
-    <hr>
+	<hr>
 
-	<div class="" style="margin-top : 80px;">
+	<div class="mt-5">
 		{% if event.photos is empty %}
-        <center>
-        <div class="alert alert-dark" role="alert" style="text-align: center; width : 400px;">
-           Il n'y a pas de photos pour cet évenement.
-        </div>
-        </center>
-		{% else %}
-			{% for photo in event.photos %}
-				<div class="col" style="margin: 20px 0 20px 0q">
-					<p>Photo postée par:
-						{{photo.author.firstName}}</p>
-					<img src="{{ photo.url}}" alt="">
-					<a class="btn btn-lg" style="background-color:transparent;"><i class="far fa-heart"></i> Like</a>
-                    <div class="commentaires">
-					<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">il y a {{ photo.comments | length}} commentaire{% if photo.comments | length <= 1 %} {% else %}s {% endif %}</a>
-                    </div>
+			<center>
+				<div class="alert alert-dark text-center w-30" role="alert" style="width : 400px;">
+					Il n'y a pas de photos pour cet évenement.
 				</div>
-				<hr>
-			{% endfor %}
+			</center>
+		{% else %}
+			<div class="border border-dark mx-auto w-50">
+				{% for photo in event.photos %}
+					<div class="col text-center" style="margin: 20px 0 20px 0q">
+						<p>Photo postée par:
+							{{photo.author.firstName}}</p>
+						<img class="img-event" src="{{ photo.url}}" alt="">
+						<a class="btn btn-lg" style="background-color:transparent;">
+							<i class="far fa-heart"></i>
+							Like</a>
+						<div class="commentaires">
+							<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">Il y a
+								{{ photo.comments | length}}
+								commentaire{% if photo.comments | length <= 1 %}
+										{% else %}s
+								{% endif %}
+							</a>
+						</div>
+					</div>
+					<hr>
+				{% endfor %}
+			</div>
+			<hr>
 		{% endif %}
 		{% if app.user.name is defined %}
-			<div class="" style="margin-top : 100px;">
+			<div class="mrg-top text-center">
 				<p>Vous avez participé a l'évenement ? Partagez vos photos :
 				</p>
-				{{ form(formUpload)}}
+				<div class="w-50 mx-auto">
+					{{ form(formUpload)}}
+					</div>
 				</div>
 			{% else %}
-				<p>Si vous avez participé a l'évenement et souhaitez poster des photos,</p>
-				<a href="{{path('security_login')}}">connectez-vous</a>
-				<p>
-					d'abords.</p>
+				<div class="mrg-top text-center">
+					<p class="size-text">Vous avez participé a l'évenement et souhaitez poster des photos,
+						<a href="{{path('security_login')}}">connectez-vous</a>d'abords.</p>
+				</div>
 			{% endif %}
 		</div>
-		<a href="{{ path('index') }}">Retour à l'acceuil</a>
+		<a href="{{ path('index') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à l'acceuil</a>
 	{% endblock %}

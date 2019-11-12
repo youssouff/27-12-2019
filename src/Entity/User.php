@@ -69,7 +69,7 @@ class User implements UserInterface
     {
         $this->photos = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->orderHystories = new ArrayCollection();
+        $this->orderHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,30 +249,30 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|OrderHystory[]
+     * @return Collection|OrderHistory[]
      */
-    public function getOrderHystories(): Collection
+    public function getOrderHistories(): Collection
     {
-        return $this->orderHystories;
+        return $this->orderHistories;
     }
 
-    public function addOrderHystory(OrderHystory $orderHystory): self
+    public function addOrderHistory(OrderHistory $orderHistory): self
     {
-        if (!$this->orderHystories->contains($orderHystory)) {
-            $this->orderHystories[] = $orderHystory;
-            $orderHystory->setAuthor($this);
+        if (!$this->orderHistories->contains($orderHistory)) {
+            $this->orderHistories[] = $orderHistory;
+            $orderHistory->setAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeOrderHystory(OrderHystory $orderHystory): self
+    public function removeOrderHistory(OrderHistory $orderHistory): self
     {
-        if ($this->orderHystories->contains($orderHystory)) {
-            $this->orderHystories->removeElement($orderHystory);
+        if ($this->orderHistories->contains($orderHistory)) {
+            $this->orderHistories->removeElement($orderHistory);
             // set the owning side to null (unless already changed)
-            if ($orderHystory->getAuthor() === $this) {
-                $orderHystory->setAuthor(null);
+            if ($orderHistory->getAuthor() === $this) {
+                $orderHistory->setAuthor(null);
             }
         }
 

@@ -28,7 +28,7 @@
                     <div class="dropdown d-lg-none ml-auto">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                            {% if app.user %} <div class="text-secondary">{{ app.user.username }}</div> {% else %} Connexion {% endif %}
+                            {% if app.user %} <div class="text-secondary">{{ app.user.username }}</div> {% else %} <div class="text-secondary">Connexion</div> {% endif %}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
                             <div class="row">
@@ -85,7 +85,7 @@
                         <div class="dropdown d-none d-lg-block ml-auto">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                {% if app.user %} <div class="text-secondary">{{ app.user.username }}</div> {% else %} Connexion {% endif %}
+                                {% if app.user %} <div class="text-secondary">{{ app.user.username }}</div> {% else %} <div class="text-secondary">Connexion</div> {% endif %}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
                                 <div class="row">

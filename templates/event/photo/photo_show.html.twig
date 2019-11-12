@@ -3,18 +3,18 @@
 {% block body %}
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
-		<p>Photo postée par:
+		<p class="size-text">Photo postée par:
             {{photo.author.firstName}}</p>
 		</div>
 	</div>
 
     <center>
-    <div class="row" style="margin-left : 400px;">
-	<div class="">
-		<img src="../{{photo.url}}" alt="">
+    <div class="row">
+	<div class="mx-auto">
+		<img class="img-event" src="../{{photo.url}}" alt="">
 	</div>
     </div>
-    <a class="btn btn-lg" style="background-color:transparent;" href=""><i class="far fa-heart"></i> Like </a>
+    <a class="btn btn-lg ml-5" style="background-color:transparent;" href=""><i class="far fa-heart"></i> Like </a>
     </center>
 
     <hr>
@@ -49,10 +49,12 @@
 				</div>
 		{% endif %}
 		{% if app.user.name is defined %}
-			<div class="" style="margin-top : 100px;">
+			<div class="mrg-top text-center">
 				<p>Postez un commentaire: 
 				</p>
+				<div class="w-50 mx-auto">
 				{{ form(formComment)}}
+				</div>
 				</div>
 			{% else %}
 				<p>Si vous souhaitez commenter la photo,</p>
@@ -61,5 +63,5 @@
 					d'abords.</p>
 			{% endif %}
 		</div>
-		<a href="{{ path('index') }}">Retour à l'acceuil</a>
+		<a href="{{ path('index') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à l'acceuil</a>
 	{% endblock %}

@@ -19,7 +19,7 @@ class CommentType extends AbstractType
                 'attr' => ['placeholder' => 'Ecrivez votre commentaire']
                 
             ])
-            ->add('submit', SubmitType::class)
+            ->add('Poster', SubmitType::class)
             ;
     }
 

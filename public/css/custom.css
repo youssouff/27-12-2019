@@ -120,9 +120,10 @@ hr{
       width: 500px;
   }
 
-  p.post-photo{
-      font-size: 18px;
+  p.size-text{
+      font-size: 25px;
   }
+
 
   .mrg-left{
       margin-left: 50px;

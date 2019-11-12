@@ -82,6 +82,7 @@ class EvenementController extends AbstractController
     public function delete(Request $request, Evenement $evenement): Response
     {
         if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->request->get('_token'))) {
+            $evenement->clearPhotos();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($evenement);
             $entityManager->flush();

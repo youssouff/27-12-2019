@@ -3,8 +3,14 @@
 {% block title %}Produits{% endblock %}
 
 {% block body %}
-    <h1>Produits</h1>
-    <a href="{{ path('goodies_new') }}" class="btn btn-dark">Create new</a>
+    <div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Gestion Produits</h1>
+			<p class="lead">Modifie et supprime les produits de ta boutique ici</p>
+		</div>
+	</div>
+
+    <div class="text-center mx-auto w-50">
     <table class="table">
         <thead>
             <tr>
@@ -33,6 +39,8 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 
+<a href="{{ path('goodies_new') }}" class="btn btn-dark mb-5 mt-5" style="margin-left : 83%">Ajouter un produit</a>
     
 {% endblock %}

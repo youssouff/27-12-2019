@@ -162,6 +162,10 @@ hr{
     font-size: 20px;
 }
 
+p.size-text-shop{
+    font-size: 25px;
+}
+
 
   .mrg-left{
       margin-left: 50px;
@@ -178,5 +182,7 @@ hr{
 
   .img-card{
     max-width : 100%;
-    max-height : 100%;
+    max-width : 100%;
+    min-height : 165px;
+    max-height : 165px;
   }

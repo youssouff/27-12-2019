@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\Upload;
 use App\Form\EvenementType;
+use App\Form\UploadType;
 use App\Repository\EvenementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,11 +32,18 @@ class EvenementController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $upload = new Upload();
+        
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $upload->getName();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('upload_directory'), $fileName);
+            $upload->setName($fileName);
+            $evenement->setImage("../appdata/event/".$fileName);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($evenement);
             $entityManager->flush();

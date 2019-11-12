@@ -14,7 +14,7 @@
 		<img class="img-event" src="../{{photo.url}}" alt="">
 	</div>
     </div>
-    <a class="btn btn-lg ml-5" style="background-color:transparent;" href=""><i class="far fa-heart"></i> Like </a>
+    <a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="far fa-heart"></i> {{ photo.users | length }} </a>
     </center>
 
     <hr>
@@ -36,11 +36,13 @@
                         </tr>
                         {% for comment in photo.comments %}
                         <tr> 
-                            <td>{{ comment.author.firstname}}:</th>
-                            <td>{{ comment.content}}</th>
+                            <td>{{ comment.author.firstname}} :</th>
+							<td>{{ comment.content}}</th>
+							{% if app.user.name is defined %}
                             {% if app.user.firstname == comment.author.firstname %}                        
                             <a class="btn btn-lg" style="background-color:transparent;" href="">Supprimer</a>                        
-                            {% endif %}
+							{% endif %}
+							{% endif %}
                         </tr>
                         
                         {% endfor %}

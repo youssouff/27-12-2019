@@ -61,6 +61,11 @@ class User implements UserInterface
     private $comments;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Photo", mappedBy="users")
+     */
+    private $likedphotos;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\OrderHistory", mappedBy="author", orphanRemoval=true)
      */
     private $orderHistories;
@@ -69,6 +74,7 @@ class User implements UserInterface
     {
         $this->photos = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->likedphotos = new ArrayCollection();
         $this->orderHistories = new ArrayCollection();
     }
 
@@ -243,6 +249,34 @@ class User implements UserInterface
             if ($comment->getAuthor() === $this) {
                 $comment->setAuthor(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Photo[]
+     */
+    public function getLikedphotos(): Collection
+    {
+        return $this->likedphotos;
+    }
+
+    public function addLikedphoto(Photo $likedphoto): self
+    {
+        if (!$this->likedphotos->contains($likedphoto)) {
+            $this->likedphotos[] = $likedphoto;
+            $likedphoto->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedphoto(Photo $likedphoto): self
+    {
+        if ($this->likedphotos->contains($likedphoto)) {
+            $this->likedphotos->removeElement($likedphoto);
+            $likedphoto->removeUser($this);
         }
 
         return $this;

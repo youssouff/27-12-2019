@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\OrderHystory;
+use App\Entity\OrderHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method OrderHystory|null find($id, $lockMode = null, $lockVersion = null)
- * @method OrderHystory|null findOneBy(array $criteria, array $orderBy = null)
- * @method OrderHystory[]    findAll()
- * @method OrderHystory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method OrderHistory|null find($id, $lockMode = null, $lockVersion = null)
+ * @method OrderHistory|null findOneBy(array $criteria, array $orderBy = null)
+ * @method OrderHistory[]    findAll()
+ * @method OrderHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class OrderHystoryRepository extends ServiceEntityRepository
+class OrderHistoryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, OrderHystory::class);
+        parent::__construct($registry, OrderHistory::class);
     }
 
     // /**
-    //  * @return OrderHystory[] Returns an array of OrderHystory objects
+    //  * @return OrderHistory[] Returns an array of OrderHistory objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class OrderHystoryRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?OrderHystory
+    public function findOneBySomeField($value): ?OrderHistory
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.exampleField = :val')

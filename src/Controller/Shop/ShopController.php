@@ -7,6 +7,7 @@ use App\Entity\OrderHistory;
 use App\Entity\GoodiesSearch;
 use App\Form\GoodiesSearchType;
 use App\Repository\GoodiesRepository;
+use App\Repository\OrderHistoryRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -32,34 +33,18 @@ class ShopController extends AbstractController
     /**
      * @Route("/", name="shop")
      */
-    public function shop(PaginatorInterface $paginator, Request $request)
+    public function shop(PaginatorInterface $paginator, Request $request, OrderHistoryRepository $repo)
     {
-        $total=0;//init cart total
-        $cart = []; // init cart
-
-        if($request->cookies->get('cart')){
-            $rawCart = json_decode($request->cookies->get('cart'));//getting cookie value
-            
+        //Best-sellers
+       $bestSeller = $repo->findAll();
         
-            foreach ($rawCart as $id => $quantity) { //cart init from cookie
-                $cart[] = [
-                    'product' => $this->repository->find($id),
-                    'quantity' => $quantity
-                ];
-            }
-
-            
-            foreach ($cart as $item) { //calcul cart total
-                $totalItem = $item['product']->getPrice() * $item['quantity'];
-                $total += $totalItem;
-            }
-        }
-        
-
+        //Search
         $search = new GoodiesSearch(); //creating search and handling form
         $form = $this->createForm(GoodiesSearchType::class, $search);
         $form->handleRequest($request);
 
+
+        //Paginator
         $goodies = $paginator->paginate(//paginate search results
             $this->repository->findAllQuery($search),
             $request->query->getInt('page', 1),
@@ -69,11 +54,12 @@ class ShopController extends AbstractController
         return $this->render('shop/index_shop.html.twig',[
             'goodies' => $goodies,
             'form' => $form->createView(),
-            'cart' => $cart,
-            'total' => $total
+            'bestSeller' => $bestSeller
         ]);
     }
 
+
+    
     /**
      * @Route("/checkout", name="shop_checkout")
      */
@@ -112,7 +98,7 @@ class ShopController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // data is an array with "name", "email", and "message" keys
             $data = $form->getData();
-            
+
             /**
              *  @var \App\Entity\User $user 
              */

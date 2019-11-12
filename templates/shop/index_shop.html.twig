@@ -19,7 +19,8 @@
 
         </div>
         <div class="col-6 col-md-3">
-            <button type="submit" class="btn btn-dark btn-block">Search</button>
+            <button type="submit" class="btn btn-dark btn-block">Rechercher</button>
+            <a href="{{path('shop_checkout')}}" class="btn btn-dark btn-block">Voir le Panier</a>
         </div>
     </div>
     {{form_end(form)}}
@@ -31,58 +32,6 @@
         </div>
         {% endif %}
     </div>
-    {% if cart is not empty %}
-    <div class="row m-4">
-        <div class="card w-100">
-            <div class="card-header">Panier</div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <th>Nom</th>
-                        <th>Prix</th>
-                        <th>Quantité</th>
-                        <th>Total</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-
-                        {% for item in cart %}
-                        <tr>
-                            <td>
-                                {{item.product.name}}
-                            </td>
-                            <td>
-                                {{item.product.price}} €
-                            </td>
-                            <td>
-                                {{item.quantity}}
-                            </td>
-                            <td>
-                                {{item.product.price * item.quantity}} €
-                            </td>
-                            <td>
-                                <a href="{{path('cart_remove', {'id': item.product.id})}}"
-                                    class="btn btn-danger sm">Retirer</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3">Total : </td>
-                            <td>{{ total }} €</td>
-                            <td></td>
-                        </tr>
-                    </tfoot>
-
-                    
-                </table>
-                <a href="{{path('cart_clear')}}" class="btn btn-danger">Vider le panier</a>
-                <a href="{{path('shop_checkout')}}" class="btn btn-danger">Passer commande</a>
-            </div>
-        </div>
-    </div>
-    {% endif %}
     <div class="row m-4">
             {% for goody in goodies %}
             <div class="cole-md-6 col-lg-4 mb-2">

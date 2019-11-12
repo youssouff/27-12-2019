@@ -40,9 +40,15 @@ class Photo
      */
     private $evenement;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="likedphotos")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,15 +99,7 @@ class Photo
 
         return $this;
     }
-    public function addUser(User $users): self
-    {
-        return $this->users;
-    }
-    public function removeUser(Comment $comment): self
-    {
 
-        return $this;
-    }
 
     public function getAuthor(): ?User
     {
@@ -123,6 +121,32 @@ class Photo
     public function setEvenement(?Evenement $evenement): self
     {
         $this->evenement = $evenement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+        }
 
         return $this;
     }

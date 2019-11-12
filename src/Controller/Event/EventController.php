@@ -87,7 +87,7 @@ class EventController extends AbstractController
     * @Route("/event/photo/{id}", name="photo_show")
     */
     public function photo_show(Photo $photo, Request $request, $id ){
-
+        $liked = false;
         $comment = new Comment();
 
         $formComment = $this->createForm(CommentType::class, $comment);
@@ -111,10 +111,32 @@ class EventController extends AbstractController
         return $this->render('event/photo/photo_show.html.twig', [
             'photo' => $photo,
             'formComment' => $formComment->createView(),
+            'liked' => $liked
         ]);
     }
     
+    /**
+    * @Route("/event/photo/{id}/like", name="like_photo")
+    */
+    public function like_photo(Photo $photo, $id){
 
+        $user = $this->getUser();
+        if(!$photo->getUsers() || !$photo->getUsers()->contains($user)){
+            $photo->addUser( $user );
+            
+        } else {
+            $photo->removeUser($user);
+        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($photo);
+        $entityManager->flush();
+        
+
+        return $this->redirectToRoute('photo_show', [
+            'photo' => $photo,
+            'id' => $id
+        ]);
+    }
 
 
 

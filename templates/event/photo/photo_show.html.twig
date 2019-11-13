@@ -42,7 +42,7 @@
 								<p class="mt-2 ml-1 size-text-comment">{{ comment.content}}</p>
 							</div>
 							{% if is_granted('ROLE_CESI') %}
-							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_comment', {'id': photo.id })}}"><i class="fas fa-flag"></i> Signaler </a>
+							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_comment', {'id': comment.id })}}"><i class="fas fa-flag"></i> Signaler </a>
 							{% endif %}
 							{% if comment.author == app.user or is_granted('ROLE_BDE') %}
 								<div class="mx-auto">          

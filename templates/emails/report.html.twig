@@ -8,13 +8,13 @@
             <p>
                 {{ user.firstName ~ " " ~ user.name }} a demandé la modération du contenu suivant :
             </p>
-            {% if instanceof(item, 'Comment') %}
+            {% if instanceof(item, "Comment") %}
                 Le commentaire posté par {{ item.author }}. <br>
                 Avec le contenu : {{ item.content }}
-            {% elseif instanceof(item, 'Photo')  %}
+            {% elseif instanceof(item, "Photo")  %}
                 La photo posté par {{ item.author }} sur l'evenement {{ item.evenement.title }}
                 Avec l'url : {{ item.url }}
-            {% elseif instanceof(item, 'Evenement')  %}
+            {% elseif instanceof(item, "Evenement")  %}
                 L'evenement "{{ item.title }}" ayant lieu le {{ item.date }}
             {% else %}
                 Object not found

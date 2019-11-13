@@ -148,8 +148,8 @@ class PhotoController extends AbstractController
             ->setTo('montemonttheophile@gmail.com')//the bde's mail
             ->setBody(
                 $this->renderView(
-                    // templates/emails/order.html.twig
-                    'emails/order.html.twig',
+                    // templates/emails/report.html.twig
+                    'emails/report.html.twig',
                     [
                         'item' => $photo,
                         'user' => $user

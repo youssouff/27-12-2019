@@ -116,6 +116,7 @@ class Goodies
         }else{
             $this->quantitySold += $quantity;
         }
+        return $this;
     }
 
 }

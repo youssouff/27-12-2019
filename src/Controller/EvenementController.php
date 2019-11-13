@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
-use App\Entity\Upload;
 use App\Form\EvenementType;
-use App\Form\UploadType;
 use App\Repository\EvenementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,21 +30,16 @@ class EvenementController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $upload = new Upload();
-        
+        $now = new \DateTime('now'); 
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $file = $evenement->getImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('upload_directory_event'), $fileName);
-            $evenement->setImage("../appdata/event/".$fileName);
+        if ($form->isSubmitted() && $form->isValid()) {  
+            $evenement->setUpdatedAt($now);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($evenement);
             $entityManager->flush();
-
             return $this->redirectToRoute('evenement_index');
         }
 
@@ -61,10 +54,12 @@ class EvenementController extends AbstractController
      */
     public function edit(Request $request, Evenement $evenement): Response
     {
+        $now = new \DateTime('now');
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {       
+            $evenement->setUpdatedAt($now);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('evenement_index');

@@ -39,6 +39,11 @@ class Goodies
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $quantitySold;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +95,27 @@ class Goodies
         $this->category = $category;
 
         return $this;
+    }
+
+    public function getQuantitySold(): ?int
+    {
+        return $this->quantitySold;
+    }
+
+    public function setQuantitySold(?int $quantitySold): self
+    {
+        $this->quantitySold = $quantitySold;
+
+        return $this;
+    }
+
+    public function incrementQuantitySold(int $quantity): self
+    {
+        if($this->quantitySold === null){
+            $this->quantitySold = $quantity;
+        }else{
+            $this->quantitySold += $quantity;
+        }
     }
 
 }

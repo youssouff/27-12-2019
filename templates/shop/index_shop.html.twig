@@ -6,7 +6,7 @@
 <div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-4">Notre boutique</h1>
-			<p class="lead">Retrouvez tous nos goodies sur ici !</p>
+			<p class="lead">Retrouvez tous nos goodies ici !</p>
 		</div>
 	</div>
 
@@ -23,8 +23,13 @@
             <div class="card">
                 <div class="card-header">
                     
+<<<<<<< Updated upstream
                     <p class="size-text-shop ml-5">{{ item.name }} | {{item.quantitySold}} ventes</p>
                         <p style="margin-left: 80%">Prix : {{item.price ? item.price : "Gratuit"}}€</p>
+=======
+                    <p class="size-text-shop ml-5">{{ item[0].name }} | {{item[1]}} ventes</p>
+                        <p class="mrg-l-80">Prix : {{item[0].price ? item[0].price : "Gratuit"}}€</p>
+>>>>>>> Stashed changes
                 </div>
                 <div class="card-body">
                     
@@ -32,8 +37,13 @@
                         <p>Description : {{ item.description }}</p><br>
 
                     <div style="margin-left: 55%">
+<<<<<<< Updated upstream
                         <a href="{{path('shop_show', {'id': item.id }) }}" class="btn btn-dark"> Détails</a>
                         <a href="{{path('cart_add', {'id': item.id }) }}" class="btn" style="background-color : #e4002b; color : white;"> Ajouter au
+=======
+                        <a href="{{path('shop_show', {'id': item[0].id }) }}" class="btn btn-dark"> Détails</a>
+                        <a href="{{path('cart_add', {'id': item[0].id }) }}" class="btn delete-button" > Ajouter au
+>>>>>>> Stashed changes
                             panier</a>
                         </div>
 
@@ -83,7 +93,7 @@
                 <div class="card">
                     <div class="card-header" style="height : 90px;">
                         <p class="size-text-shop ml-5">{{ goody.name }}</p>
-                        <p style="margin-left: 80%">Prix : {{goody.price ? goody.price : "Gratuit"}}€</p>
+                        <p class="mrg-l-80">Prix : {{goody.price ? goody.price : "Gratuit"}}€</p>
                     </div>
                     <div class="card-body">
                         <div class="meta">Categorie : {{ goody.category.name }}</div>
@@ -91,7 +101,7 @@
     
                         <div style="margin-left: 55%">
                         <a href="{{path('shop_show', {'id': goody.id }) }}" class="btn btn-dark"> Détails</a>
-                        <a href="{{path('cart_add', {'id': goody.id }) }}" class="btn" style="background-color : #e4002b; color : white;"> Ajouter au
+                        <a href="{{path('cart_add', {'id': goody.id }) }}" class="btn delete-button"> Ajouter au
                             panier</a>
                         </div>
                     </div>

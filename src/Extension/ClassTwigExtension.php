@@ -2,15 +2,16 @@
 
 namespace App\Extension;
 
+use Twig\TwigTest;
 use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
+
 
 class ClassTwigExtension extends AbstractExtension
 {
     public function getTests()
     {
         return [
-            'instanceof' =>  new \Twig_Function_Method($this, 'isInstanceof')
+            new TwigTest('instanceof', 'isInstanceOf'),
         ];
     }
 
@@ -19,7 +20,8 @@ class ClassTwigExtension extends AbstractExtension
      * @param $instance
      * @return bool
      */
-    public function isInstanceof($var, $instance) {
+    public function isInstanceOf($var, $instance) {
         return  $var instanceof $instance;
     }
+
 }

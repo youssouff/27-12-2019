@@ -188,6 +188,11 @@ p.size-text-shop{
       min-width : 500px;
   }
 
+  .img-show-event{
+    max-width : 700px;
+    min-width : 700px;
+}
+
   .img-card{
     max-width : 100%;
     max-width : 100%;

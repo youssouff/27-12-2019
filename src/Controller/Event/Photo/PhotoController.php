@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PhotoController extends AbstractController
 {
     /**
-    * @Route("/event/photo/{id}", name="photo_show")
+    * @Route("/photo/{id}", name="photo_show")
     */
     public function photo_show(Photo $photo, Request $request, $id ){
         $liked = false;

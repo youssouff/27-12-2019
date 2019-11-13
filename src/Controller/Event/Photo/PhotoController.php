@@ -129,11 +129,13 @@ class PhotoController extends AbstractController
             $entityManager->flush();
     
         }
-            return $this->redirectToRoute('show_event', [
-            'photo' => $photo,
-            'id' => $id
-            ]);
-            
+
+        return $this->redirectToRoute('show_event', [
+        'photo' => $photo,
+        'id' => $id
+        ]);
+    }
+
     
     }
 

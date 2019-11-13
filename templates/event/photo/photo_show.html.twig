@@ -41,7 +41,10 @@
 								<p class="mt-2 ml-1 size-text-comment" >{{ comment.author.firstname}}:<br></p>
 								<p class="mt-2 ml-1 size-text-comment">{{ comment.content}}</p>
 							</div>
-							{% if comment.author == app.user or is_granted('ROLE_ADMIN') %}
+							{% if is_granted('ROLE_CESI') %}
+							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_comment', {'id': photo.id })}}"><i class="fas fa-flag"></i> Signaler </a>
+							{% endif %}
+							{% if comment.author == app.user or is_granted('ROLE_BDE') %}
 								<div class="mx-auto">          
 								{{ include('event/photo/_delete_comment_form.html.twig') }}
 								</div>       
@@ -69,5 +72,5 @@
 					d'abords.</p>
 			{% endif %}
 		</div>
-		<a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à l'évenement</a>
+		<a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à l'évènement</a>
 	{% endblock %}

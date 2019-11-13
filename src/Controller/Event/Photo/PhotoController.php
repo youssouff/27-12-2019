@@ -72,16 +72,16 @@ class PhotoController extends AbstractController
     public function delete_comment(Comment $comment, Request $request){
 
         
-    if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
-        $id = $comment->getPhoto()->getId();
-        $photo = $comment->getPhoto();
-        $photo->removeComment($comment);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($photo);
-        $entityManager->remove($comment);
-        $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+            $id = $comment->getPhoto()->getId();
+            $photo = $comment->getPhoto();
+            $photo->removeComment($comment);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($photo);
+            $entityManager->remove($comment);
+            $entityManager->flush();
 
-    }
+        }
         return $this->redirectToRoute('photo_show', [
         'photo' => $photo,
         'id' => $id
@@ -89,6 +89,32 @@ class PhotoController extends AbstractController
         
 
     }
+
+    /**
+    * @Route("/comment/{id}/report", name="report_comment")
+    */
+    public function report_comment(Comment $comment, \Swift_Mailer $mailer){
+
+        $user = $this->getUser();
+
+        $message = (new \Swift_Message('Commande'))
+            ->setFrom($user->getUsername())
+            ->setTo('montemonttheophile@gmail.com')//the bde's mail
+            ->setBody(
+                $this->renderView(
+                    // templates/emails/order.html.twig
+                    'emails/report.html.twig',
+                    [
+                    'item' => $comment,
+                    'user' => $user
+                    ]
+                ),'text/html');
+    
+            $mailer->send($message);
+        
+        return $this->redirectToRoute('event_before');
+    }
+
     /**
     * @Route("/photo/delete/{id}", name="delete_photo")
     */
@@ -109,5 +135,30 @@ class PhotoController extends AbstractController
             ]);
             
     
-        }
+    }
+
+    /**
+    * @Route("/photo/{id}/report", name="report_photo")
+    */
+    public function report_event(Photo $photo, \Swift_Mailer $mailer){
+
+        $user = $this->getUser();
+
+        $message = (new \Swift_Message('Commande'))
+            ->setFrom($user->getUsername())
+            ->setTo('montemonttheophile@gmail.com')//the bde's mail
+            ->setBody(
+                $this->renderView(
+                    // templates/emails/order.html.twig
+                    'emails/order.html.twig',
+                    [
+                        'item' => $photo,
+                        'user' => $user
+                    ]
+                ),'text/html');
+    
+            $mailer->send($message);
+        
+            return $this->redirectToRoute('event_before');
+    }
 }

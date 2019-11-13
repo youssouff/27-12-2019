@@ -110,5 +110,28 @@ class EventController extends AbstractController
             'id' => $id,
         ]);
     }
+
+    /**
+    * @Route("/event/{id}/report", name="report_event")
+    */
+    public function report(Evenement $event, \Swift_Mailer $mailer){
+
+        $user = $this->getUser();
+        $message = (new \Swift_Message('Commande'))
+            ->setFrom($user->getUsername())
+            ->setTo('montemonttheophile@gmail.com')//the bde's mail
+            ->setBody(
+                $this->renderView(
+                    // templates/emails/order.html.twig
+                    'emails/report.html.twig',
+                    [
+                        'item' => $event,
+                      'user' => $user
+                    ]
+                ),'text/html');
     
+            $mailer->send($message);
+            
+        return $this->redirectToRoute('event_before');
+    }
 }

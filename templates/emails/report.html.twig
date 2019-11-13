@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+            <h1>Avis de Restriction</h1>
+            <p>
+                {{ user.firstName ~ user.name }} a demandé la modération du contenu suivant :
+            </p>
+            {% if item is instanceof('Comment') %}
+                Le commentaire posté par {{ item.author }}. <br>
+                Avec le contenu : {{ item.content }}
+            {% elseif item is enstanceof('Photo') %}
+                La photo posté par {{ item.author }} sur l'evenement {{ item.evenement.title }}
+                Avec l'url : {{ item.url }}
+            {% elseif item is instanceof('Evenement') %}
+                L'evenement "{{ item.title }}" ayant lieu le {{ item.date }}
+            {% endif %}
+            <p>
+                Merci aux membre du bde de faire le necessaire pour modifier/supprimé le contenu en question
+            </p>
+    </body>

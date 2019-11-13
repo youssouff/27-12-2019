@@ -117,7 +117,7 @@ class EventController extends AbstractController
     public function report(Evenement $event, \Swift_Mailer $mailer){
 
         $user = $this->getUser();
-        $message = (new \Swift_Message('Commande'))
+        $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
             ->setTo('montemonttheophile@gmail.com')//the bde's mail
             ->setBody(
@@ -125,13 +125,13 @@ class EventController extends AbstractController
                     // templates/emails/order.html.twig
                     'emails/report.html.twig',
                     [
-                        'item' => $event,
-                      'user' => $user
+                    'item' => $event,
+                    'user' => $user
                     ]
                 ),'text/html');
     
             $mailer->send($message);
-            
+
         return $this->redirectToRoute('event_before');
     }
 }

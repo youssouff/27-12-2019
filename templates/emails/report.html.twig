@@ -6,16 +6,18 @@
     <body>
             <h1>Avis de Restriction</h1>
             <p>
-                {{ user.firstName ~ user.name }} a demandé la modération du contenu suivant :
+                {{ user.firstName ~ " " ~ user.name }} a demandé la modération du contenu suivant :
             </p>
-            {% if item is instanceof('Comment') %}
+            {% if instanceof(item, 'Comment') %}
                 Le commentaire posté par {{ item.author }}. <br>
                 Avec le contenu : {{ item.content }}
-            {% elseif item is enstanceof('Photo') %}
+            {% elseif instanceof(item, 'Photo')  %}
                 La photo posté par {{ item.author }} sur l'evenement {{ item.evenement.title }}
                 Avec l'url : {{ item.url }}
-            {% elseif item is instanceof('Evenement') %}
+            {% elseif instanceof(item, 'Evenement')  %}
                 L'evenement "{{ item.title }}" ayant lieu le {{ item.date }}
+            {% else %}
+                Object not found
             {% endif %}
             <p>
                 Merci aux membre du bde de faire le necessaire pour modifier/supprimé le contenu en question

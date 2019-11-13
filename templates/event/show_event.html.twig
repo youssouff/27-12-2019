@@ -15,6 +15,9 @@
 			</div>
 
 			<div class="bdr-event size-border-event mx-auto" style="margin-left : 50px; ">
+				{% if is_granted('ROLE_CESI') %}
+				<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_event', {'id': photo.id })}}"><i class="fas fa-flag"></i> Signaler </a>
+				{% endif %}
 				<h3 style="margin-top : 30px;">Détails de l'événements</h3><br>
 				<p>Prix:
 					{{ event.price }}€</p>
@@ -41,14 +44,16 @@
 						<div class="col text-center" style="margin: 20px 0 20px 0q">
 							<p>Photo postée par:
 								{{photo.author.firstName}}</p>
-								{% if photo.author == app.user or is_granted('ROLE_ADMIN') %}
+								{% if is_granted('ROLE_CESI') %}
+								<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_photo', {'id': photo.id })}}"><i class="fas fa-flag"></i> Signaler </a>
+								{% endif %}
+
+
+								{% if photo.author == app.user or is_granted('ROLE_BDE') %}
 								{{ include('event/_delete_photo_form.html.twig') }}
 								{% endif %}
-								
-
-
 							<img class="img-event" src="{{ photo.url}}" alt="">
-							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
+							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id })}}"><i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
 								
 							<div class="commentaires">
 								<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">Il y a

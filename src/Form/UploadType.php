@@ -21,7 +21,7 @@ class UploadType extends AbstractType
                 'label' => 'Choisissez une photo'
             ])
             
-            ->add('Partagez', SubmitType::class)
+            ->add('partagez', SubmitType::class)
         ;
     }
 

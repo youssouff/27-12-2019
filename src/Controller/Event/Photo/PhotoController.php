@@ -143,7 +143,7 @@ class PhotoController extends AbstractController
 
         $id= $photo->getEvenement()->getId();
         $user = $this->getUser();
-
+        $id = $photo->getEvenement()->getId();
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
             ->setTo('montemonttheophile@gmail.com')//the bde's mail

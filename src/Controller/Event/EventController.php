@@ -7,9 +7,11 @@ use App\Entity\Upload;
 use App\Entity\Photo;
 use App\Repository\EvenementRepository;
 use App\Form\UploadType;
+use \ZipAchive;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EventController extends AbstractController
@@ -135,4 +137,31 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('event_before');
     }
+    /**
+     * @Route("/event/{id}/download/participants", name="csv_participants")
+     */
+    public function download_participants($id){
+
+        
+
+
+        return $this->redirectToRoute('show_event', [
+            'id' => $id,
+        ]);
+    }
+
+    /**
+     * @Route("/event/{id}/download/photos", name="zip_photos")
+     */
+    public function download_photos($id){
+        
+        
+
+        return $this->redirectToRoute('show_event', [
+            'id' => $id,
+        ]);
+    }
+    
+        
+
 }

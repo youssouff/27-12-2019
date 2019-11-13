@@ -93,7 +93,7 @@ class EventController extends AbstractController
     */
     public function participate(Evenement $event, $id){
         $user = $this->getUser();
-        if(!$event->getParticipants() || !$event->getParticipants()->contains($user)){
+        if(!$event->getParticipants()->contains($user)){
             $event->addParticipant( $user );
             
         } else {

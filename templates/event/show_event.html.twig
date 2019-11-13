@@ -16,7 +16,7 @@
 
 			<div class="bdr-event size-border-event mx-auto" style="margin-left : 50px; ">
 				{% if is_granted('ROLE_CESI') %}
-				<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_event', {'id': photo.id })}}"><i class="fas fa-flag"></i> Signaler </a>
+				<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_event', {'id': event.id })}}"><i class="fas fa-flag"></i> Signaler </a>
 				{% endif %}
 				<h3 style="margin-top : 30px;">Détails de l'événements</h3><br>
 				<p>Prix:

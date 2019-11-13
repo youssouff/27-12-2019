@@ -74,14 +74,6 @@ class CartController extends AbstractController
 
 
     /**
-     * @Route("/view")
-     */
-    public function view(Request $request){
-        var_dump($request->cookies->get('cart',[]));
-       return new Response('= value for cookie named cart');
-    }
-
-    /**
      * @Route("/clear", name="cart_clear")
      */
     public function clear(Request $request){

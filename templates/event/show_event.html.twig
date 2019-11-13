@@ -23,7 +23,7 @@
 					{{ event.price }}€</p>
 				<p>Evenement:
 					{{ event.recursion.name }}</p>
-					<a {% if incoming == false %}{% else %}href="{{ path('participate', {'id': event.id}) }}"{% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true" >{% if incoming == false %}Evenement passé{% else %}{% if event in app.user.evenements %}Je n'y participerai pas{% else %}Je participe{% endif %}{% endif %}</a>
+					<a {% if incoming == false %}{% else %}href="{{ path('participate', {'id': event.id}) }}"{% endif %} class="btn btn-secondary btn-lg active mx-auto mrg-left mrg-top mb-4" role="button" aria-pressed="true" >{% if incoming == false %}Evenement passé{% else %}{% if event in app.user.evenements %}Je n'y participerai pas{% else %}Je participe{% endif %}{% endif %}</a>
 			</div>
 		</div>
 	</center>
@@ -92,7 +92,9 @@
 				
 			{% endif %}
 		{% else %}
-		<p>Vous pourrez poster des photos dès que cet évenement sera passé.</p>
+		<div class="alert alert-dark text-center mx-auto w-50" role="alert" style="width : 400px;">
+						Vous pourrez poster des photos dès que cet évenement sera passé.
+					</div>
 		{% endif %}
 		</div>
 		<a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à la liste</a>

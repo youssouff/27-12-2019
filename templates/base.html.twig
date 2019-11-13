@@ -106,14 +106,6 @@
                                 </a>
                             </div>
                             {% endif %}
-                            {% if is_granted('ROLE_BDE')%}
-                            <div class="col-12">
-                                <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
-                                    Administration
-                                </a>
-                            </div>
-                            {% else %}
-                            {% endif %}
                             <div class="col-12">
                                 <a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}"
                                     class="btn btn-dark btn-block mt-1 mb-1">

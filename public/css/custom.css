@@ -103,7 +103,7 @@ hr{
     width: 50%;
     height: 2px;
     margin-top: 120px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
     background-color: black;
     border: none; /*on supprime le style par défaut*/
   }
@@ -149,6 +149,14 @@ hr{
     height: auto;
 }
 
+.bdr-edit{
+    border-width : 2px;
+    border-style: solid;
+    border-color:  lightslategrey;
+    background-color : #F2F2F2; 
+    width: 40%;
+}
+
 
   .size-border-event{
       width: 500px;
@@ -192,4 +200,11 @@ p.size-text-shop{
       color : white;
   }
 
-  #goodies_admin_table{}
+
+  .alert-style{
+    background-color : #ffc845; 
+    width: 40%;
+    color : white; 
+    border-radius:10px
+  }
+

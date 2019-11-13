@@ -1,69 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Validation de Commande{% endblock %}
+{% block title %}Validation de Commande
+{% endblock %}
 
 {% block body %}
-<div class="jumbotron jumbotron-fluid">
+	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-4">Votre panier</h1>
 			<p class="lead">Retrouvez ici le contenue de votre panier</p>
 		</div>
 	</div>
 
-<div class="container mb-5">
-    <div class="row">
-        <div class="col">
-            <a href="{{path('shop')}}" class="btn btn-dark btn-block">Retourner à la Boutique</a>
-        </div>
-    </div>
-    <table class="table">
-        <thead>
-            <th>Nom</th>
-            <th>Prix</th>
-            <th>Quantité</th>
-            <th>Total</th>
-            <th></th>
-        </thead>
-        <tbody>
+	<div class="container mb-5">
+		<div class="row">
+			<div class="col mb-5">
+				<a href="{{path('shop')}}" class="btn btn-dark btn-block">Retourner à la Boutique</a>
+			</div>
+		</div>
+		<table class="table">
+			<thead>
+				<th>Nom</th>
+				<th>Prix</th>
+				<th>Quantité</th>
+				<th>Total</th>
+				<th></th>
+			</thead>
+			<tbody>
 
-            {% for item in cart %}
-            <tr>
-                <td>
-                    {{item.product.name}}
-                </td>
-                <td>
-                    {{item.product.price}} €
-                </td>
-                <td>
-                    {{item.quantity}}
-                </td>
-                <td>
-                    {{item.product.price * item.quantity}} €
-                </td>
-                <td>
-                    <a href="{{path('cart_remove', {'id': item.product.id})}}" class="btn sm" style="background-color : #e4002b; color: white;">Retirer</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3" class="text-right">Total : </td>
-                <td>{{ total }} €</td>
-                <td></td>
-            </tr>
-        </tfoot>
-    </table>
-    <div class="row">
-        <div class="col">
-                Toute commande vous engage à payer !
-        </div>
-        <div class="col">
-            {{form_start(form)}}
+				{% for item in cart %}
+					<tr>
+						<td>
+							{{item.product.name}}
+						</td>
+						<td>
+							{{item.product.price}}
+							€
+						</td>
+						<td>
+							{{item.quantity}}
+						</td>
+						<td>
+							{{item.product.price * item.quantity}}
+							€
+						</td>
+						<td>
+							<a href="{{path('cart_remove', {'id': item.product.id})}}" class="btn sm" style="background-color : #e4002b; color: white;">Retirer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3" class="text-right">Total :
+					</td>
+					<td>{{ total }}
+						€</td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table>
 
-            {{form_end(form)}}
-        </div>
-    </div>
-</div>
+		<hr>
+
+		<div class="alert alert-style alert-primary mx-auto text-center" role="alert">
+			Toute commande vous engage à payer !
+		</div>
+
+
+		{{form_start(form)}}
+
+		{{form_end(form)}}
+
+	</div>
 
 {% endblock %}

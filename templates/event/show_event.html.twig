@@ -20,7 +20,7 @@
 					{{ event.price }}€</p>
 				<p>Evenement:
 					{{ event.recursion.name }}</p>
-					<a href="{{ path('participate', {'id': event.id}) }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">{% if event in app.user.evenements %}Je n'y participerai pas{% else %}Je participe{% endif %}</a>
+					<a {% if incoming == false %}{% else %}href="{{ path('participate', {'id': event.id}) }}"{% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true" >{% if incoming == false %}Evenement passé{% else %}{% if event in app.user.evenements %}Je n'y participerai pas{% else %}Je participe{% endif %}{% endif %}</a>
 			</div>
 		</div>
 	</center>
@@ -65,18 +65,26 @@
 		<hr>
 			{% endif %}
 			{% if app.user.name is defined %}
-			<div class="mrg-top text-center">
-				<p>Vous avez participé a l'évenement ? Partagez vos photos :
-				</p>
-				<div class="w-50 mx-auto">
-					{{ form(formUpload)}}
-				</div>
-			</div>
+				{% if event in app.user.evenements %}
+					<div class="mrg-top text-center">
+						<p>Vous avez participé a l'évenement ? Partagez vos photos :
+						</p>
+						<div class="w-50 mx-auto">
+							{{ form(formUpload)}}
+						</div>
+					</div>
+				{% else %}
+					<div class="mrg-top text-center">
+						<p class="size-text">Il faut avoir participé à l'évenement pour pouvoir poster des photos.
+					</div>
+				{% endif %}	
 			{% else %}
+				
 				<div class="mrg-top text-center">
 					<p class="size-text">Vous avez participé a l'évenement et souhaitez poster des photos,
 						<a href="{{path('security_login')}}">connectez-vous</a> d'abords.</p>
 				</div>
+				
 			{% endif %}
 		{% else %}
 		<p>Vous pourrez poster des photos dès que cet évenement sera passé.</p>

@@ -2,6 +2,19 @@
 
 {% block title %}Evenements{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#event_admin_table').DataTable();
+    } );
+</script>
+{% endblock %}
+
 {% block body %}
     <div class="jumbotron jumbotron-fluid">
 		<div class="container">
@@ -12,7 +25,7 @@
 
 
     <div class="text-center">
-    <table class="table">
+    <table class="table" id="event_admin_table">
         <thead>
             <tr>
                 <th>Titre</th>

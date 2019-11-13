@@ -71,7 +71,7 @@ class EventController extends AbstractController
             $entityManager->persist($photo);
             $entityManager->flush();
             
-            return $this->redirectToRoute('event_show', [
+            return $this->redirectToRoute('show_event', [
                 'id' => $id,
             ]);
         }
@@ -181,7 +181,7 @@ class EventController extends AbstractController
             $entityManager->flush();
     
         }
-            return $this->redirectToRoute('event_show', [
+            return $this->redirectToRoute('show_event', [
             'photo' => $photo,
             'id' => $id
             ]);

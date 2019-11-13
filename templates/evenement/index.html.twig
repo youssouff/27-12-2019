@@ -30,7 +30,7 @@
                 <td>{{ evenement.price }}</td>
                 <td>{{ evenement.date ? evenement.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('event_show', {'id': evenement.id}) }}" class="btn btn-dark">Voir</a>
+                    <a href="{{ path('show_event', {'id': evenement.id}) }}" class="btn btn-dark">Voir</a>
                     <a href="{{ path('evenement_edit', {'id': evenement.id}) }}" class="btn btn-dark">Editer</a>
                     {{ include('evenement/_delete_form.html.twig') }}
                 </td>

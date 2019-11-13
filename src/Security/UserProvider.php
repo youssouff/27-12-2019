@@ -10,6 +10,10 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class UserProvider implements UserProviderInterface
 {
+    private $api;
+    function __construct(Api $api){
+        $this-> api= $api;
+    }
     /**
      * Symfony calls this method if you use features like switch_user
      * or remember_me.
@@ -21,7 +25,7 @@ class UserProvider implements UserProviderInterface
      *
      * @throws UsernameNotFoundException if the user is not found
      */
-    public function loadUserByUsername($username, Api $api)
+    public function loadUserByUsername($username)
     {
         // Load a User object from your data source or throw UsernameNotFoundException.
         // The $username argument may not actually be a username:

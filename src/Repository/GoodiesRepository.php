@@ -28,7 +28,8 @@ class GoodiesRepository extends ServiceEntityRepository
     public function findBestSeller($value)
     {
         return $this->createQueryBuilder('g')
-            ->orderBy('g.quantity_sold', 'DESC')
+            ->where('g.quantitySold > 0')
+            ->orderBy('g.quantitySold', 'DESC')
             ->setMaxResults($value)
             ->getQuery()
             ->getResult()

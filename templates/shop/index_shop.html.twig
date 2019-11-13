@@ -23,17 +23,17 @@
             <div class="card">
                 <div class="card-header">
                     
-                    <p class="size-text-shop ml-5">{{ item[0].name }} | {{item[1]}} ventes</p>
-                        <p style="margin-left: 80%">Prix : {{item[0].price ? item[0].price : "Gratuit"}}€</p>
+                    <p class="size-text-shop ml-5">{{ item.name }} | {{item.quantitySold}} ventes</p>
+                        <p style="margin-left: 80%">Prix : {{item.price ? item.price : "Gratuit"}}€</p>
                 </div>
                 <div class="card-body">
                     
-                     <div class="meta">Categorie : {{ item[0].category.name }}</div>
-                        <p>Description : {{ item[0].description }}</p><br>
+                     <div class="meta">Categorie : {{ item.category.name }}</div>
+                        <p>Description : {{ item.description }}</p><br>
 
                     <div style="margin-left: 55%">
-                        <a href="{{path('shop_show', {'id': item[0].id }) }}" class="btn btn-dark"> Détails</a>
-                        <a href="{{path('cart_add', {'id': item[0].id }) }}" class="btn" style="background-color : #e4002b; color : white;"> Ajouter au
+                        <a href="{{path('shop_show', {'id': item.id }) }}" class="btn btn-dark"> Détails</a>
+                        <a href="{{path('cart_add', {'id': item.id }) }}" class="btn" style="background-color : #e4002b; color : white;"> Ajouter au
                             panier</a>
                         </div>
 

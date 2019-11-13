@@ -11,13 +11,13 @@ class ClassTwigExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('instanceof', [$this, 'instanceOfTest']),
+            new TwigFunction('class', [$this, 'getClassName']),
         ];
     }
 
-    public function instanceOfTest($var, $instance)
+    public function getClassName($object)
     {
-        return  $var instanceof $instance;
+        return (new \ReflectionClass($object))->getShortName();
     }
 
 }

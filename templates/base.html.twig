@@ -71,7 +71,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{path('index')}}">Acceuil</a>
+                        <a class="nav-link" href="{{path('index')}}">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('shop')}}">Boutique</a>
@@ -105,14 +105,6 @@
                                     Mon Profil
                                 </a>
                             </div>
-                            {% endif %}
-                            {% if is_granted('ROLE_BDE')%}
-                            <div class="col-12">
-                                <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
-                                    Administration
-                                </a>
-                            </div>
-                            {% else %}
                             {% endif %}
                             <div class="col-12">
                                 <a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}"

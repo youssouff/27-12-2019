@@ -96,7 +96,9 @@
 				
 			{% endif %}
 		{% else %}
-		<p>Vous pourrez poster des photos dès que cet évenement sera passé.</p>
+		<div class="alert alert-dark text-center mx-auto w-50" role="alert" style="width : 400px;">
+						Vous pourrez poster des photos dès que cet évenement sera passé.
+					</div>
 		{% endif %}
 		</div>
 		<a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à la liste</a>

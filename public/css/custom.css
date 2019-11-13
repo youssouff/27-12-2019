@@ -103,7 +103,7 @@ hr{
     width: 50%;
     height: 2px;
     margin-top: 120px;
-    margin-bottom: 70px;
+    margin-bottom: 100px;
     background-color: black;
     border: none; /*on supprime le style par défaut*/
   }
@@ -186,3 +186,10 @@ p.size-text-shop{
     min-height : 165px;
     max-height : 165px;
   }
+
+  .color-button{
+      background-color : #13322b;
+      color : white;
+  }
+
+  #goodies_admin_table{}

@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
     public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-
+        
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -46,17 +46,14 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils)
     {
         $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
+        
         return $this->render('security/login.html.twig',[
             'error' => $error,
-            'lastUsername' => $lastUsername
-
         ]);
     }
 
     /**
      * @Route("/account", name="security_account")
-     * @Route("/admin", name="security_account")
      */
     public function account(){
         return $this->render('security/account.html.twig');

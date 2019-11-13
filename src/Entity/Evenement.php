@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
+ * @Vich\Uploadable()
  */
 class Evenement
 {
@@ -17,6 +20,17 @@ class Evenement
      * @ORM\Column(type="integer")
      */
     private $id;
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -27,11 +41,6 @@ class Evenement
      * @ORM\Column(type="text")
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -59,6 +68,11 @@ class Evenement
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="evenements")
      */
     private $participant;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
     public function __construct()
     {
@@ -91,18 +105,6 @@ class Evenement
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function setImage($image)
-    {
-        $this->image = $image;
 
         return $this;
     }
@@ -206,5 +208,53 @@ class Evenement
 
         return $this;
     }
+    /**
+     * @param null|string
+     */
+    public function getFilename(): ?String
+    {
+        return $this->filename;
+    }
+    /**
+     * @param null|string $filename
+     * @return Property
+     */
+    public function setFilename(?string $filename)
+    {
+        $this->filename = $filename;
+        return $this;
+    }
+    /**
+     * @param null|File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+    /**
+     * @param null|File $imageFile
+     * @return Property
+     */
+    public function setImageFile(?File $imageFile)
+    {
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+        return $this;
+    }
 
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    
 }

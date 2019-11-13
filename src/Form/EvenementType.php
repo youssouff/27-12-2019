@@ -18,8 +18,8 @@ class EvenementType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('image', FileType::class, [
-                'label' => 'Choisissez une photo'
+            ->add('imageFile', FileType::class, [
+                'required' => 'false'
             ])
             ->add('price', IntegerType::class, [
                 'required' => false

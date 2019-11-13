@@ -5,10 +5,8 @@ namespace App\Controller\Event;
 use App\Entity\Evenement;
 use App\Entity\Upload;
 use App\Entity\Photo;
-use App\Entity\Comment;
 use App\Repository\EvenementRepository;
 use App\Form\UploadType;
-use App\Form\CommentType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -91,101 +89,26 @@ class EventController extends AbstractController
         ]);
     }
     /**
-    * @Route("/event/photo/{id}", name="photo_show")
+    * @Route("/event/{id}/participate", name="participate")
     */
-    public function photo_show(Photo $photo, Request $request, $id ){
-        $liked = false;
-        $comment = new Comment();
+    public function participate(Evenement $event, $id){
         $user = $this->getUser();
-        $formComment = $this->createForm(CommentType::class, $comment);
-
-        $formComment->handleRequest($request);
-
-        if ($formComment->isSubmitted() && $formComment->isValid()) {
-            
-            $comment->setauthor( $user = $this->getUser() );
-            $comment->setPhoto( $photo );
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($comment);
-            $entityManager->flush();
-            return $this->redirectToRoute('photo_show', [
-                'id' => $id,
-            ]);
-
-
-        }
-
-        return $this->render('event/photo/photo_show.html.twig', [
-            'photo' => $photo,
-            'formComment' => $formComment->createView(),
-        ]);
-    }
-    
-    /**
-    * @Route("/event/photo/{id}/like", name="like_photo")
-    */
-    public function like_photo(Photo $photo, $id){
-
-        $user = $this->getUser();
-        if(!$photo->getUsers() || !$photo->getUsers()->contains($user)){
-            $photo->addUser( $user );
+        if(!$event->getParticipants() || !$event->getParticipants()->contains($user)){
+            $event->addParticipant( $user );
             
         } else {
-            $photo->removeUser($user);
+            $event->removeParticipant($user);
         }
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($photo);
-        $entityManager->flush();
-        
-
-        return $this->redirectToRoute('photo_show', [
-            'photo' => $photo,
-            'id' => $id
-        ]);
-    }
-    /**
-    * @Route("/comment/delete/{id}", name="delete_comment")
-    */
-    public function delete_comment(Comment $comment, Request $request){
-
-        
-    if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
-        $id = $comment->getPhoto()->getId();
-        $photo = $comment->getPhoto();
-        $photo->removeComment($comment);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($photo);
-        $entityManager->remove($comment);
+        $entityManager->persist($event);
         $entityManager->flush();
 
-    }
-        return $this->redirectToRoute('photo_show', [
-        'photo' => $photo,
-        'id' => $id
+
+    
+        return $this->redirectToRoute('show_event', [
+            'event' => $event,
+            'id' => $id,
         ]);
-        
-
     }
-    /**
-    * @Route("/photo/delete/{id}", name="delete_photo")
-    */
-    public function delete_photo(Photo $photo,$id, Request $request){
-
-        
-        if ($this->isCsrfTokenValid('delete'.$photo->getId(), $request->request->get('_token'))) {
-            $id = $photo->getEvenement()->getId();
-            $photo->clearComments();
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($photo);
-            $entityManager->flush();
     
-        }
-            return $this->redirectToRoute('show_event', [
-            'photo' => $photo,
-            'id' => $id
-            ]);
-            
-    
-        }
 }

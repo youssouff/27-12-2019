@@ -70,12 +70,18 @@ class User implements UserInterface
      */
     private $orderHistories;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement", mappedBy="participant")
+     */
+    private $evenements;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likedphotos = new ArrayCollection();
         $this->orderHistories = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -308,6 +314,34 @@ class User implements UserInterface
             if ($orderHistory->getAuthor() === $this) {
                 $orderHistory->setAuthor(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Evenement[]
+     */
+    public function getEvenements(): Collection
+    {
+        return $this->evenements;
+    }
+
+    public function addEvenement(Evenement $evenement): self
+    {
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements[] = $evenement;
+            $evenement->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvenement(Evenement $evenement): self
+    {
+        if ($this->evenements->contains($evenement)) {
+            $this->evenements->removeElement($evenement);
+            $evenement->removeParticipant($this);
         }
 
         return $this;

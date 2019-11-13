@@ -55,9 +55,15 @@ class Evenement
      */
     private $photos;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="evenements")
+     */
+    private $participant;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
+        $this->participant = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,6 +173,35 @@ class Evenement
             if ($photo->getEvenement() === $this) {
                 $photo->setEvenement(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participant;
+    }
+    public function clearParticipants()
+    {
+            $this->getParticipant()->clear();
+    }
+    public function addParticipant(User $participant): self
+    {
+        if (!$this->participant->contains($participant)) {
+            $this->participant[] = $participant;
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(User $participant): self
+    {
+        if ($this->participant->contains($participant)) {
+            $this->participant->removeElement($participant);
         }
 
         return $this;

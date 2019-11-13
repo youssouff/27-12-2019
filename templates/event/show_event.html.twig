@@ -20,6 +20,7 @@
 					{{ event.price }}€</p>
 				<p>Evenement:
 					{{ event.recursion.name }}</p>
+					<a href="{{ path('participate', {'id': event.id}) }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">{% if event in app.user.evenements %}Je n'y participerai pas{% else %}Je participe{% endif %}</a>
 			</div>
 		</div>
 	</center>

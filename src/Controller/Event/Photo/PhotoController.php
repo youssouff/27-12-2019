@@ -139,10 +139,10 @@ class PhotoController extends AbstractController
     /**
     * @Route("/photo/{id}/report", name="report_photo")
     */
-    public function report_photo(Photo $photo, $id, \Swift_Mailer $mailer){
+    public function report_photo(Photo $photo, \Swift_Mailer $mailer){
 
         $user = $this->getUser();
-
+        $id = $photo->getEvenement()->getId();
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
             ->setTo('montemonttheophile@gmail.com')//the bde's mail

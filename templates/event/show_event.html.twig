@@ -23,6 +23,8 @@
 					{{ event.price }}€</p>
 				<p>Evenement:
 					{{ event.recursion.name }}</p>
+					<a {% if is_granted('ROLE_BDE') %}href="{{ path('csv_participants', {'id': event.id}) }}"{% else %}{% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true" >{% if is_granted('ROLE_BDE') %}Télécharger la liste des participants{% else %}Restreint au BDE{% endif %}</a>
+					<a {% if is_granted('ROLE_CESI') %}href="{{ path('zip_photos', {'id': event.id}) }}"{% else %}{% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true" >{% if is_granted('ROLE_CESI') %}Télécharger les photos{% else %}Restreint au personnel du cesi{% endif %}</a>
 					<a {% if incoming == false %}{% else %}href="{{ path('participate', {'id': event.id}) }}"{% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true" >{% if incoming == false %}Evenement passé{% else %}{% if event in app.user.evenements %}Je n'y participerai pas{% else %}Je participe{% endif %}{% endif %}</a>
 			</div>
 		</div>
@@ -44,6 +46,7 @@
 						<div class="col text-center" style="margin: 20px 0 20px 0q">
 							<p>Photo postée par:
 								{{photo.author.firstName}}</p>
+
 								{% if is_granted('ROLE_CESI') %}
 								<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_photo', {'id': photo.id })}}"><i class="fas fa-flag"></i> Signaler </a>
 								{% endif %}
@@ -62,6 +65,7 @@
 											{% else %}s
 									{% endif %}
 								</a>
+								
 							</div>
 						</div>
 						<hr class="hr-comment">

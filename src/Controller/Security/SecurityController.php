@@ -29,7 +29,8 @@ class SecurityController extends AbstractController
 
             $user->setPassword( $encoder->encodePassword($user, $user->getPassword()) );
             $user->setRoles(["ROLE_USER"]);
-
+            $user->setCampus($user->getCampus()->getDenomination());
+            
             $api->register($user);
 
             return $this->redirectToRoute('security_login');

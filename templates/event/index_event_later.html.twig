@@ -27,8 +27,9 @@
     <div class="card card-event" style="width: 18rem; background-color: #8a8d8f;">
         {% if event.filename %} 
         
-        <img class="img-card" src="../appdata/event/{{ event.filename }}" class="card-img-top" alt="...">
         
+        <img src="../appdata/event/{{ event.filename }}" class="card-img-top img-card" alt="...">
+       
         {% else %}
         <div style="background-color : black; height :165px ; width : 100%;"></div>
         
@@ -48,9 +49,12 @@
 </div>
 
     {% else %}
+
+    <div style="height : 400px">
     <div class="alert alert-dark mx-auto text-center w-50" role="alert">
   Il n'y a pas d'évenements de prévus
-</div>
+  </div>
+  </div>
     
     {% endif %}
 

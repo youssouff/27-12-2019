@@ -17,8 +17,8 @@ class ApiUserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('nom')
-            ->add('prenom')
+            ->add('name')
+            ->add('firstName')
             ->add('telephone')
             ->add('campus', EntityType::class, [
                 'class' => Center::class,

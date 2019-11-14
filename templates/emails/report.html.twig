@@ -12,12 +12,12 @@
                 Le commentaire posté par {{ item.author.firstName ~" "~ item.author.name }}. <br>
                 Avec le contenu : {{ item.content }}
             {% elseif class(item) == "Photo"  %}
-                La photo posté par {{ item.author.firstName ~" "~ item.author.name }} sur l'evenement {{ item.evenement.title }}
+                La photo posté par {{ item.author.firstName ~" "~ item.author.name }} sur l'évènement {{ item.evenement.title }}
                 Avec l'url : {{ item.url }}
-            {% elseif class(item) == "Evenement"  %}
+            {% elseif class(item) == "Évènement"  %}
                 L'evenement "{{ item.title }}" ayant lieu le {{ item.date |date("d/m/Y") }}
             {% else %}
-                Object not found
+                Objet non trouvé
             {% endif %}
             <p>
                 Merci aux membre du bde de faire le necessaire pour modifier/supprimé le contenu en question

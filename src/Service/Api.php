@@ -3,8 +3,7 @@
 namespace App\Service;
 
 use App\Security\ApiUser;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -24,11 +23,11 @@ class Api
     public function getUserFullName(int $id): string
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'http://localhost:8000/user/getName/:' . $id);
+        $response = $client->request('GET', 'http://localhost:8080/users/getName/:' . $id);
         $content = $response->getArray();
         //A verifier
         if ($content[user]) {
-            return $content[user][nom] . " " . $content[user][prenom];
+            return $content[user][name] . " " . $content[user][firstName];
         }
         return null;
 
@@ -42,7 +41,9 @@ class Api
     public function getUserByMail($mail): ApiUser
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'http://localhost:8000/user/getName/:' . $mail);
+        $response = $client->request('GET', 'http://localhost:8080/users/getName/:' . $mail, [
+            'headers' => ['Content-type' => 'applicaton/json']
+        ]);
         $content = $response->getContent();
         print_r($content);
         die();
@@ -64,10 +65,25 @@ class Api
     public function register(ApiUser $user)
     {
         $client = HttpClient::create();
-        $response = $client->request('POST', 'http://localhost:8000/user/newUser/:', [
-            'body' => $this->serializer->serialize($user, 'json')
+        $response = $client->request('GET', 'http://localhost:8080/users/getFull/lucien@gmail.com', [
+            'headers' => ['Content-type' => 'applicaton/json']
         ]);
+        // $content = $response->getContent();
+        // print_r($response->user);
+        // die();
 
-        $content = $response->getContent();
+        // //A verifier
+        // if ($content[user]) {
+        //     // return $this->serializer->deserialize($content, ApiUser::class, 'json');
+        // }
+        // return null;
+
+
+        // $client = HttpClient::create();
+
+        // $client->request('POST', 'http://localhost:8080/users/newUser/', [
+        //     'headers' => ['Content-type' => 'application/json'],
+        //     'body' => $this->serializer->serialize($user, 'json')
+        // ]);
     }
 }

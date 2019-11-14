@@ -8,9 +8,9 @@ class ApiUser implements UserInterface
 {
     private $email;
 
-    private $nom;
+    private $name;
 
-    private $prenom;
+    private $firstName;
 
     private $telephone;
 
@@ -26,6 +26,78 @@ class ApiUser implements UserInterface
      * @var string The hashed password
      */
     private $password;
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getCampus(): ?string
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(string $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getPromotion(): ?int
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(int $promotion): self
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): self
+    {
+        $this->age = $age;
+
+        return $this;
+    }
 
     public function getEmail(): ?string
     {

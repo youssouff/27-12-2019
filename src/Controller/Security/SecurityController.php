@@ -5,6 +5,7 @@ namespace App\Controller\Security;
 
 use App\Service\Api;
 use App\Form\ApiUserType;
+use App\Security\ApiUser;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;

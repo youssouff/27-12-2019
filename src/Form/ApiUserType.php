@@ -20,7 +20,7 @@ class ApiUserType extends AbstractType
             ->add('name')
             ->add('firstName')
             ->add('telephone')
-            ->add('campus', EntityType::class, [
+            ->add('center', EntityType::class, [
                 'class' => Center::class,
                 'choice_label' => 'denomination'
             ])

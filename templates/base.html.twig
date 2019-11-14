@@ -78,10 +78,10 @@
                     </li>
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Evènements</a>
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Évènements</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{{path('event_later')}}">Evènements à venir</a>
-                            <a class="dropdown-item" href="{{path('event_before')}}">Evènements passés</a>
+                            <a class="dropdown-item" href="{{path('event_later')}}">Évènements à venir</a>
+                            <a class="dropdown-item" href="{{path('event_before')}}">Évènements passés</a>
                         </div>
                     </div>
                 </ul>
@@ -93,18 +93,19 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
                         <div class="row">
-                            {% if not app.user %}
-                            <div class="col-12">
-                                <a href="{{path('security_register')}}" class="btn btn-dark btn-block mt-1 mb-1">
-                                    Inscription
-                                </a>
-                            </div>
-                            {% else %}
+                            {% if app.user %}
                             <div class="col-12">
                                 <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
                                     Mon Profil
                                 </a>
                             </div>
+                            {% else %}
+                            <div class="col-12">
+                                <a href="{{path('security_register')}}" class="btn btn-dark btn-block mt-1 mb-1">
+                                    Inscription
+                                </a>
+                            </div>
+
                             {% endif %}
                             <div class="col-12">
                                 <a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}"
@@ -126,13 +127,17 @@
             <div class="row">
                 <div class="col-sm text-center">
                     <p class="">
-                        <h4 id="list-item-1">Information</h4>
+                        <h4 id="list-item-1">Informations</h4>
 
                     </p>
                 </div>
                 <div class="col-sm text-center">
                     <p class="">
                         <h4 class="">Suivez nous sur :</h4>
+                        <a target="_blank"  href="https://www.facebook.com/lucas.bieger" ><i class="fab fa-facebook-f"></i></a>
+                        <a target="_blank"  href="https://twitter.com/Lucas_Bieger" ><i class="fab fa-twitter"></i></a>
+                        <a target="_blank"  href="https://www.youtube.com/user/lucasbibi1" ><i class="fab fa-instagram"></i></a>
+                        <a target="_blank"  href="https://www.instagram.com/lucas.bieger/?hl=fr" ><i class="fab fa-youtube"></i></a>
 
                     </p>
                 </div>

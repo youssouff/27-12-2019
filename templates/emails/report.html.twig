@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-            <h1>Avis de Restriction</h1>
-            <p>
-                {{ username }} a demandé la modération du contenu suivant :
-            </p>
-            {% if class(item) == "Comment" %}
-                Le commentaire posté par {{ author }}. <br>
-                Avec le contenu : {{ item.content }}
-            {% elseif class(item) == "Photo"  %}
-                La photo posté par {{ author }} sur l'évènement {{ item.evenement.title }}
-                Avec l'url : {{ item.url }}
-            {% elseif class(item) == "Evenement"  %}
-                L'evenement "{{ item.title }}" ayant lieu le {{ item.date |date("d/m/Y") }}
-            {% else %}
-                Objet non trouvé
-            {% endif %}
-            <p>
-                Merci aux membre du bde de faire le necessaire pour modifier/supprimé le contenu en question
-            </p>
-    </body>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<h1>Avis de Restriction</h1>
+		<p>
+			{{ username }}
+			a demandé la modération du contenu suivant :
+		</p>
+		{% if class(item) == "Comment" %}
+			Le commentaire posté par
+			{{ author }}.
+			<br>
+			Avec le contenu :
+			{{ item.content }}
+		{% elseif class(item) == "Photo"  %}
+			La photo posté par
+			{{ author }}
+			sur l'évènement
+			{{ item.evenement.title }}
+			Avec l'url :
+			{{ item.url }}
+		{% elseif class(item) == "Evenement"  %}
+			L'evenement "{{ item.title }}" ayant lieu le
+			{{ item.date |date("d/m/Y") }}
+		{% else %}
+			Objet non trouvé
+		{% endif %}qx
+		<p>
+			Merci aux membre du bde de faire le necessaire pour modifier/supprimé le contenu en question
+		</p>
+	</body>
+</html>

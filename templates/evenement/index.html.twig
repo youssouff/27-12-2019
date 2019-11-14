@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Evenements{% endblock %}
+{% block title %}Evenements
+{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-<script>
-    $(document).ready( function () {
-        $('#event_admin_table').DataTable();
-    } );
-</script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+	<script>
+		$(document).ready(function () {
+$('#event_admin_table').DataTable();
+});
+	</script>
 {% endblock %}
 
 {% block body %}
-    <div class="jumbotron jumbotron-fluid">
+	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-4">Gestion des évènements</h1>
 			<p class="lead">Modifie et supprime les évènements ici</p>
@@ -24,39 +25,39 @@
 	</div>
 
 
-    <div class="text-center w-50 mx-auto">
-    <table class="table" id="event_admin_table">
-        <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for evenement in evenements %}
-            <tr>
-                <td>{{ evenement.title }}</td>
-                <td>{{ evenement.description }}</td>
-                <td>{{ evenement.price }}</td>
-                <td>{{ evenement.date ? evenement.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('show_event', {'id': evenement.id}) }}" class="btn btn-dark">Voir</a>
-                    <a href="{{ path('evenement_edit', {'id': evenement.id}) }}" class="btn btn-dark">Editer</a>
-                    {{ include('evenement/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Pas d'enregistrement trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    </div>
+	<div class="text-center w-50 mx-auto">
+		<table class="table" id="event_admin_table">
+			<thead>
+				<tr>
+					<th>Titre</th>
+					<th>Description</th>
+					<th>Prix</th>
+					<th>Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for evenement in evenements %}
+					<tr>
+						<td>{{ evenement.title }}</td>
+						<td>{{ evenement.description }}</td>
+						<td>{{ evenement.price }}</td>
+						<td>{{ evenement.date ? evenement.date|date('Y-m-d H:i:s') : '' }}</td>
+						<td>
+							<a href="{{ path('show_event', {'id': evenement.id}) }}" class="btn btn-dark">Voir</a>
+							<a href="{{ path('evenement_edit', {'id': evenement.id}) }}" class="btn btn-dark">Editer</a>
+							{{ include('evenement/_delete_form.html.twig') }}
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="7">Pas d'enregistrement trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 
-    <a href="{{ path('evenement_new') }}" class="btn btn-dark mb-5 mt-5 mrg-l-80">Créer un nouvel évènement</a>
+	<a href="{{ path('evenement_new') }}" class="btn btn-dark mb-5 mt-5 mrg-l-80">Créer un nouvel évènement</a>
 
 {% endblock %}

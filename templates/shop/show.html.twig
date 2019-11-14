@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{goody.name}}{% endblock %}
+{% block title %}
+	{{goody.name}}
+{% endblock %}
 
 {% block body %}
 
-<h1>Nom : {{ goody.name }}</h1>
+	<h1>Nom :
+		{{ goody.name }}</h1>
 
-Description
-{{ goody.description }}
-Price
-{{ goody.price }}
-category
-{{ goody.category.name }}
-
-
-    <a href="{{ path('shop') }}">Retour à la boutique</a>
-    
+	Description
+	{{ goody.description }}
+	Price
+	{{ goody.price }}
+	category
+	{{ goody.category.name }}
 
 
-    
+	<a href="{{ path('shop') }}">Retour à la boutique</a>
+
+
 {% endblock %}

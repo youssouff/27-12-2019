@@ -3,74 +3,87 @@
 {% block body %}
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
-		<p class="size-text">Photo postée par:
-            {{photo.author.firstName}}</p>
+			<p class="size-text">Photo postée par:
+				{{photo.author.firstName}}</p>
 		</div>
 	</div>
 
-    <center>
-    <div class="row">
-	<div class="mx-auto">
-		<img class="img-event" src="../{{photo.url}}" alt="">
-	</div>
-    </div>
-    <a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
-    </center>
+	<center>
+		<div class="row">
+			<div class="mx-auto">
+				<img class="img-event" src="../{{photo.url}}" alt="">
+			</div>
+		</div>
+		<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}">
+			<i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i>
+			{{ photo.users | length }}
+		</a>
+	</center>
 
-    <hr>
+	<hr>
 
 	<div class="" style="margin-top : 80px;">
 		{% if photo.comments is empty %}
-        <center>
-        <div class="alert alert-dark text-center col-4" role="alert">
-           Il n'y a pas de commentaires pour cette photo.
-        </div>
-        </center>
+			<center>
+				<div class="alert alert-dark text-center col-4" role="alert">
+					Il n'y a pas de commentaires pour cette photo.
+				</div>
+			</center>
 		{% else %}
 			<p class="size-text text-center">Commentaires</p>
-				<div class="bdr-comment w-50 mx-auto" >
+			<div class="bdr-comment w-50 mx-auto">
 
-                    <div class="commentaires" >
-                    
-                        
-                        
-                        
-						<div class="row">
-                        {% for comment in photo.comments %}
-                         	<div class="bdr-comment2 mx-auto mb-2 col-8 mt-2">
-								<p class="mt-2 ml-1 size-text-comment" >{{ comment.author.firstname}}:<br></p>
-								<p class="mt-2 ml-1 size-text-comment">{{ comment.content}}</p>
-							</div>
-							{% if is_granted('ROLE_CESI') %}
-							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_comment', {'id': comment.id })}}"><i class="fas fa-flag"></i> Signaler </a>
-							{% endif %}
-							{% if comment.author == app.user or is_granted('ROLE_BDE') %}
-								<div class="mx-auto">          
-								{{ include('event/photo/_delete_comment_form.html.twig') }}
-								</div>       
-							{% endif %}
-							<br>	
-                        {% endfor %}
-						</div>
-                    </div>
+				<div class="commentaires">
+
+					<table class="table">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Prénom</th>
+								<th scope="col">Commentaire</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>{{ comment.author.firstname}}</td>
+								<td>{{ comment.content}}</td>
+								<td>
+									{% if is_granted('ROLE_CESI') %}
+										<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_comment', {'id': comment.id })}}">
+											<i class="fas fa-flag"></i>
+											Signaler
+										</a>
+									{% endif %}
+									{% if comment.author == app.user or is_granted('ROLE_BDE') %}
+										<div class="mx-auto">
+											{{ include('event/photo/_delete_comment_form.html.twig') }}
+										</div>
+									{% endif %}
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<hr>
+			</div>
+			<hr>
 		{% endif %}
 		{% if app.user.name is defined %}
 			<div class="mrg-top text-center">
-				<p>Postez un commentaire: 
+				<p>Postez un commentaire:
 				</p>
 				<div class="w-50 mx-auto">
-				{{ form_start(formComment)}}
-				{{ form_widget(formComment.content)}}
-				{{ form_end(formComment)}}
+					{{ form_start(formComment)}}
+					{{ form_widget(formComment.content)}}
+					{{ form_end(formComment)}}
 				</div>
-				</div>
-			{% else %}
-				<p class="size-text text-center">Si vous souhaitez commenter la photo,
+			</div>
+		{% else %}
+			<p class="size-text text-center">Si vous souhaitez commenter la photo,
 				<a href="{{path('security_login')}}">connectez-vous</a>
-					d'abords.</p>
-			{% endif %}
-		</div>
-		<a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à l'évènement</a>
-	{% endblock %}
+				d'abords.</p>
+		{% endif %}
+	</div>
+	<a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à l'évènement</a>
+{% endblock %}

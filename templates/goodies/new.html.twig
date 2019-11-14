@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau Produit{% endblock %}
+{% block title %}Nouveau Produit
+{% endblock %}
 
 {% block body %}
-    <div class="jumbotron jumbotron-fluid">
+	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-4">Nouveau Produit</h1>
 			<p class="lead">Ajoutez ici vos nouveaux produits</p>
 		</div>
 	</div>
 
-    <div class="bdr-login w-50 mx-auto mb-5 pt-5 pb-5">
-    <div class="col-8 mx-auto">
-    {{ include('goodies/_form.html.twig') }}
-    </div>
-    </div>
-    <a href="{{ path('goodies_index') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à la liste</a>
+	<div class="bdr-login w-50 mx-auto mb-5 pt-5 pb-5">
+		<div class="col-8 mx-auto">
+			{{ include('goodies/_form.html.twig') }}
+		</div>
+	</div>
+	<a href="{{ path('goodies_index') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à la liste</a>
 {% endblock %}

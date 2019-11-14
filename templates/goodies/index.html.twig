@@ -1,59 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produits{% endblock %}
+{% block title %}Produits
+{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-<script>
-    $(document).ready( function () {
-        $('#goodies_admin_table').DataTable();
-    } );
-</script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+	<script>
+		$(document).ready(function () {
+$('#goodies_admin_table').DataTable();
+});
+	</script>
 {% endblock %}
 
 {% block body %}
-    <div class="jumbotron jumbotron-fluid">
+	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<h1 class="display-4">Gestion des produits</h1>
 			<p class="lead">Modifie et supprime les produits de ta boutique ici</p>
 		</div>
 	</div>
 
-    <div class="text-center mx-auto w-50">
-    <table class="table" id="goodies_admin_table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for goody in goodies %}
-            <tr>
-                <td>{{ goody.name }}</td>
-                <td>{{ goody.description }}</td>
-                <td>{{ goody.price }}</td>
-                <td>
-                    <a href="{{ path('shop_show', {'id': goody.id}) }}" class="btn btn-dark">Voir</a>
-                    <a href="{{ path('goodies_edit', {'id': goody.id}) }}" class="btn btn-dark">Editer</a>
-                    {{ include('goodies/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">Pas d'enregistrements trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    </div>
+	<div class="text-center mx-auto w-50">
+		<table class="table" id="goodies_admin_table">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Description</th>
+					<th>Prix</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for goody in goodies %}
+					<tr>
+						<td>{{ goody.name }}</td>
+						<td>{{ goody.description }}</td>
+						<td>{{ goody.price }}</td>
+						<td>
+							<a href="{{ path('shop_show', {'id': goody.id}) }}" class="btn btn-dark">Voir</a>
+							<a href="{{ path('goodies_edit', {'id': goody.id}) }}" class="btn btn-dark">Editer</a>
+							{{ include('goodies/_delete_form.html.twig') }}
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">Pas d'enregistrements trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 
-<a href="{{ path('goodies_new') }}" class="btn btn-dark mb-5 mt-5 mrg-l-80">Ajouter un produit</a>
-    
+	<a href="{{ path('goodies_new') }}" class="btn btn-dark mb-5 mt-5 mrg-l-80">Ajouter un produit</a>
+
 {% endblock %}

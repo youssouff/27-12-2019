@@ -108,10 +108,11 @@ class ShopController extends AbstractController
              *  @var \App\Entity\User $user 
              */
             $user = $this->getUser();
+            $username= $user->getUsername();
 
             
             $message = (new \Swift_Message('Commande'))
-            ->setFrom($user ? $user->getUsername() : "none@symfony.com")
+            ->setFrom($username)
             ->setTo('montemonttheophile@gmail.com')//the bde's mail
             ->setBody(
                 $this->renderView(
@@ -119,7 +120,7 @@ class ShopController extends AbstractController
                     'emails/order.html.twig',
                     ['cart' => $cart,
                     'total' => $total,
-                    'user' => $user,
+                    'username' => $username,
                     'room' => $data['salle']]
                 ),'text/html');
     

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Event\Photo;
 
+use App\Service\Api;
 use App\Entity\Photo;
 use App\Entity\Comment;
 use App\Form\CommentType;

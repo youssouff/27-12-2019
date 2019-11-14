@@ -41,7 +41,7 @@ class Photo
     private $evenement;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     private $users;
 

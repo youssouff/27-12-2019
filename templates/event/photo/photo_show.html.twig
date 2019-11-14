@@ -37,8 +37,8 @@
 									<tbody>
 										<tr>{% for comment in photo.comments %}
 											
-											<td style="width : 20%">{{ comment.author}} :</td>
-											<td style="width : 60%">{{ comment.content}}</td>
+											<td style="width : 20%">{{ comment.author }}:</td>
+											<td style="width : 60%">{{ comment.content }}</td>
 											<td>
 												{% if is_granted('ROLE_CESI') %}
 													<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_comment', {'id': comment.id })}}">

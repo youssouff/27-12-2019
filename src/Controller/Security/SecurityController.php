@@ -19,8 +19,9 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="security_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, Api $api){
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, Api $api, CenterRepository $repo){
         $user = new ApiUser();
+        $centers = $repo->findAll();
         $form = $this->createForm(ApiUserType::class, $user);
         
         $form->handleRequest($request);

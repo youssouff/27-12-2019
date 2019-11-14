@@ -8,7 +8,7 @@
 		<div class="container">
 			<h1 class="display-4">BDE Strasbourg | Connexion</h1>
 			<p class="lead">
-				Bienvenue sur le site de votre bde ! veuillez vous connecter pour accèdez a toutes les fonctionalitée
+				Bienvenue sur le site de votre BDE ! veuillez vous connecter pour accéder à toutes les fonctionnalitée
 			</p>
 		</div>
 	</div>
@@ -22,7 +22,7 @@
 				</div>
 			{% endif %}
 
-			<p class="size-text">Connecter vous</p>
+			<p class="size-text">Connectez-vous</p>
 			
         <form action=" {{ path('security_login') }}" class="form-signin w-50 mx-auto" method="post">
             <input placeholder="Email" required name="_username" type="text" class="bordered form-control mb-1"></input>
@@ -33,7 +33,7 @@
             </button>
 
             <div class="mt-4">
-                <span class="meta">Vous n'avez pas encore liez votre compte CESI ?</span>
+                <span class="meta">Vous n'avez pas encore de compte CESI ?</span>
                 <br/>
                 <a href="{{path('security_register')}}">Inscrivez-vous</a>
             </div>

@@ -26,4 +26,8 @@ class Api
     //return null if not found
     }
 
+    public function register(ApiUser $user){
+        //apiuser => json
+        //crer nouvel entre d'après le json
+    }
 }

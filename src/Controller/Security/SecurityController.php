@@ -2,8 +2,9 @@
 
 namespace App\Controller\Security;
 
-use App\Entity\User;
-use App\Form\UserType;
+
+use App\Service\Api;
+use App\Form\ApiUserType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,9 +18,9 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="security_register")
      */
-    public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+    public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder,Api $api){
+        $user = new ApiUser();
+        $form = $this->createForm(ApiUserType::class, $user);
         
         $form->handleRequest($request);
 
@@ -28,8 +29,7 @@ class SecurityController extends AbstractController
             $user->setPassword( $encoder->encodePassword($user, $user->getPassword()) );
             $user->setRoles(["ROLE_USER"]);
 
-            $manager->persist($user);
-            $manager->flush();
+            $api->register($user);
 
             return $this->redirectToRoute('security_login');
             

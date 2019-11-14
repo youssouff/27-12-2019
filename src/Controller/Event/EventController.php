@@ -2,12 +2,13 @@
 
 namespace App\Controller\Event;
 
-use App\Entity\Evenement;
-use App\Entity\Upload;
-use App\Entity\Photo;
-use App\Repository\EvenementRepository;
-use App\Form\UploadType;
 use \ZipAchive;
+use App\Service\Api;
+use App\Entity\Photo;
+use App\Entity\Upload;
+use App\Form\UploadType;
+use App\Entity\Evenement;
+use App\Repository\EvenementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -118,7 +119,6 @@ class EventController extends AbstractController
     * @Route("/event/{id}/report", name="report_event")
     */
     public function report(Evenement $event, \Swift_Mailer $mailer){
-
         $user = $this->getUser();
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())

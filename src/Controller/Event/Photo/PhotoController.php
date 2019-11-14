@@ -93,9 +93,10 @@ class PhotoController extends AbstractController
     /**
     * @Route("/comment/{id}/report", name="report_comment")
     */
-    public function report_comment(Comment $comment, \Swift_Mailer $mailer){
-
+    public function report_comment(Comment $comment, \Swift_Mailer $mailer, Api $api){
         $user = $this->getUser();
+        
+        $author = $api->getUserFullName($comment->getAuthor()->getId());
 
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
@@ -105,6 +106,7 @@ class PhotoController extends AbstractController
                     // templates/emails/order.html.twig
                     'emails/report.html.twig',
                     [
+                    'author' => $author,
                     'item' => $comment,
                     'user' => $user
                     ]
@@ -139,11 +141,11 @@ class PhotoController extends AbstractController
     /**
     * @Route("/photo/{id}/report", name="report_photo")
     */
-    public function report_photo(Photo $photo, \Swift_Mailer $mailer){
+    public function report_photo(Photo $photo, \Swift_Mailer $mailer, Api $api){
 
-        $id= $photo->getEvenement()->getId();
         $user = $this->getUser();
         $id = $photo->getEvenement()->getId();
+        $author = $api->getUserFullName($photo->getAuthor()->getId());
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
             ->setTo('montemonttheophile@gmail.com')//the bde's mail
@@ -152,6 +154,7 @@ class PhotoController extends AbstractController
                     // templates/emails/report.html.twig
                     'emails/report.html.twig',
                     [
+                        'author' => $author,
                         'item' => $photo,
                         'user' => $user
                     ]

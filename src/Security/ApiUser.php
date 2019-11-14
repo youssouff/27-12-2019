@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ApiUser implements UserInterface
 {
-    function __construct(int $id, string $email, string $name, string $firstName, string $telephone, string $campus, int $promotion, int $age, string $roles, string $password)
+    function initialize(int $id, string $email, string $name, string $firstName, string $telephone, string $campus, int $promotion, int $age, string $roles, string $password)
     {
         $this->id = $id;
         $this->email = $email;

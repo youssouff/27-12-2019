@@ -52,7 +52,8 @@ class Api
         $content = $response->toArray();
 
         if ($content[0]) {
-            $user = new ApiUser($content[0]['id'], $content[0]['email'], $content[0]['name'], $content[0]['firstName'], $content[0]['telephone'], $content[0]['campus'], $content[0]['promotion'], $content[0]['age'], $content[0]['roles'], $content[0]['password']);
+            $user = new ApiUser();
+            $user->initialize($content[0]['id'], $content[0]['email'], $content[0]['name'], $content[0]['firstName'], $content[0]['telephone'], $content[0]['campus'], $content[0]['promotion'], $content[0]['age'], $content[0]['roles'], $content[0]['password']);
             return $user;
         } else return null;
 

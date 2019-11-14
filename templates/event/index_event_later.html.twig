@@ -36,8 +36,8 @@
         <div class="card-body">
             <h5 class="card-title">{{ event.title }}</h5>
             <p class="card-text">{{ event.description | raw }}</p>
-            <li class="list-group-item mx-auto" style="background-color : #b1b3b3; position:absolute; bottom: 60px;">Prévu pour le: {{ event.date | date ('d/m/Y à H:i')}}</li>
-            <a href=" {{ path('show_event', {'id': event.id }) }}" class="btn btn-secondary mx-auto" style="position:absolute; bottom: 10px;">En savoir plus</a>
+            <li class="list-group-item w-100" style="background-color : #b1b3b3; bottom: 0px;">Prévu pour le: {{ event.date | date ('d/m/Y à H:i')}}</li>
+            <a href=" {{ path('show_event', {'id': event.id }) }}" class="btn btn-secondary" style="position:absolute; bottom: 10px;">En savoir plus</a>
         </div>
     </div>
     </div>
@@ -48,7 +48,10 @@
 </div>
 
     {% else %}
-    <p>Il n'y a pas d'évenements de prévus</p>
+    <div class="alert alert-dark mx-auto text-center w-50" role="alert">
+  Il n'y a pas d'évenements de prévus
+</div>
+    
     {% endif %}
 
 

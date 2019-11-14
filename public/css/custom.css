@@ -12,6 +12,11 @@
 --colorFour : #;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+
 body{
     background-color: white;
 }
@@ -27,8 +32,8 @@ footer{
 
 .background{
     background-image: url("../appdata/background.jpg");
-    width: 80%;
-    height: 600px;
+    width: 100vw;
+    height: 100vh;
     background-repeat: no-repeat;
     margin-bottom: 100px;
 }
@@ -246,5 +251,5 @@ p.size-text-shop{
 
 
 .color-link{
-    color :#69b3e7;
+    color :#ffffff;
 }

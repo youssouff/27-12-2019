@@ -51,12 +51,18 @@ class PhotoController extends AbstractController
     public function like_photo(Photo $photo, $id){
 
         $user = $this->getUser();
-        if(!$photo->getUsers() || !$photo->getUsers()->contains($user)){
+
+        if($photo->getUsers()){
+            if (!in_array($user->getUsername(), $photo->getUsers())) 
+            { 
+                $photo->addUser( $user );
+            }else{
+                $photo->removeUser($user);
+            }
+        }else{
             $photo->addUser( $user );
-            
-        } else {
-            $photo->removeUser($user);
         }
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($photo);
         $entityManager->flush();

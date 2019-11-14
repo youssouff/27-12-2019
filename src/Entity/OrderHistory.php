@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Security\ApiUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,8 +18,7 @@ class OrderHistory
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="orderHistories")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $author;
 
@@ -37,14 +37,14 @@ class OrderHistory
         return $this->id;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    public function setAuthor(ApiUser $author): self
     {
-        $this->author = $author;
+        $this->author = $author->getUsername();
 
         return $this;
     }

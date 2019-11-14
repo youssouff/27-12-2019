@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Security\ApiUser;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -65,9 +66,9 @@ class Evenement
     private $photos;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="evenements")
+     * @ORM\Column(type="json", nullable=true)
      */
-    private $participant;
+    private $participant = [];
 
     /**
      * @ORM\Column(type="datetime")
@@ -77,7 +78,6 @@ class Evenement
     public function __construct()
     {
         $this->photos = new ArrayCollection();
-        $this->participant = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,29 +181,36 @@ class Evenement
     }
 
     /**
-     * @return Collection|User[]
+     * @return string[]
      */
-    public function getParticipants(): Collection
+    public function getParticipants()
     {
         return $this->participant;
     }
     public function clearParticipants()
     {
-            $this->getParticipant()->clear();
+            $this->participant = [];
     }
-    public function addParticipant(User $participant): self
+    public function addParticipant(ApiUser $user): self
     {
-        if (!$this->participant->contains($participant)) {
-            $this->participant[] = $participant;
+         
+        
+        if($this->participant){
+            if (!in_array($user->getUsername(), $this->participant)) 
+            { 
+                $this->participant[] = $user->getUsername();
+            }
+        }else{
+            $this->participant[] = $user->getUsername();
         }
 
         return $this;
     }
 
-    public function removeParticipant(User $participant): self
+    public function removeParticipant(ApiUser $user): self
     {
-        if ($this->participant->contains($participant)) {
-            $this->participant->removeElement($participant);
+        if (($key = array_search($user->getUsername(), $this->participant)) !== false) {
+            unset($this->participant[$key]);
         }
 
         return $this;

@@ -97,12 +97,20 @@ class EventController extends AbstractController
     */
     public function participate(Evenement $event, $id){
         $user = $this->getUser();
-        if(!$event->getParticipants()->contains($user)){
+
+        if($event->getParticipants()){
+            if (!in_array($user->getUsername(), $event->getParticipants())) 
+            { 
+                $event->addParticipant( $user );
+            }else{
+                $event->removeParticipant($user);
+            }
+        }else{
             $event->addParticipant( $user );
-            
-        } else {
-            $event->removeParticipant($user);
         }
+            
+        
+        
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($event);
         $entityManager->flush();

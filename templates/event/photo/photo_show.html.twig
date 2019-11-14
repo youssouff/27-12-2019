@@ -4,7 +4,7 @@
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 		<p class="size-text">Photo postée par:
-            {{photo.author.firstName}}</p>
+            {{photo.author}}</p>
 		</div>
 	</div>
 
@@ -14,7 +14,7 @@
 		<img class="img-event" src="../{{photo.url}}" alt="">
 	</div>
     </div>
-    <a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
+    <a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user.username in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
     </center>
 
     <hr>
@@ -37,7 +37,7 @@
 									<tbody>
 										<tr>{% for comment in photo.comments %}
 											
-											<td style="width : 20%">{{ comment.author.firstname}} :</td>
+											<td style="width : 20%">{{ comment.author}} :</td>
 											<td style="width : 60%">{{ comment.content}}</td>
 											<td>
 												{% if is_granted('ROLE_CESI') %}
@@ -48,7 +48,7 @@
 												{% endif %}
 												</td>
 												<td>
-												{% if comment.author == app.user or is_granted('ROLE_BDE') %}
+												{% if comment.author == app.user.username or is_granted('ROLE_BDE') %}
 													<div class="mx-auto">
 														{{ include('event/photo/_delete_comment_form.html.twig') }}
 													</div>
@@ -65,7 +65,7 @@
 				</div>
 				<hr>
 		{% endif %}
-		{% if app.user.name is defined %}
+		{% if app.user.username is defined %}
 			<div class="mrg-top text-center">
 				<p>Postez un commentaire: 
 				</p>

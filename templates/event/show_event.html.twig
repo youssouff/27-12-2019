@@ -37,7 +37,7 @@
 				<a style="width : 70%; margin-left : auto; margin-right : auto" {% if incoming == false %} {% else %} href="{{ path('participate', {'id': event.id}) }}" {% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top mb-3" role="button" aria-pressed="true">
 					{% if incoming == false %}Evenement passé
 					{% else %}
-						{% if event in app.user.evenements %}Je n'y participerai pas{% else %}Je participe
+						{% if app.user.username in event.participants %}Je n'y participerai pas{% else %}Je participe
 						{% endif %}
 					{% endif %}
 				</a>
@@ -60,7 +60,7 @@
 					{% for photo in event.photos %}
 						<div class="col text-center" style="margin: 20px 0 20px 0q">
 							<p>Photo postée par:
-								{{photo.author.firstName}}</p>
+								{{photo.author}}</p>
 
 							{% if is_granted('ROLE_CESI') %}
 								<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_photo', {'id': photo.id })}}">
@@ -70,7 +70,7 @@
 							{% endif %}
 
 
-							{% if photo.author == app.user or is_granted('ROLE_BDE') %}
+							{% if photo.author == app.user.username or is_granted('ROLE_BDE') %}
 								{{ include('event/_delete_photo_form.html.twig') }}
 							{% endif %}
 							<img class="img-event" src="{{ photo.url}}" alt="">
@@ -96,7 +96,7 @@
 				<hr>
 			{% endif %}
 			{% if app.user.name is defined %}
-				{% if event in app.user.evenements %}
+				{% if app.user.username in event.participants %}
 					<div class="mrg-top text-center">
 						<p>Vous avez participé a l'évènement ? Partagez vos photos :
 						</p>

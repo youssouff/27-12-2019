@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Security\ApiUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PhotoRepository")
@@ -29,8 +30,7 @@ class Photo
     private $comments;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="photos")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $author;
 
@@ -41,14 +41,13 @@ class Photo
     private $evenement;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="likedphotos")
+     * @ORM\Column(type="json")
      */
     private $users;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,14 +104,14 @@ class Photo
     }
 
 
-    public function getAuthor(): ?User
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    public function setAuthor(?ApiUser $author): self
     {
-        $this->author = $author;
+        $this->author = $author->getUsername();
 
         return $this;
     }
@@ -130,28 +129,33 @@ class Photo
     }
 
     /**
-     * @return Collection|User[]
+     * @return string[]
      */
-    public function getUsers(): Collection
+    public function getUsers()
     {
         return $this->users;
     }
 
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
+    public function addUser(ApiUser $user): self
+    {    
+        if($this->users){
+            if (!in_array($user->getUsername(), $this->users)) 
+            { 
+                $this->users[] = $user->getUsername();
+            }
+        }else{
+            $this->users[] = $user->getUsername();
         }
-
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeUser(ApiUser $user): self
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
+        if (($key = array_search($user->getUsername(), $this->users)) !== false) {
+            unset($this->users[$key]);
         }
 
         return $this;
+
     }
 }

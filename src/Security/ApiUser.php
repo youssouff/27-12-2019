@@ -8,6 +8,18 @@ class ApiUser implements UserInterface
 {
     private $email;
 
+    private $nom;
+
+    private $prenom;
+
+    private $telephone;
+
+    private $campus;
+
+    private $promotion;
+
+    private $age;
+
     private $roles = [];
 
     /**

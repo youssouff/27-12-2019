@@ -1,172 +1,184 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>
-        BDE Strasbourg | {% block title %}
-        {% endblock %}
-    </title>
-    <!--FontAwesome-->
-    <script src="https://kit.fontawesome.com/8190148fda.js" crossorigin="anonymous"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css')}}>
-    <!--Custom style sheet-->
-    <link rel="stylesheet" href={{ asset('css/custom.css')}}>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			BDE Strasbourg |
+			{% block title %}{% endblock %}
+		</title>
+		<!--FontAwesome-->
+		<script src="https://kit.fontawesome.com/8190148fda.js" crossorigin="anonymous"></script>
+		<!-- Bootstrap CSS -->
+		<link
+		rel="stylesheet" href={{ asset('css/bootstrap.min.css')}}>
+		<!--Custom style sheet-->
+		<link rel="stylesheet" href={{ asset('css/custom.css')}}> {% block stylesheets %}{% endblock %}
+		</head>
 
-    {% block stylesheets %}{% endblock %}
-</head>
+		<body>
 
-<body>
+			<header>
+				<div class="jumbotron jumbotron-fluid" id="banner"></div>
 
-    <header>
-        <div class="jumbotron jumbotron-fluid" id="banner"></div>
+				<nav class="navbar navbar-expand-lg navbar-dark" id="navbar" style="background-color : #27251f">
+					<a class="navbar-brand" href="/">BDE Strasbourg</a>
 
-        <nav class="navbar navbar-expand-lg navbar-dark" id="navbar" style="background-color : #27251f">
-            <a class="navbar-brand" href="/">BDE Strasbourg</a>
+					<div class="dropdown d-lg-none ml-auto">
+						<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							{% if app.user %}
+								<div class="text-secondary">{{ app.user.username }}</div>
+							{% else %}
+								<div class="text-secondary">Connexion</div>
+							{% endif %}
+						</a>
+						<div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
+							<div class="row">
+								{% if not app.user %}
+									<div class="col-12">
+										<a href="{{path('security_register')}}" class="btn btn-dark btn-block mt-1 mb-1">
+											Inscription
+										</a>
+									</div>
+								{% else %}
+									<div class="col-12">
+										<a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
+											Mon Profil
+										</a>
+									</div>
+								{% endif %}
+								{% if is_granted('ROLE_BDE')%}
+									<div class="col-12">
+										<a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
+											Administration
+										</a>
+									</div>
+									{% else %}
+								{% endif %}
+								<div class="col-12">
+									<a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}" class="btn btn-dark btn-block mt-1 mb-1">
+										{% if app.user %}
+											Déconnexion
+										{% else %}
+											Connexion
+										{% endif %}
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
 
-            <div class="dropdown d-lg-none ml-auto">
-                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {% if app.user %} <div class="text-secondary">{{ app.user.username }}</div> {% else %} <div
-                        class="text-secondary">Connexion</div> {% endif %}
-                </a>
-                <div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
-                    <div class="row">
-                        {% if not app.user %}
-                        <div class="col-12">
-                            <a href="{{path('security_register')}}" class="btn btn-dark btn-block mt-1 mb-1">
-                                Inscription
-                            </a>
-                        </div>
-                        {% else %}
-                        <div class="col-12">
-                            <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
-                                Mon Profil
-                            </a>
-                        </div>
-                        {% endif %}
-                        {% if is_granted('ROLE_BDE')%}
-                        <div class="col-12">
-                            <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
-                                Administration
-                            </a>
-                        </div>
-                        {% else %}
-                        {% endif %}
-                        <div class="col-12">
-                            <a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}"
-                                class="btn btn-dark btn-block mt-1 mb-1">
-                                {% if app.user %} Déconnexion {% else %} Connexion {% endif %}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNav">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link" href="{{path('index')}}">Accueil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{path('shop')}}">Boutique</a>
+							</li>
+							<div class="dropdown">
+								<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Évènements</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="{{path('event_later')}}">Évènements à venir</a>
+									<a class="dropdown-item" href="{{path('event_before')}}">Évènements passés</a>
+								</div>
+							</div>
+						</ul>
+						<div class="dropdown d-none d-lg-block ml-auto">
+							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								{% if app.user %}
+									<div class="text-secondary">{{ app.user.username }}</div>
+								{% else %}
+									<div class="text-secondary">Connexion</div>
+								{% endif %}
+							</a>
+							<div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
+								<div class="row">
+									{% if app.user %}
+										<div class="col-12">
+											<a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
+												Mon Profil
+											</a>
+										</div>
+									{% else %}
+										<div class="col-12">
+											<a href="{{path('security_register')}}" class="btn btn-dark btn-block mt-1 mb-1">
+												Inscription
+											</a>
+										</div>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('index')}}">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('shop')}}">Boutique</a>
-                    </li>
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Évènements</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{{path('event_later')}}">Évènements à venir</a>
-                            <a class="dropdown-item" href="{{path('event_before')}}">Évènements passés</a>
-                        </div>
-                    </div>
-                </ul>
-                <div class="dropdown d-none d-lg-block ml-auto">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        {% if app.user %} <div class="text-secondary">{{ app.user.username }}</div> {% else %} <div
-                            class="text-secondary">Connexion</div> {% endif %}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right p-2 mw-250" arialabelledby="account-button">
-                        <div class="row">
-                            {% if app.user %}
-                            <div class="col-12">
-                                <a href="{{path('security_account')}}" class="btn btn-dark btn-block mt-1 mb-1">
-                                    Mon Profil
-                                </a>
-                            </div>
-                            {% else %}
-                            <div class="col-12">
-                                <a href="{{path('security_register')}}" class="btn btn-dark btn-block mt-1 mb-1">
-                                    Inscription
-                                </a>
-                            </div>
+									{% endif %}
+									<div class="col-12">
+										<a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}" class="btn btn-dark btn-block mt-1 mb-1">
+											{% if app.user %}
+												Déconnexion
+											{% else %}
+												Connexion
+											{% endif %}
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</header>
 
-                            {% endif %}
-                            <div class="col-12">
-                                <a href="{% if app.user %}{{path('security_logout')}}{% else %}{{path('security_login')}}{% endif %}"
-                                    class="btn btn-dark btn-block mt-1 mb-1">
-                                    {% if app.user %} Déconnexion {% else %} Connexion {% endif %}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+			{% block body %}{% endblock %}
 
-    {% block body %}{% endblock %}
+			<footer class="sticky-bottom">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm text-center">
+							<p class="">
+								<h4 id="list-item-1">Informations</h4>
+									<li>BDE CESI école d'ingénieur</li>
+									<li>Campus Strasbourg</li>
+									<li>2 Allée des Foulons, 67380</li>
+									<li>Strasbourg Lingolsheim</li>
+							</p>
+						</div>
+						<div class="col-sm text-center">
+							<p class="">
+								<h4 class="">Suivez nous sur nos réseaux:</h4>
+								<a target="_blank" href="https://www.facebook.com/lucas.bieger">
+									<i class="fab fa-facebook-square"></i>
+								</a>
+								<a target="_blank" href="https://twitter.com/Lucas_Bieger">
+									<i class="fab fa-twitter-square"></i>
+								</a>
+								<a target="_blank" href="https://www.youtube.com/user/lucasbibi1">
+									<i class="fab fa-instagram-square"></i>
+								</a>
+								<a target="_blank" href="https://www.instagram.com/lucas.bieger/?hl=fr">
+									<i class="fab fa-youtube-square"></i>
+								</a>
 
-    <footer class="sticky-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm text-center">
-                    <p class="">
-                        <h4 id="list-item-1">Informations</h4>
-
-                    </p>
-                </div>
-                <div class="col-sm text-center">
-                    <p class="">
-                        <h4 class="">Suivez nous sur :</h4>
-                        <a target="_blank"  href="https://www.facebook.com/lucas.bieger" ><i class="fab fa-facebook-f"></i></a>
-                        <a target="_blank"  href="https://twitter.com/Lucas_Bieger" ><i class="fab fa-twitter"></i></a>
-                        <a target="_blank"  href="https://www.youtube.com/user/lucasbibi1" ><i class="fab fa-instagram"></i></a>
-                        <a target="_blank"  href="https://www.instagram.com/lucas.bieger/?hl=fr" ><i class="fab fa-youtube"></i></a>
-
-                    </p>
-                </div>
-                <div class="col-sm text-center">
-                    <p class="">
-                        <h4 class="">Informations légales </h4>
-                        <ul class="list-unstyled">
-                            <li><a href="{{ path('privacy_policy') }}">Politique de confidentialité</a></li>
-                        </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+							</p>
+						</div>
+						<div class="col-sm text-center">
+							<p class="">
+								<h4 class="">Informations légales
+								</h4>
+								<ul class="list-unstyled">
+									<li>
+										<a href="{{ path('privacy_policy') }}">Politique de confidentialité</a>
+									</li>
+								</ul>
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
 
 
+			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+			{% block javascripts %}{% endblock %}
+		</body>
 
-
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-    {% block javascripts %}{% endblock %}
-</body>
-
-</html>
+	</html>

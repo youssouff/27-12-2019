@@ -23,21 +23,19 @@
 			{% endif %}
 
 			<p class="size-text">Connectez-vous</p>
-			
-        <form action=" {{ path('security_login') }}" class="form-signin w-50 mx-auto" method="post">
-            <input placeholder="Email" required name="_username" type="text" class="bordered form-control mb-1"></input>
-            <input placeholder="Password" required name="_password" type="password" class="bordered form-control mb-2"></input>
 
-            <button type="submit" class="btn btn-dark btn-block colored bordered">
-                Se connecter
-            </button>
+			<form action=" {{ path('security_login') }}" class="form-signin w-50 mx-auto" method="post">
+				<input placeholder="Email" required name="_username" type="text" class="bordered form-control mb-1"></input>
+			<input placeholder="Password" required name="_password" type="password" class="bordered form-control mb-2"></input>
 
-            <div class="mt-4">
-                <span class="meta">Vous n'avez pas encore de compte CESI ?</span>
-                <br/>
-                <a href="{{path('security_register')}}">Inscrivez-vous</a>
-            </div>
-	    </form>
-    </div>
-</div>
-{% endblock %}
+		<button type="submit" class="btn btn-dark btn-block colored bordered">
+			Se connecter
+		</button>
+
+		<div class="mt-4">
+			<span class="meta">Vous n'avez pas encore de compte CESI ?</span>
+			<br/>
+			<a href="{{path('security_register')}}">Inscrivez-vous</a>
+		</div>
+	</form>
+</div></div>{% endblock %}

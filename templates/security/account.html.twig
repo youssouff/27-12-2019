@@ -1,51 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Compte{% endblock %}
+{% block title %}Mon Compte
+{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-<div class="row">
-    <div class="col-md mt-3 mb-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Mon compte</h5><br>
-                <p>
-                    Vous trouverez ici toutes vos informations personnelles :
-                </p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Nom: {{app.user.name}}</li>
-                <li class="list-group-item">Prenom: {{app.user.firstName}}</li>
-                <li class="list-group-item">Email: {{app.user.email}}</li>
-                <li class="list-group-item">Centre: {{app.user.center.denomination}}</li>
-            </ul>
-            
-        </div>
-    </div>
-    <div class="col-md">
-        <div class="card mt-3 mb-3">
-            <div class="card-body">
-                <h5 class="card-title text-center">Administration</h5><br>
-                <p>
-                    Voici toutes les actions que vous pouvez effectuer:
-                </p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <a href="" class="btn btn-dark btn-block">Supprimer mon compte (disabled)</a>
-                </li>
-                {% if is_granted('ROLE_BDE')%}
-                <li class="list-group-item">
-                    <a href="{{path('evenement_index')}}" class="btn btn-dark btn-block">Gérer les évenements</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="{{path('goodies_index')}}" class="btn btn-dark btn-block">Gérer les produits</a>
-                </li>
-                {% endif %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md mt-3 mb-3">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title text-center">Mon compte</h5><br>
+						<p>
+							Vous trouverez ici toutes vos informations personnelles :
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Nom:
+							{{app.user.name}}</li>
+						<li class="list-group-item">Prenom:
+							{{app.user.firstName}}</li>
+						<li class="list-group-item">Email:
+							{{app.user.email}}</li>
+						<li class="list-group-item">Centre:
+							{{app.user.center.denomination}}</li>
+					</ul>
 
-            </ul>
-        </div>
-    </div>
-</div>
-</div>
+				</div>
+			</div>
+			<div class="col-md">
+				<div class="card mt-3 mb-3">
+					<div class="card-body">
+						<h5 class="card-title text-center">Administration</h5><br>
+						<p>
+							Voici toutes les actions que vous pouvez effectuer:
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<a href="" class="btn btn-dark btn-block">Supprimer mon compte (disabled)</a>
+						</li>
+						{% if is_granted('ROLE_BDE')%}
+							<li class="list-group-item">
+								<a href="{{path('evenement_index')}}" class="btn btn-dark btn-block">Gérer les évenements</a>
+							</li>
+							<li class="list-group-item">
+								<a href="{{path('goodies_index')}}" class="btn btn-dark btn-block">Gérer les produits</a>
+							</li>
+						{% endif %}
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

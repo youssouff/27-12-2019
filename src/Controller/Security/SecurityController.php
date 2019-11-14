@@ -15,26 +15,26 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
-    
+
     /**
      * @Route("/register", name="security_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, Api $api){
-        $user = new ApiUser(null,);
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, Api $api)
+    {
+        $user = new ApiUser();
         $form = $this->createForm(ApiUserType::class, $user);
-        
+
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->setPassword( $encoder->encodePassword($user, $user->getPassword()) );
+            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
             $user->setRoles(["ROLE_USER"]);
             $user->setCampus($form['campus']->getData()->getDenomination());
 
             $api->register($user);
 
             return $this->redirectToRoute('security_login');
-            
         }
 
         return $this->render('security/register.html.twig', [
@@ -48,8 +48,8 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils)
     {
         $error = $authenticationUtils->getLastAuthenticationError();
-        
-        return $this->render('security/login.html.twig',[
+
+        return $this->render('security/login.html.twig', [
             'error' => $error,
         ]);
     }
@@ -57,8 +57,8 @@ class SecurityController extends AbstractController
     /**
      * @Route("/account", name="security_account")
      */
-    public function account(){
+    public function account()
+    {
         return $this->render('security/account.html.twig');
     }
-
 }

@@ -45,7 +45,6 @@ class Api
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
-
         $client->request('POST', 'http://localhost:8080/users/newUser/', [
             'headers' => ['Content-type' => 'application/json'],
             'body' => $serializer->serialize($user, 'json')

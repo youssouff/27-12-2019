@@ -28,10 +28,9 @@ footer{
 .background{
     background-image: url("../appdata/background.jpg");
     width: 80%;
-    height: 600px;  
-    position: absolute;
+    height: 600px;
     background-repeat: no-repeat;
-    margin-left : 305px;
+    margin-bottom: 100px;
 }
 
 .titleindex{
@@ -157,6 +156,13 @@ hr{
     width: 40%;
 }
 
+.bdr-card{
+    border-width : 3px;
+    border-style: solid;
+    border-color:  black;
+    height : 150px;
+}
+
 
   .size-border-event{
       width: 500px;
@@ -239,3 +245,6 @@ p.size-text-shop{
 }
 
 
+.color-link{
+    color :#69b3e7;
+}

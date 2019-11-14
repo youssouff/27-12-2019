@@ -127,7 +127,9 @@ class EventController extends AbstractController
     * @Route("/event/{id}/report", name="report_event")
     */
     public function report(Evenement $event, \Swift_Mailer $mailer){
+        
         $user = $this->getUser();
+
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
             ->setTo('montemonttheophile@gmail.com')//the bde's mail

@@ -103,7 +103,7 @@ class PhotoController extends AbstractController
     public function report_comment(Comment $comment, \Swift_Mailer $mailer, Api $api){
         $user = $this->getUser();
         
-        $author = $api->getUserFullName($comment->getAuthor()->getId());
+        $author = $comment->getAuthor();
 
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
@@ -150,9 +150,11 @@ class PhotoController extends AbstractController
     */
     public function report_photo(Photo $photo, \Swift_Mailer $mailer, Api $api){
 
-        $user = $this->getUser();
         $id = $photo->getEvenement()->getId();
-        $author = $api->getUserFullName($photo->getAuthor()->getId());
+
+        $user = $this->getUser();
+        $author = $photo->getAuthor();
+
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
             ->setTo('montemonttheophile@gmail.com')//the bde's mail

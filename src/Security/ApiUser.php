@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ApiUser implements UserInterface
 {
-    function initialize(int $id, string $email, string $name, string $firstName, string $telephone, string $campus, int $promotion, int $age, string $roles, string $password)
+    function initialize(int $id, string $email, string $name, string $firstName, string $telephone, string $campus, int $promotion, int $age, array $roles, string $password)
     {
         $this->id = $id;
         $this->email = $email;
@@ -16,7 +16,7 @@ class ApiUser implements UserInterface
         $this->campus = $campus;
         $this->promotion = $promotion;
         $this->age = $age;
-        $this->role = $roles;
+        $this->roles = $roles;
         $this->password = $password;
     }
 
@@ -155,7 +155,7 @@ class ApiUser implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        //guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);

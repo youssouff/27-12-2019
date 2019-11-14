@@ -11,8 +11,9 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 class UserProvider implements UserProviderInterface
 {
     private $api;
-    function __construct(Api $api){
-        $this-> api= $api;
+    function __construct(Api $api)
+    {
+        $this->api = $api;
     }
     /**
      * Symfony calls this method if you use features like switch_user
@@ -33,9 +34,9 @@ class UserProvider implements UserProviderInterface
         // method in your User class.
 
         //username is the mail
-        return $api->getUserByMail($username);
-        
-        throw new \Exception('TODO: fill in loadUserByUsername() inside '.__FILE__);
+        return $this->api->getUserByMail($username);
+
+        throw new \Exception('TODO: fill in loadUserByUsername() inside ' . __FILE__);
     }
 
     /**
@@ -59,7 +60,7 @@ class UserProvider implements UserProviderInterface
 
         // Return a User object after making sure its data is "fresh".
         // Or throw a UsernameNotFoundException if the user no longer exists.
-        throw new \Exception('TODO: fill in refreshUser() inside '.__FILE__);
+        throw new \Exception('TODO: fill in refreshUser() inside ' . __FILE__);
     }
 
     /**

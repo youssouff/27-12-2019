@@ -6,6 +6,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ApiUser implements UserInterface
 {
+    function __construct(int $id, string $email, string $name, string $firstName, string $telephone, string $campus, int $promotion, int $age, string $roles, string $password)
+    {
+        $this->id = $id;
+        $this->email = $email;
+        $this->name = $name;
+        $this->firstName = $firstName;
+        $this->telephone = $telephone;
+        $this->campus = $campus;
+        $this->promotion = $promotion;
+        $this->age = $age;
+        $this->role = $roles;
+        $this->password = $password;
+    }
+
+    private $id;
+
     private $email;
 
     private $name;
@@ -26,6 +42,18 @@ class ApiUser implements UserInterface
      * @var string The hashed password
      */
     private $password;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function getName(): ?string
     {

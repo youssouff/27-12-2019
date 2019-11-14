@@ -13,20 +13,6 @@
 		</div>
 	</div>
 
-<<<<<<< Updated upstream
-<div class="bdr-login w-50 mx-auto mb-5">
-    <div class="m-4 text-center">
-
-        <p class="size-text">Inscrivez-vous</p>
-        {{ form_start(form) }}
-
-        <div class="form">
-            {{ form_errors(form.email) }}
-            {{ form_errors(form.password) }}
-            <div class="row">
-                <div class="col-6 mb-3 mt-3">
-                    {{ form_widget(form.name, {'attr':
-=======
 	<div class="bdr-login w-50 mx-auto mb-5">
 		<div class="m-4 text-center">
 
@@ -39,113 +25,69 @@
 				<div class="row">
 					<div class="col-6 mb-3 mt-3">
 						{{ form_widget(form.name, {'attr':
->>>>>>> Stashed changes
                         {
                         'placeholder' : "Nom"
                         }
                     }) 
                 }}
-<<<<<<< Updated upstream
-                </div>
-                <div class="col-6 mb-3 mt-3">
-                    {{ form_widget(form.firstName, {'attr':
-=======
 					</div>
 					<div class="col-6 mb-3 mt-3">
 						{{ form_widget(form.firstName, {'attr':
->>>>>>> Stashed changes
                         {
                         'placeholder' : "Prénom"
                         }
                     }) 
                 }}
-<<<<<<< Updated upstream
-                </div>
-                <div class="col-6 mb-3">
-                    {{ form_widget(form.password, {'attr':
-=======
 					</div>
 					<div class="col-6 mb-3">
 						{{ form_widget(form.password, {'attr':
->>>>>>> Stashed changes
                         {
                         'placeholder' : "Mots de passe"
                         }
                     }) 
                 }}
-<<<<<<< Updated upstream
-                </div>
-                <div class="col-6 mb-3">
-                    {{ form_widget(form.email, {'attr':
-=======
 					</div>
 					<div class="col-6 mb-3">
 						{{ form_widget(form.email, {'attr':
->>>>>>> Stashed changes
                     {
                     'placeholder' : "Email"
                     }
                 }) 
             }}
-<<<<<<< Updated upstream
-                </div>
-                <div class="col-3 mx-auto">
-                    {{ form_widget(form.campus, {'attr':
+					</div>
+					<div class="col-3 mx-auto">
+						{{ form_widget(form.campus, {'attr':
                     {
                     'placeholder' : "Centre"
                     }
                     }) 
                     }}
-                </div>
-                <div class="col-6 mb-3 mt-3">
-                    {{ form_widget(form.telephone, {'attr':
+					</div>
+					<div class="col-6 mb-3 mt-3">
+						{{ form_widget(form.telephone, {'attr':
                             {
                             'placeholder' : "Téléphone"
                             }
                         }) 
                     }}
-                </div>
-                <div class="col-6 mb-3 mt-3">
-                    {{ form_widget(form.promotion, {'attr':
+					</div>
+					<div class="col-6 mb-3 mt-3">
+						{{ form_widget(form.promotion, {'attr':
                             {
                             'placeholder' : "Promotion (Année d'entrée)"
                             }
                         }) 
                     }}
-                </div>
-                <div class="col-6 mb-3 mt-3">
-                    {{ form_widget(form.age, {'attr':
+					</div>
+					<div class="col-6 mb-3 mt-3">
+						{{ form_widget(form.age, {'attr':
                             {
                             'placeholder' : "Age"
                             }
                         }) 
                     }}
-                </div>
-                
-            </div>
+					</div>
 
-            <button type="submit" class="btn btn-dark btn-block mt-4">
-                S'inscrire
-            </button>
-        </div>
-        <div class="mt-4">
-            <span class="meta">Vos comptes avez déja un compte ? </span>
-            <br />
-            <a href="{{path('security_login')}}">Connectez-vous</a>
-        </div>
-        {{ form_end(form) }}
-    </div>
-</div>
-=======
-					</div>
-					<div class="col-3 mx-auto">
-						{{ form_widget(form.center, {'attr':
-                    {
-                    'placeholder' : "Centre"
-                    }
-                }) 
-            }}
-					</div>
 				</div>
 
 				<button type="submit" class="btn btn-dark btn-block mt-4">
@@ -161,6 +103,5 @@
 			{{ form_end(form) }}
 		</div>
 	</div>
->>>>>>> Stashed changes
 
 {% endblock %}

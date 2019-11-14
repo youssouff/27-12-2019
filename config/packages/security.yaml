@@ -1,11 +1,17 @@
 security:
     encoders:
+        App\Entity\User:
+            algorithm: auto
         App\Security\ApiUser:
             algorithm: auto
 
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: email
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             id: App\Security\UserProvider
@@ -17,7 +23,7 @@ security:
         main:
             anonymous: true
 
-            provider: app_user_provider
+            provider: in_database
 
             form_login:
                 login_path: security_login
@@ -37,4 +43,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: ROLE_BDE }
+         - { path: ^/shop/checkout, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }

@@ -17,13 +17,13 @@
    
     {% if events %} 
 
-<div class="" style="margin-top : 100px; margin-bottom : 100px">
+<div class="mrg-t-b-100">
 <div class="row">    
     {% for event in events %}
         
 
 
-    <div class="col-sm2" style="margin: 0 auto;">
+    <div class="col-sm2 mx-auto">
     <div class="card card-event" style="width: 18rem; background-color: #8a8d8f;">
         {% if event.filename %} 
         <img class="img-card" src="../appdata/event/{{ event.filename }}" class="card-img-top" alt="...">
@@ -34,8 +34,8 @@
         <div class="card-body">
             <h5 class="card-title">{{ event.title }}</h5>
             <p class="card-text">{{ event.description | raw }}</p>
-            <li class="list-group-item" style="background-color : #b1b3b3; position:absolute; bottom: 60px; left: 0 ; right: 0 ;">Datant de: {{ event.date | date ('d/m/Y à H:i')}}</li>
-            <a href=" {{ path('show_event', {'id': event.id }) }}" class="btn btn-secondary" style="position:absolute; bottom: 10px; left: 0 ; right: 0 ;">En savoir plus</a>
+            <li class="list-group-item mx-auto" style="background-color : #b1b3b3; position:absolute; bottom: 60px;">Datant de: {{ event.date | date ('d/m/Y à H:i')}}</li>
+            <a href=" {{ path('show_event', {'id': event.id }) }}" class="btn btn-secondary mx-auto" style="position:absolute; bottom: 10px;">En savoir plus</a>
         </div>
     </div>
     </div>

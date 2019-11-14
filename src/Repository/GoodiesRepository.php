@@ -21,7 +21,21 @@ class GoodiesRepository extends ServiceEntityRepository
         parent::__construct($registry, Goodies::class);
     }
 
-
+     /**
+      * @return Goodies[] Returns an array of Goodies objects
+      */
+    
+    public function findBestSeller($value)
+    {
+        return $this->createQueryBuilder('g')
+            ->where('g.quantitySold > 0')
+            ->orderBy('g.quantitySold', 'DESC')
+            ->setMaxResults($value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
     
 
 

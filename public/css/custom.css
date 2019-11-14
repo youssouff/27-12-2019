@@ -214,3 +214,27 @@ p.size-text-shop{
     border-radius:10px
   }
 
+.delete-button{
+    background-color : #e4002b; 
+    color: white;
+}
+
+.mrg-l-100{
+    margin-left: 100%;
+}
+
+.mrg-l-80{
+    margin-left: 80%;
+}
+
+.mrg-t-b-100{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.event-button{
+    width : 70%; 
+    margin-left : auto; 
+    margin-right : auto
+}
+

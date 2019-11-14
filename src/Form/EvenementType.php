@@ -19,7 +19,7 @@ class EvenementType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('imageFile', FileType::class, [
-                'required' => 'false'
+                'required' => false
             ])
             ->add('price', IntegerType::class, [
                 'required' => false

@@ -41,7 +41,7 @@ class Photo
     private $evenement;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="json", nullable=true)|null
      */
     private $users;
 
@@ -129,7 +129,7 @@ class Photo
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
     public function getUsers()
     {

@@ -49,9 +49,9 @@ class PhotoController extends AbstractController
     * @Route("/event/photo/{id}/like", name="like_photo")
     */
     public function like_photo(Photo $photo, $id){
-
+        //gets the actual user
         $user = $this->getUser();
-
+        //likes or unlike it
         if($photo->getUsers()){
             if (!in_array($user->getUsername(), $photo->getUsers())) 
             { 
@@ -62,12 +62,12 @@ class PhotoController extends AbstractController
         }else{
             $photo->addUser( $user );
         }
-
+        //saves the photo's state in database
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($photo);
         $entityManager->flush();
         
-
+        //redirect to photo show route
         return $this->redirectToRoute('photo_show', [
             'photo' => $photo,
             'id' => $id

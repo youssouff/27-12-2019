@@ -31,8 +31,8 @@
 								{% endif %}
 								<div class="card-body">
 									<h5 class="card-title">{{ event.title }}</h5>
-									<p class="card-text">{{ event.description | raw }}</p>
-									<li class="list-group-item mx-auto w-100" style="background-color : #b1b3b3; bottom: 0px;">Datant de:
+									<p class="card-text h-10 text-truncate">{{ event.description | raw }}</p>
+									<li class="list-group-item mx-auto w-100" style="background-color : #b1b3b3;">Datant de:
 										{{ event.date | date ('d/m/Y à H:i')}}</li>
 									<a href=" {{ path('show_event', {'id': event.id }) }}" class="btn btn-secondary mx-auto" style="position:absolute; bottom: 10px;">En savoir plus</a>
 								</div>

@@ -195,14 +195,13 @@ p.size-text-shop{
   }
 
   .img-event{
-      max-width : 500px;
-      min-width : 500px;
+      max-width : 50%;
+      min-width : 50%;
   }
 
   .img-show-event{
-    max-width : 700px;
-    min-width : 700px;
-    max-height: 500px;
+    width : auto;
+    max-height: 550px;
 }
 
   .img-card{
@@ -252,4 +251,12 @@ p.size-text-shop{
 
 .color-link{
     color :#ffffff;
+}
+
+.color-alert{
+    background-color : #69b3e7;
+}
+
+.color-panier{
+    background-color : #006f62;
 }

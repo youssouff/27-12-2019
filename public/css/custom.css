@@ -264,3 +264,7 @@ p.size-text-shop{
 .color-panier{
     background-color : #006f62;
 }
+.preview{
+    height: 100px;
+    overflow: hidden;
+}

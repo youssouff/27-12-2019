@@ -13,11 +13,10 @@
 
 	<div class="container-fluid">
 
-		<div class="alert alert-style color-alert mx-auto text-center" role="alert">
-			Retrouve nos 3 meilleurs ventes
-		</div>
-
 		{% if bestSeller is not empty %}
+			<div class="alert alert-style color-alert mx-auto text-center" role="alert">
+				Retrouve nos meilleurs ventes
+			</div>
 			<div class="row">
 				{% for item in bestSeller %}
 					<div class="col-md mb-2 mt-3">
@@ -35,8 +34,12 @@
 
 								<div class="meta">Categorie :
 									{{ item.category.name }}</div>
-								<p>Description :
-									{{ item.description }}</p><br>
+								
+								<div class="preview">
+									Description :
+									{{ item.description }}
+								</div>
+									<br>
 
 								<div style="margin-left: 55%">
 									<a href="{{path('shop_show', {'id': item.id }) }}" class="btn btn-dark">
@@ -97,8 +100,8 @@
 						<div class="card-body">
 							<div class="meta">Categorie :
 								{{ goody.category.name }}</div>
-							<p>Description :
-								{{ goody.description }}</p><br>
+							<div class="preview">Description :
+								{{ goody.description }}</div>
 
 							<div style="margin-left: 55%">
 								<a href="{{path('shop_show', {'id': goody.id }) }}" class="btn btn-dark">

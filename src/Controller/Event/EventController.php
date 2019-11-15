@@ -168,7 +168,7 @@ class EventController extends AbstractController
         
 
     $html2pdf = new Html2Pdf();
-    $html2pdf->writeHTML('<h1>Participants : </h1>'.implode(" ",$event->getParticipants()));
+    $html2pdf->writeHTML('<h1>Participants : </h1>'.implode("<br>",$event->getParticipants()));
     $html2pdf->output();
 
         return $this->redirectToRoute('show_event', [

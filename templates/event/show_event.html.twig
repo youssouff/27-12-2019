@@ -76,8 +76,10 @@
 							</div>
 
 							<div class="col">
+							{% if app.user %}
 							{% if photo.author == app.user.username or is_granted('ROLE_BDE') %}
 								{{ include('event/_delete_photo_form.html.twig') }}
+							{% endif %}
 							{% endif %}
 							</div>
 

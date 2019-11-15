@@ -13,7 +13,7 @@
 
 	<div class="container-fluid">
 
-		<div class="alert alert-style mx-auto text-center" role="alert">
+		<div class="alert alert-style color-alert mx-auto text-center" role="alert"></div>
 			Retrouve nos 3 meilleurs ventes
 		</div>
 
@@ -42,8 +42,7 @@
 									<a href="{{path('shop_show', {'id': item.id }) }}" class="btn btn-dark">
 										Détails</a>
 									<a href="{{path('cart_add', {'id': item.id }) }}" class="btn" style="background-color : #e4002b; color : white;">
-										Ajouter au
-										                            panier</a>
+										Ajouter au panier</a>
 								</div>
 
 							</div>
@@ -73,7 +72,7 @@
 			</div>
 			<div class="col-2 col-md-2 mx-auto">
 				<button type="submit" class="btn btn-dark btn-block">Rechercher</button>
-				<a href="{{path('shop_checkout')}}" class="btn btn-dark btn-block">Voir le Panier</a>
+				<a href="{{path('shop_checkout')}}" class="btn btn-dark btn-block color-panier">Voir le Panier</a>
 			</div>
 		</div>
 		{{form_end(form)}}

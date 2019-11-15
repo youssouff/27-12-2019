@@ -140,8 +140,7 @@ hr{
     border-width : 2px;
     border-style: solid;
     border-color:  lightslategrey;
-    background-color : #F2F2F2; 
-    width: 50%;
+    background-color : #F2F2F2;
 }
 
 .bdr-comment2{
@@ -166,6 +165,13 @@ hr{
     border-style: solid;
     border-color:  black;
     height : 150px;
+}
+
+.bdr-shop{
+    border-width : 3px;
+    border-style: solid;
+    border-color:  black;
+    height : 300px;
 }
 
 

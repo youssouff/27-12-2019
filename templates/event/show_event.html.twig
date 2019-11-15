@@ -11,7 +11,7 @@
 	<center>
 		<div class="row mx-auto">
 			<div class="mx-auto">
-				<img class="img-show-event" src="../appdata/event/{{ event.filename }}" alt="" style="text-align: center;">
+				<img class="img-show-event mb-2" src="../appdata/event/{{ event.filename }}" alt="" style="text-align: center;">
 			</div>
 
 			<div class="bdr-event size-border-event mx-auto" style="margin-left : 50px; ">
@@ -51,33 +51,43 @@
 		<div class="mt-5">
 			{% if event.photos is empty %}
 				<center>
-					<div class="alert alert-dark text-center " role="alert" style="width : 400px;">
+					<div class="alert alert-dark text-center w-25" role="alert">
 						Il n'y a pas de photos pour cet évenement.
 					</div>
 				</center>
 			{% else %}
-				<div class="border border-dark mx-auto w-50">
+				<div class="border border-dark mx-auto w-75">
 					{% for photo in event.photos %}
 						<div class="col text-center" style="margin: 20px 0 20px 0q">
 							<p>Photo postée par:
 								{{photo.author}}</p>
 
+
+								<img class="img-event mb-4" src="{{ photo.url}}" alt="">
+
+							<div class="row">
+							<div class="col">
 							{% if is_granted('ROLE_CESI') %}
 								<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_photo', {'id': photo.id })}}">
 									<i class="fas fa-flag"></i>
 									Signaler
 								</a>
 							{% endif %}
+							</div>
 
-
+							<div class="col">
 							{% if photo.author == app.user.username or is_granted('ROLE_BDE') %}
 								{{ include('event/_delete_photo_form.html.twig') }}
 							{% endif %}
-							<img class="img-event" src="{{ photo.url}}" alt="">
+							</div>
+
+							<div class="col">
 							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id })}}">
 								<i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i>
 								{{ photo.users | length }}
 							</a>
+							</div>
+							</div>
 
 							<div class="commentaires">
 								<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">Il y a

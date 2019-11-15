@@ -6,18 +6,35 @@
 
 {% block body %}
 
-	<h1>Nom :
-		{{ goody.name }}</h1>
-
-	Description
-	{{ goody.description }}
-	Price
-	{{ goody.price }}
-	category
-	{{ goody.category.name }}
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">{{ goody.name }}</h1>
+			<p class="lead">{{ goody.description }}</p>
+		</div>
+	</div>
 
 
-	<a href="{{ path('shop') }}">Retour à la boutique</a>
+	<div class="bdr-shop mx-auto w-50">
+		<div class="row">
+
+			<div class="col mt-5 ml-3" style="height : 100%">
+				Prix :
+				{{ goody.price }}€
+				<br><br>
+				Catégorie :
+				{{ goody.category.name }}
+				<br><br><br>
+			</div>
+			<div class="col mt-3">
+				<div style="background-color : #8a8d8f; height : 100%; width : 75%"></div>
+			</div>
+			
+		</div>
+		<a href="{{path('cart_add', {'id': goody.id }) }}" class="btn delete-button mb-5 mt-5 mrg-l-80">Ajouter au panier</a>
+	</div>
+
+	<a href="{{ path('shop') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à la boutique</a>
+	
 
 
 {% endblock %}

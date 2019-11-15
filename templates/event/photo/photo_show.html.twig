@@ -11,7 +11,7 @@
     <center>
     <div class="row">
 	<div class="mx-auto">
-		<img class="img-event" src="../{{photo.url}}" alt="">
+		<img class="img-show-event" src="../{{photo.url}}" alt="">
 	</div>
     </div>
     <a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user.username in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
@@ -28,7 +28,7 @@
         </center>
 		{% else %}
 			<p class="size-text text-center">Commentaires</p>
-				<div class="bdr-comment w-50 mx-auto" >
+				<div class="bdr-comment mx-auto" >
 
                     <div class="commentaires" >
                     
@@ -37,8 +37,8 @@
 									<tbody>
 										<tr>{% for comment in photo.comments %}
 											
-											<td style="width : 20%">{{ comment.author }}:</td>
-											<td style="width : 60%">{{ comment.content }}</td>
+											<td>{{ comment.author }}:</td>
+											<td >{{ comment.content }}</td>
 											<td>
 												{% if is_granted('ROLE_CESI') %}
 													<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_comment', {'id': comment.id })}}">
@@ -46,10 +46,8 @@
 														Signaler
 													</a>
 												{% endif %}
-												</td>
-												<td>
 												{% if comment.author == app.user.username or is_granted('ROLE_BDE') %}
-													<div class="mx-auto">
+													<div class="mx-auto text-center">
 														{{ include('event/photo/_delete_comment_form.html.twig') }}
 													</div>
 												{% endif %}

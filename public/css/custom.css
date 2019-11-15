@@ -158,7 +158,6 @@ hr{
     border-style: solid;
     border-color:  lightslategrey;
     background-color : #F2F2F2; 
-    width: 40%;
 }
 
 .bdr-card{
@@ -168,6 +167,12 @@ hr{
     height : 150px;
 }
 
+.bdr-shop{
+    border-width : 3px;
+    border-style: solid;
+    border-color:  black;
+    height : 300px;
+}
 
   .size-border-event{
       width: 500px;

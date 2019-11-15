@@ -122,11 +122,13 @@
     </header>
 
     {% block body %}{% endblock %}
-    <div id="cookiewarn" class=" fixed-bottom" style="display: block;">
+    <div id="cookiewarn" class=" fixed-bottom " style="display: block;">
         <div class="" style="height:20%; width: 100%; text-align: center; position:relative; background-color:white;">
-            <p>test</p>
-            <button onclick="HideCookieWarn();">ok</button>
-            <button onclick="goPrev()">cancel</button>
+            <div class="border" style="border-color : black">
+            <p>Nous respectons votre vie privée. Nous utilisons des données non sensibles comme des cookies ou des identifiants électroniques pour conserver vos données de navigation entre vos visites et vous offir une meilleur expérience utilisateur. </p>
+            <button class="btn btn-dark" onclick="HideCookieWarn();">Accepter</button>
+            <button class="btn btn-dark" onclick="goPrev()">Refuser</button>
+            </div>
         </div>
     </div>
 

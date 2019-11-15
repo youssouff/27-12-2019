@@ -164,19 +164,7 @@ class EventController extends AbstractController
      */
     public function download_participants(Evenement $event,$id){
 
-        $normalizer = new ObjectNormalizer();
-        $encoder = new JsonEncoder();
-        $serializer = new Serializer([$normalizer], [$encoder]);
         //not working at this moment
-        $users = [];
-        $pts = $event->getParticipants()->toArray();
-        foreach($pts as $key => $v){
-            $pts[$key] = (array) $key;
-        }
-
-
-        var_dump(gettype($pts[0]));
-
 
         return $this->redirectToRoute('show_event', [
             'id' => $id,

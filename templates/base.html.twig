@@ -17,7 +17,7 @@
     {% block stylesheets %}{% endblock %}
 </head>
 
-<body>
+<body onload="checkCookie();">
 
     <header>
         <div class="jumbotron jumbotron-fluid" id="banner"></div>
@@ -71,6 +71,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <button onclick="showalert();">showalert</button>
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('index')}}"><div class="color-link">Accueil</div></a>
                     </li>
@@ -122,7 +123,67 @@
     </header>
 
     {% block body %}{% endblock %}
+    <div id="cookiewarn" class=" fixed-bottom" style="display: block;">
+        <div class="" style="height:20%; width: 100%; text-align: center; position:relative; background-color:white;">
+            <p>test</p>
+            <button onclick="HideCookieWarn();">ok</button>
+            <button onclick="goPrev()">cancel</button>
+        </div>
+    </div>
 
+    <script>
+        function isCookie(){
+            
+
+        }
+        function HideCookieWarn() {
+            var x = document.getElementById("cookiewarn");
+                if (x.style.display === "block") {
+                        x.style.display = "none";  
+                        isCookie = "true";
+                        if (isCookie != "" && isCookie != null) {
+                        setCookie("popup", isCookie, 365);
+            }                      
+                    } 
+                    
+            }
+        function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+            
+
+        function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+        }
+        }
+        return "";
+        }
+        function checkCookie() {
+        var isCookie = getCookie("popup");
+        var x = document.getElementById("cookiewarn");
+              
+                        
+        if (isCookie != "") {
+            x.style.display = "none";     
+        } 
+        }
+        
+        function goPrev()
+        {
+            window.history.back();
+        }
+    </script>
     <footer class="sticky-bottom">
         <div class="container">
             <div class="row">

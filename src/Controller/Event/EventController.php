@@ -2,6 +2,7 @@
 
 namespace App\Controller\Event;
 
+use Spipu\Html2Pdf\Html2Pdf;
 use \ZipAchive;
 use App\Service\Api;
 use App\Entity\Photo;
@@ -164,7 +165,11 @@ class EventController extends AbstractController
      */
     public function download_participants(Evenement $event,$id){
 
-        //not working at this moment
+        
+
+    $html2pdf = new Html2Pdf();
+    $html2pdf->writeHTML('<h1>Participants : </h1>'.implode(" ",$event->getParticipants()));
+    $html2pdf->output();
 
         return $this->redirectToRoute('show_event', [
             'id' => $id,

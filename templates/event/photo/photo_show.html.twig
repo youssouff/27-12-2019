@@ -14,7 +14,9 @@
 		<img class="img-show-event" src="../{{photo.url}}" alt="">
 	</div>
     </div>
-    <a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user.username in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
+	<a class="btn btn-lg" style="background-color:transparent;" {%if app.user is null %}href="{{path('security_login')}}" {% else %} href="{{path('like_photo', {'id': photo.id, 'route' : app.request.attributes.get('_route')})}}"{% endif %}>
+	<i class="fa{%if app.user is null %}r{% else %}{%if app.user.username in photo.users %}s{% else %}r{% endif %}{% endif %} fa-heart"></i>
+	 {{ photo.users | length }} </a>
     </center>
 
     <hr>
@@ -46,10 +48,13 @@
 														Signaler
 													</a>
 												{% endif %}
+												{% if app.user is null %}
+												{% else %}
 												{% if comment.author == app.user.username or is_granted('ROLE_BDE') %}
 													<div class="mx-auto text-center">
 														{{ include('event/photo/_delete_comment_form.html.twig') }}
 													</div>
+												{% endif %}
 												{% endif %}
 											</td>
 											</td>

@@ -26,14 +26,16 @@
 					{{ event.price }}€</p>
 				<p>Evenement:
 					{{ event.recursion.name }}</p>
-				<a style="width : 70%; margin-left : auto; margin-right : auto" {% if is_granted('ROLE_BDE') %} href="{{ path('csv_participants', {'id': event.id}) }}" {% else %} {% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top" role="button" aria-pressed="true">
-					{% if is_granted('ROLE_BDE') %}Télécharger la liste des participants{% else %}Restreint au BDE
-					{% endif %}
+				{% if is_granted('ROLE_BDE') %}
+				<a style="width : 70%; margin-left : auto; margin-right : auto"  href="{{ path('csv_participants', {'id': event.id}) }}"  class="btn btn-secondary btn-lg active mrg-left mrg-top" role="button" aria-pressed="true">
+					Télécharger la liste des participants
 				</a>
-				<a style="width : 70%; margin-left : auto; margin-right : auto" {% if is_granted('ROLE_CESI') %} href="{{ path('zip_photos', {'id': event.id}) }}" {% else %} {% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top" role="button" aria-pressed="true">
-					{% if is_granted('ROLE_CESI') %}Télécharger les photos{% else %}Restreint au personnel du cesi
-					{% endif %}
+				{% endif %}
+				{% if is_granted('ROLE_CESI') %}
+				<a style="width : 70%; margin-left : auto; margin-right : auto"  href="{{ path('zip_photos', {'id': event.id}) }}" class="btn btn-secondary btn-lg active mrg-left mrg-top" role="button" aria-pressed="true">
+					Télécharger les photos
 				</a>
+				{% endif %}
 				<a style="width : 70%; margin-left : auto; margin-right : auto" {% if incoming == false %} {% else %} href="{{ path('participate', {'id': event.id}) }}" {% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top mb-3" role="button" aria-pressed="true">
 					{% if incoming == false %}Evenement passé
 					{% else %}
@@ -84,8 +86,8 @@
 							</div>
 
 							<div class="col">
-							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id })}}">
-								<i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i>
+							<a class="btn btn-lg" style="background-color:transparent;" {%if app.user is null %}href="{{path('security_login')}}" {% else %} href="{{path('like_photo', {'id': photo.id, 'route' : app.request.attributes.get('_route')})}}"{% endif %}>
+								<i class="fa{%if app.user is null %}r{% else %}{%if app.user.username in photo.users %}s{% else %}r{% endif %}{% endif %} fa-heart"></i>
 								{{ photo.users | length }}
 							</a>
 								</div>

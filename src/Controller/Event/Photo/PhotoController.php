@@ -50,9 +50,9 @@ class PhotoController extends AbstractController
     }
     
     /**
-    * @Route("/event/photo/{id}/like", name="like_photo")
+    * @Route("/photo/{id}/like/{route}", name="like_photo")
     */
-    public function like_photo(Photo $photo, $id){
+    public function like_photo(Photo $photo, $id, Request $request, $route){
         //gets the actual user
         $user = $this->getUser();
         //likes or unlike it
@@ -72,7 +72,7 @@ class PhotoController extends AbstractController
         $entityManager->flush();
         
         //redirect to photo show route
-        return $this->redirectToRoute('photo_show', [
+        return $this->redirectToRoute("$route", [
             'photo' => $photo,
             'id' => $id
         ]);
@@ -109,10 +109,13 @@ class PhotoController extends AbstractController
     * @Route("/comment/{id}/report", name="report_comment")
     */
     public function report_comment(Comment $comment, \Swift_Mailer $mailer, Api $api){
+        //gets the actual user
         $user = $this->getUser();
-        
+        //gets the comment's author
         $author = $comment->getAuthor();
-
+        //get the id of the comment's photo
+        $id = $comment->getPhoto()->getId();
+        //prepare the mail to report the comment
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
             ->setTo('montemonttheophile@gmail.com')//the bde's mail
@@ -161,12 +164,13 @@ class PhotoController extends AbstractController
     * @Route("/photo/{id}/report", name="report_photo")
     */
     public function report_photo(Photo $photo, \Swift_Mailer $mailer, Api $api){
-
+        //get the id of the photo's event
         $id = $photo->getEvenement()->getId();
-
+        //gets the actual user
         $user = $this->getUser();
+        //gets the photo's author
         $author = $photo->getAuthor();
-
+        //prepare the mail to report the photo
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
             ->setTo('montemonttheophile@gmail.com')//the bde's mail

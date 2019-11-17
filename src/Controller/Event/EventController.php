@@ -137,10 +137,10 @@ class EventController extends AbstractController
     /**
     * @Route("/event/{id}/report", name="report_event")
     */
-    public function report(Evenement $event, \Swift_Mailer $mailer){
-        
+    public function report(Evenement $event, \Swift_Mailer $mailer, $id){
+        //gets the actual user
         $user = $this->getUser();
-
+        //prepare the mail to report the event
         $message = (new \Swift_Message('Report'))
             ->setFrom($user->getUsername())
             ->setTo('montemonttheophile@gmail.com')//the bde's mail
@@ -165,8 +165,7 @@ class EventController extends AbstractController
      */
     public function download_participants(Evenement $event,$id){
 
-        
-
+        //download the event's participants in a PDF
         $html2pdf = new Html2Pdf();
         $html2pdf->writeHTML('<h1>Participants : </h1>'.implode("<br>",$event->getParticipants()));
         $html2pdf->output();
@@ -181,7 +180,7 @@ class EventController extends AbstractController
      */
     public function download_photos($id){
         
-        //not working at this moment
+        //not working
 
         return $this->redirectToRoute('show_event', [
             'id' => $id,

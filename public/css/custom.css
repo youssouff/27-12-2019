@@ -32,7 +32,6 @@ footer{
 
 .background{
     background-image: url("../appdata/background.jpg");
-    width: 100vw;
     height: 100vh;
     background-repeat: no-repeat;
     margin-bottom: 100px;

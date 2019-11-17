@@ -1,0 +1,269 @@
+/**
+*Custom css sheet,
+*Author : Thophile, Samil, Thomas, Lucien
+*For : Projet Web CESI 2019
+*/
+
+/** Colors **/
+*{
+--colorOne : #;
+--colorTwo : #;
+--colorThree : #;
+--colorFour : #;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body{
+    background-color: white;
+}
+
+footer{
+        background:#27251f;
+        bottom:0;      
+        width:100%;       
+        padding-top:10px;        
+        height:200px;  
+        color : white;
+}
+
+.background{
+    background-image: url("../appdata/background.jpg");
+    height: 100vh;
+    background-repeat: no-repeat;
+    margin-bottom: 100px;
+}
+
+.titleindex{
+    margin-top : 150px;
+    margin-left: 100px;
+    color : black;
+    font-size: 50px;
+}
+
+.titleindex2{
+
+    margin-left: 350px;
+    color : rgba(231, 243, 94, 0.966);
+    font-size: 50px;;
+    background-color: black;
+}
+
+/**Overide**/
+
+
+
+/**Custom classes**/
+
+
+
+/**States**/
+
+
+#banner{
+    margin-top: 0;
+    background-image: url("../appdata/banniere.png");
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-color: white;
+    height: 100px;
+}
+
+#navbar{
+    margin-top: -50px;
+}
+
+.borderleft
+{
+    background-color: #27251f;
+    width: 280px;
+    height: 1000px;
+}
+
+.borderright
+{
+    background-color: #27251f;
+    float : right;
+    width : 100px;
+    height: 1000px;
+}
+
+.col-sm2{
+    color : white;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.card-event{
+    height: 420px;
+}
+
+
+hr{
+    width: 50%;
+    height: 2px;
+    margin-top: 120px;
+    margin-bottom: 80px;
+    background-color: black;
+    border: none; /*on supprime le style par défaut*/
+  }
+
+.hr-comment{
+    width: 50%;
+    height: 2px;
+    margin-top: 120px;
+    margin-bottom: 70px;
+    background-color: gray;
+    border: none;  
+}
+
+
+  .bdr-event{
+      border-width : 2px;
+      border-style: solid;
+      border-color:  black;
+      background-color : #BDBDBD;
+  }
+
+  .bdr-login{
+    border-width : 2px;
+    border-style: solid;
+    border-color:  lightslategrey;
+    background-color : #BDBDBD;
+}
+
+.bdr-comment{
+    border-width : 2px;
+    border-style: solid;
+    border-color:  lightslategrey;
+    background-color : #F2F2F2; 
+    width: 50%;
+}
+
+.bdr-comment2{
+    border-width : 2px;
+    border-style: solid;
+    border-color:  lightslategrey;
+    background-color : white; 
+    width: 50%;
+    height: auto;
+}
+
+.bdr-edit{
+    border-width : 2px;
+    border-style: solid;
+    border-color:  lightslategrey;
+    background-color : #F2F2F2; 
+}
+
+.bdr-card{
+    border-width : 3px;
+    border-style: solid;
+    border-color:  black;
+    height : 150px;
+}
+
+.bdr-shop{
+    border-width : 3px;
+    border-style: solid;
+    border-color:  black;
+    height : 300px;
+}
+
+  .size-border-event{
+      width: 500px;
+  }
+
+  p.size-text{
+      font-size: 25px;
+  }
+
+  p.size-text-comment{
+    font-size: 20px;
+}
+
+p.size-text-shop{
+    font-size: 25px;
+}
+
+
+  .mrg-left{
+      margin-left: 50px;
+  }
+
+  .mrg-top{
+      margin-top : 50px;
+  }
+
+  .img-event{
+    max-width : 50%;
+    min-width : 50%;
+  }
+
+  .img-show-event{
+    width : auto;
+    max-height: 550px;
+}
+
+  .img-card{
+    max-width : 100%;
+    max-width : 100%;
+    min-height : 165px;
+    max-height : 165px;
+  }
+
+  .color-button{
+      background-color : #13322b;
+      color : white;
+  }
+
+
+  .alert-style{
+    background-color : #ffc845; 
+    width: 40%;
+    color : white; 
+    border-radius:10px
+  }
+
+.delete-button{
+    background-color : #e4002b; 
+    color: white;
+}
+
+.mrg-l-100{
+    margin-left: 100%;
+}
+
+.mrg-l-80{
+    margin-left: 80%;
+}
+
+.mrg-t-b-100{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.event-button{
+    width : 70%; 
+    margin-left : auto; 
+    margin-right : auto
+}
+
+
+.color-link{
+    color :#ffffff;
+}
+.color-alert{
+    background-color : #69b3e7;
+}
+
+.color-panier{
+    background-color : #006f62;
+}
+.preview{
+    height: 100px;
+    overflow: hidden;
+}

@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">{{ event.title }}</h1>
+			<p class="lead">{{ event.description | raw}}</p>
+		</div>
+	</div>
+
+	<center>
+		<div class="row mx-auto">
+			<div class="mx-auto">
+				<img class="img-show-event mb-2" src="../appdata/event/{{ event.filename }}" alt="" style="text-align: center;">
+			</div>
+
+			<div class="bdr-event size-border-event mx-auto" style="margin-left : 50px; ">
+				{% if is_granted('ROLE_CESI') %}
+					<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_event', {'id': event.id })}}">
+						<i class="fas fa-flag"></i>
+						Signaler
+					</a>
+				{% endif %}
+				<h3 style="margin-top : 30px;">Détails de l'événement</h3><br>
+				<p>Prix:
+					{{ event.price }}€</p>
+				<p>Evenement:
+					{{ event.recursion.name }}</p>
+				<a style="width : 70%; margin-left : auto; margin-right : auto" {% if is_granted('ROLE_BDE') %} href="{{ path('csv_participants', {'id': event.id}) }}" {% else %} {% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top" role="button" aria-pressed="true">
+					{% if is_granted('ROLE_BDE') %}Télécharger la liste des participants{% else %}Restreint au BDE
+					{% endif %}
+				</a>
+				<a style="width : 70%; margin-left : auto; margin-right : auto" {% if is_granted('ROLE_CESI') %} href="{{ path('zip_photos', {'id': event.id}) }}" {% else %} {% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top" role="button" aria-pressed="true">
+					{% if is_granted('ROLE_CESI') %}Télécharger les photos{% else %}Restreint au personnel du cesi
+					{% endif %}
+				</a>
+				<a style="width : 70%; margin-left : auto; margin-right : auto" {% if incoming == false %} {% else %} href="{{ path('participate', {'id': event.id}) }}" {% endif %} class="btn btn-secondary btn-lg active mrg-left mrg-top mb-3" role="button" aria-pressed="true">
+					{% if incoming == false %}Evenement passé
+					{% else %}
+						{% if app.user.username in event.participants %}Je n'y participerai pas{% else %}Je participe
+						{% endif %}
+					{% endif %}
+				</a>
+			</div>
+		</div>
+	</center>
+
+	<hr>
+
+	{% if incoming == false %}
+		<div class="mt-5">
+			{% if event.photos is empty %}
+				<center>
+					<div class="alert alert-dark text-center w-25" role="alert">
+						Il n'y a pas de photos pour cet évenement.
+					</div>
+				</center>
+			{% else %}
+				<div class="border border-dark mx-auto w-75">
+					{% for photo in event.photos %}
+						<div class="col text-center" style="margin: 20px 0 20px 0q">
+							<p>Photo postée par:
+								{{photo.author}}</p>
+
+								<img class="img-event mb-4" src="{{ photo.url}}" alt="">
+
+							<div class="row">
+							<div class="col">
+
+							{% if is_granted('ROLE_CESI') %}
+								<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_photo', {'id': photo.id })}}">
+									<i class="fas fa-flag"></i>
+									Signaler
+								</a>
+							{% endif %}
+							</div>
+
+							<div class="col">
+							{% if app.user %}
+							{% if photo.author == app.user.username or is_granted('ROLE_BDE') %}
+								{{ include('event/_delete_photo_form.html.twig') }}
+							{% endif %}
+							{% endif %}
+							</div>
+
+							<div class="col">
+							<a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id })}}">
+								<i class="fa{%if app.user in photo.users %}s{% else %}r{% endif %} fa-heart"></i>
+								{{ photo.users | length }}
+							</a>
+								</div>
+							</div>
+							<div class="commentaires">
+								<a class="btn btn-lg" style="background-color:transparent;" href=" {{ path('photo_show', {'id': photo.id }) }}">Il y a
+									{{ photo.comments | length}}
+									commentaire{% if photo.comments | length <= 1 %}{% else %}s
+									{% endif %}
+								</a>
+
+							</div>
+						</div>
+						<hr class="hr-comment">
+					{% endfor %}
+				</div>
+				<hr>
+			{% endif %}
+			{% if app.user.name is defined %}
+				{% if app.user.username in event.participants %}
+					<div class="mrg-top text-center">
+						<p>Vous avez participé a l'évènement ? Partagez vos photos :
+						</p>
+						<div class="w-50 mx-auto">
+							{{ form(formUpload)}}
+							</div>
+						</div>
+					{% else %}
+						<div class="mrg-top text-center">
+							<p class="size-text">Il faut avoir participé à l'évènement pour pouvoir poster des photos.</p>
+						</div>
+					{% endif %}
+				{% else %}
+
+					<div class="mrg-top text-center">
+						<p class="size-text">Vous avez participé a l'évènement et souhaitez poster des photos,
+							<a href="{{path('security_login')}}">connectez-vous</a>
+							d'abords.</p>
+					</div>
+
+				{% endif %}
+			{% else %}
+				<div class="alert alert-dark text-center mx-auto w-50" role="alert" style="width : 400px;">
+					Vous pourrez poster des photos dès que cet évènement sera passé.
+				</div>
+			{% endif %}
+		</div>
+		<a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à la liste</a>
+	{% endblock %}

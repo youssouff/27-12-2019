@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Evènement
+{% endblock %}
+
+{% block body %}
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Nouvel Evénement</h1>
+			<p class="lead">Créer ici vos nouveaux événements</p>
+		</div>
+	</div>
+
+	<div class="bdr-login w-50 mx-auto mb-5 pt-5 pb-5">
+		<div class="col-8 mx-auto">
+			{{ include('evenement/_form.html.twig') }}
+		</div>
+	</div>
+
+	<a href="{{ path('evenement_index') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{{ form_start(form) }}
+
+    {{ form_label(form.title, null, {
+    'label': "Nom de l'évènement" }) }}
+    {{ form_widget(form.title) }}
+    {{ form_label(form.description, null, {
+        'label': "Description" }) }}
+    {{ form_widget(form.description) }}
+
+    <div class="row">
+        <div class="col-6">
+            {{ form_label(form.imageFile, null, {
+                'label': "Image" }) }}
+            {{ form_widget(form.imageFile) }}
+        </div>
+        <div class="col-6">
+            {{ form_label(form.price, null, {
+                'label': "Prix" }) }}
+            {{ form_widget(form.price) }}
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-9" >
+                {{ form_label(form.date, null, {
+                    'label': "Date" }) }}
+                {{ form_widget(form.date) }}
+            </div>
+            <div class="col-3" >
+                {{ form_label(form.recursion, null, {
+                    'label': "Récursion" }) }}
+                {{ form_widget(form.recursion) }}
+            </div>
+        </div>
+
+    
+    
+    <div style="text-align: center;margin-top: 20px;">
+        <button class="btn btn-dark" >{{ button_label|default('Sauvegarder') }}</button>
+    </div>    
+    
+{{ form_end(form) }}

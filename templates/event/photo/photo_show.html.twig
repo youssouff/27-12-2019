@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+		<p class="size-text">Photo postée par:
+            {{photo.author}}</p>
+		</div>
+	</div>
+
+    <center>
+    <div class="row">
+	<div class="mx-auto">
+		<img class="img-show-event" src="../{{photo.url}}" alt="">
+	</div>
+    </div>
+    <a class="btn btn-lg" style="background-color:transparent;" href="{{path('like_photo', {'id': photo.id})}}"><i class="fa{%if app.user.username in photo.users %}s{% else %}r{% endif %} fa-heart"></i> {{ photo.users | length }} </a>
+    </center>
+
+    <hr>
+
+	<div class="" style="margin-top : 80px;">
+		{% if photo.comments is empty %}
+        <center>
+        <div class="alert alert-dark text-center col-4" role="alert">
+           Il n'y a pas de commentaires pour cette photo.
+        </div>
+        </center>
+		{% else %}
+			<p class="size-text text-center">Commentaires</p>
+				<div class="bdr-comment mx-auto" >
+
+                    <div class="commentaires" >
+                    
+							<table class="table mx-auto	">
+
+									<tbody>
+										<tr>{% for comment in photo.comments %}
+											
+											<td>{{ comment.author }}:</td>
+											<td >{{ comment.content }}</td>
+											<td>
+												{% if is_granted('ROLE_CESI') %}
+													<a class="btn btn-lg" style="background-color:transparent;" href="{{path('report_comment', {'id': comment.id })}}">
+														<i class="fas fa-flag"></i>
+														Signaler
+													</a>
+												{% endif %}
+												{% if comment.author == app.user.username or is_granted('ROLE_BDE') %}
+													<div class="mx-auto text-center">
+														{{ include('event/photo/_delete_comment_form.html.twig') }}
+													</div>
+												{% endif %}
+											</td>
+											</td>
+										</tr>
+									</tbody>
+									{% endfor %}
+								</table>
+                        
+                        
+                    </div>
+				</div>
+				<hr>
+		{% endif %}
+		{% if app.user.username is defined %}
+			<div class="mrg-top text-center">
+				<p>Postez un commentaire: 
+				</p>
+				<div class="w-50 mx-auto">
+				{{ form_start(formComment)}}
+				{{ form_widget(formComment.content)}}
+				{{ form_end(formComment)}}
+				</div>
+				</div>
+			{% else %}
+				<p class="size-text text-center">Si vous souhaitez commenter la photo,
+				<a href="{{path('security_login')}}">connectez-vous</a>
+					d'abords.</p>
+			{% endif %}
+		</div>
+		<a href="{{ path('show_event', {'id' : photo.evenement.id }) }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à l'évènement</a>
+	{% endblock %}

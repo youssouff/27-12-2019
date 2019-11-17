@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenements
+{% endblock %}
+
+{% block body %}
+
+
+	<section class="evements">
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-4">Nos événements</h1>
+				<p class="lead">Retrouvez tous nous événements passés</p>
+			</div>
+		</div>
+
+		{% if events %}
+
+			<div class="mrg-t-b-100">
+				<div class="row">
+					{% for event in events %}
+
+
+						<div class="col-sm2 mx-auto">
+							<div class="card card-event" style="width: 18rem; background-color: #8a8d8f;">
+								{% if event.filename %}
+									<img class="img-card" src="../appdata/event/{{ event.filename }}" class="card-img-top" alt="...">
+								{% else %}
+									<div style="background-color : black; height :165px ; width : 100%;"></div>
+
+								{% endif %}
+								<div class="card-body">
+									<h5 class="card-title">{{ event.title }}</h5>
+									<p class="card-text h-10 text-truncate">{{ event.description | raw }}</p>
+									<li class="list-group-item mx-auto w-100" style="background-color : #b1b3b3;">Datant de:
+										{{ event.date | date ('d/m/Y à H:i')}}</li>
+									<a href=" {{ path('show_event', {'id': event.id }) }}" class="btn btn-secondary mx-auto" style="position:absolute; bottom: 10px;">En savoir plus</a>
+								</div>
+							</div>
+						</div>
+
+
+					{% endfor %}
+				</div>
+			</div>
+
+		{% else %}
+			<div style="height : 400px">
+				<div class="alert alert-dark mx-auto text-center w-50" role="alert">
+					Il n'y a pas d'évenements de prévus
+				</div>
+			</div>
+		{% endif %}
+
+
+	</section>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer produit
+{% endblock %}
+
+{% block body %}
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Editer un produit</h1>
+			<p class="lead">Vous pouvez éditer un produit depuis cette interface</p>
+		</div>
+	</div>
+
+
+	<div class="bdr-edit mx-auto mb-5 pt-5 pb-5">
+		<div class="col-8 mx-auto">
+			{{ include('goodies/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+		</div>
+	</div>
+
+	<div style="margin-left : 73%;">
+		{{ include('goodies/_delete_form.html.twig') }}
+	</div>
+
+	<a href="{{ path('goodies_index') }}" class="btn btn-secondary btn-lg active mrg-left mrg-top mb-4" role="button" aria-pressed="true">Retour à la liste</a>
+
+{% endblock %}
